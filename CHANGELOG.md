@@ -1,4 +1,7 @@
 # Changelog
+## 1.7.1
+Removing underline from focused/hovered `Button` instances.
+
 ## 1.7.0
 
 * Changed the default `$colorCurrent` on `Breadcrumbs` to `blue` from `#0000EE`.
