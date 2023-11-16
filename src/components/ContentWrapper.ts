@@ -27,4 +27,4 @@ export function ContentWrapperCustomWidth(widthRems : number, children : Child) 
 		[
 			new DE("div", null, children),
 		]);
-};
+}
