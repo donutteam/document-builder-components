@@ -1,4 +1,7 @@
 # Changelog
+## 1.3.2
+Fixing an oversight where the `Header` component and `HeaderLevel` type were not exported.
+
 ## 1.3.1
 
 * Added `_GlobalDefaults.scss` to house internal, global variables.
