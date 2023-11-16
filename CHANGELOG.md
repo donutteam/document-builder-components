@@ -6,7 +6,7 @@ Fixing an oversight where the `Header` component and `HeaderLevel` type were not
 
 * Added `_GlobalDefaults.scss` to house internal, global variables.
 * Changing `Block` and `Header` components to specify a default for margins.
-	* I thought my code was valid but it wasn't, woops.
+	* I thought my code was valid, but it wasn't, woops.
 
 ## 1.3.0
 
