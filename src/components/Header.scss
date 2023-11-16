@@ -1,0 +1,43 @@
+@use "_Mixins";
+
+@mixin Header($margins)
+{
+	.component-header
+	{
+		@include Mixins.ConditionalTopBottomMargin($margins);
+
+		font-weight: bold;
+
+		margin: 0;
+	}
+
+	h1.component-header
+	{
+		font-size: 2em;
+	}
+
+	h2.component-header
+	{
+		font-size: 1.5em;
+	}
+
+	h3.component-header
+	{
+		font-size: 1.17em;
+	}
+
+	h4.component-header
+	{
+		font-size: 1em;
+	}
+
+	h5.component-header
+	{
+		font-size: 0.83em;
+	}
+
+	h6.component-header
+	{
+		font-size: 0.67em;
+	}
+}
