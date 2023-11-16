@@ -1,6 +1,8 @@
 # Changelog
 ## 1.5.0
-Improved `ConditionalTopBottomMargin` mixin.
+
+* Improved `ConditionalTopBottomMargin` mixin.
+* Added `ContentWrapper` and `ContentWrapperCustomWidth` components.
 
 ## 1.4.0
 

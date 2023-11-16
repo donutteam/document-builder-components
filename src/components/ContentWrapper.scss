@@ -1,0 +1,33 @@
+//
+// Imports
+//
+
+@use "./GlobalDefaults";
+@use "./Mixins";
+
+//
+// Component
+//
+
+@mixin ContentWrapper($defaultWidth, $margins: GlobalDefaults.$margins)
+{
+	.component-content-wrapper
+	{
+		@include Mixins.ConditionalTopBottomMargin($margins);
+
+		--width: $defaultWidth;
+
+		display: grid;
+
+		grid-template-areas: ". content .";
+
+		grid-template-columns: 1fr minmax(0px, var(--width)) 1fr;
+
+		> *
+		{
+			grid-area: content;
+
+			position: relative;
+		}
+	}
+}
