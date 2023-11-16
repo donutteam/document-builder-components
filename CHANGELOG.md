@@ -1,4 +1,7 @@
 # Changelog
+## 1.4.0
+Added `Breadcrumbs` and `BreadcrumbsItem` components.
+
 ## 1.3.2
 Fixing an oversight where the `Header` component and `HeaderLevel` type were not exported.
 
