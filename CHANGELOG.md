@@ -1,4 +1,7 @@
 # Changelog
+## 1.5.0
+Improved `ConditionalTopBottomMargin` mixin.
+
 ## 1.4.0
 
 * Added `Breadcrumbs` and `BreadcrumbsItem` components.

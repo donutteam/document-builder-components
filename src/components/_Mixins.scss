@@ -11,14 +11,17 @@
 @mixin ConditionalTopBottomMargin($margins: GlobalDefaults.$margins)
 {
 	margin: 0;
-
-	&:not(:first-child)
+	
+	@if $margins != 0
 	{
-		margin-top: $margins;
-	}
+		&:not(:first-child)
+		{
+			margin-top: $margins;
+		}
 
-	&:not(:last-child)
-	{
-		margin-bottom: $margins;
+		&:not(:last-child)
+		{
+			margin-bottom: $margins;
+		}
 	}
 }
