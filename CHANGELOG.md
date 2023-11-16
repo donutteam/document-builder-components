@@ -1,6 +1,8 @@
 # Changelog
 ## 1.4.0
-Added `Breadcrumbs` and `BreadcrumbsItem` components.
+
+* Added `Breadcrumbs` and `BreadcrumbsItem` components.
+* Added `Notice` component and `NoticeType` type.
 
 ## 1.3.2
 Fixing an oversight where the `Header` component and `HeaderLevel` type were not exported.
@@ -14,8 +16,7 @@ Fixing an oversight where the `Header` component and `HeaderLevel` type were not
 ## 1.3.0
 
 * Changed `Block` mixin to not specify a default for `$margins`.
-* Added `Header` component.
-* Added `HeaderLevel` type.
+* Added `Header` component and `HeaderLevel` type.
 
 ## 1.2.0
 Added `BlockGroup` component.
