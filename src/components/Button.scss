@@ -1,0 +1,163 @@
+//
+// Imports
+//
+
+@use "./GlobalDefaults";
+@use "./Mixins";
+
+//
+// Components
+//
+
+
+@mixin Button
+(
+	$backgroundColor: #475569,			// Tailwind Gray 600
+	$backgroundColorDisabled: #9ca3af, 	// Tailwind Gray 400
+	$backgroundColorHover: #1e293b,		// Tailwind Gray 800
+	$textColor: #f9fafb,				// Tailwind Gray 50
+	$textColorDisabled: #d1d5db,		// Tailwind Gray 300
+	$margins: GlobalDefaults.$margins,
+)
+{
+	.component-button
+	{
+		@include Mixins.ConditionalTopBottomMargin($margins);
+
+		align-items: center;
+
+		all: unset;
+
+		background-color: $backgroundColor;
+
+		border: none;
+
+		border-radius: 0.625rem;
+
+		color: $textColor;
+
+		display: flex;
+
+		font-family: inherit; // For <button> elements
+
+		font-size: inherit; // For <button> elements
+
+		gap: 0.625rem;
+
+		padding: 0.625em;
+
+		text-align: inherit; // For <button> elements
+
+		text-decoration: none; // For <a> elements
+
+		transition: background-color 0.2s;
+
+		&:not(:disabled)
+		{
+			&:focus,
+			&:hover
+			{
+				background-color: $backgroundColorHover;
+
+				cursor: pointer;
+			}
+		}
+
+		&:disabled
+		{
+			background-color: $backgroundColorDisabled;
+
+			color: $textColorDisabled;
+		}
+
+		> .icon,
+		> .external
+		{
+			max-height: 1em;
+		}
+	}
+
+	.component-button-group
+	{
+		@include Mixins.ConditionalTopBottomMargin($margins);
+
+		align-items: center;
+
+		display: flex;
+
+		flex-wrap: wrap;
+
+		gap: 0.75rem;
+
+		&:not(:first-child)
+		{
+			margin-top: 0.75rem;
+		}
+
+		&:not(:last-child)
+		{
+			margin-bottom: 0.75rem;
+		}
+
+		> .component-button
+		{
+			margin: 0 !important;
+		}
+	}
+
+	.component-button-group.right-aligned
+	{
+		justify-content: flex-end;
+	}
+
+	.component-button-list
+	{
+		@include Mixins.ConditionalTopBottomMargin($margins);
+
+		display: flex;
+
+		flex-direction: column;
+
+		gap: 1px;
+
+		&:not(:first-child)
+		{
+			margin-top: 0.75rem;
+		}
+
+		&:not(:last-child)
+		{
+			margin-bottom: 0.75rem;
+		}
+
+		> .component-button
+		{
+			margin: 0 !important;
+
+			&:not(:only-child):first-child
+			{
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+
+			&:not(:first-child, :last-child)
+			{
+				border-radius: 0;
+			}
+
+			&:not(:only-child):last-child
+			{
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+			}
+		}
+	}
+
+	.component-button-list.center-aligned
+	{
+		> .component-button
+		{
+			justify-content: center;
+		}
+	}
+}

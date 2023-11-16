@@ -1,6 +1,9 @@
 # Changelog
-## 1.6.2
-Changed the default `$colorCurrent` on `Breadcrumbs` to `blue` from `#0000EE`.
+## 1.7.0
+
+* Changed the default `$colorCurrent` on `Breadcrumbs` to `blue` from `#0000EE`.
+* Added `Button`, `ButtonCenterAlignedList`, `ButtonGroup`, `ButtonList`, and `ButtonRightAlignedGroup` components.
+* Added `ButtonOptions` interface.
 
 ## 1.6.1
 Fixing a spacing issue when using `showRelativeTime` on a `HumanDateTime` instance.
