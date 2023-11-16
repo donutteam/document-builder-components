@@ -16,7 +16,7 @@ export function ContentWrapper(children : Child) : DE
 		]);
 }
 
-export function ContentWrapperCustomWidth(widthRems : string, children : Child) : DE
+export function ContentWrapperCustomWidth(widthRems : number, children : Child) : DE
 {
 	return new DE("div",
 		{

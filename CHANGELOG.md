@@ -1,4 +1,7 @@
 # Changelog
+## 1.5.1
+Fixing the type of `widthRems` on `ContentWrapperCustomWidth`.
+
 ## 1.5.0
 
 * Improved `ConditionalTopBottomMargin` mixin.
