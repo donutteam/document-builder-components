@@ -2,13 +2,14 @@
 // Imports
 //
 
+@use "./GlobalDefaults";
 @use "./Mixins";
 
 //
 // Component
 //
 
-@mixin Block($margins)
+@mixin Block($margins: GlobalDefaults.$margins)
 {
 	.component-block
 	{
