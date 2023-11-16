@@ -1,4 +1,7 @@
 # Changelog
+## 1.6.1
+Fixing a spacing issue when using `showRelativeTime` on a `HumanDateTime` instance.
+
 ## 1.6.0
 
 * Added `HumanDateTime` component.

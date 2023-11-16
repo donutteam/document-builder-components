@@ -98,7 +98,7 @@ export function HumanDateTime(options : HumanDateTimeOptions) : DE
 		},
 		[
 			date,
-			options.showDate && options.showTime ? " " : "",
+			options.showDate && options.showRelativeTime ? " " : "",
 			relativeTime,
 		]);
 }
