@@ -1,4 +1,9 @@
 # Changelog
+## 1.6.0
+
+* Added `HumanDateTime` component.
+* Added `HumanDateTimeOptions` interface.
+
 ## 1.5.2
 Fixing an oversight with the way SCSS variables interact with Custom Properties.
 
@@ -13,7 +18,9 @@ Fixing the type of `widthRems` on `ContentWrapperCustomWidth`.
 ## 1.4.0
 
 * Added `Breadcrumbs` and `BreadcrumbsItem` components.
-* Added `Notice` component and `NoticeType` type.
+* Added `BreadcrumbsItemOptions` interface.
+* Added `Notice` component.
+* Added `NoticeType` type.
 
 ## 1.3.2
 Fixing an oversight where the `Header` component and `HeaderLevel` type were not exported.
@@ -27,7 +34,8 @@ Fixing an oversight where the `Header` component and `HeaderLevel` type were not
 ## 1.3.0
 
 * Changed `Block` mixin to not specify a default for `$margins`.
-* Added `Header` component and `HeaderLevel` type.
+* Added `Header` component.
+* Added `HeaderLevel` type.
 
 ## 1.2.0
 Added `BlockGroup` component.

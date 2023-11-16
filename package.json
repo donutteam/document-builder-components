@@ -1,27 +1,31 @@
 {
-  "name": "@donutteam/document-builder-components",
-  "version": "1.5.2",
-  "description": "A collection of components built with Donut Team's Document Builder package.",
-  "main": "./lib/index.js",
-  "scripts": {
-    "build": "npx rimraf lib && npx tsc",
-    "prepublishOnly": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/donutteam/npm-document-builder-components.git"
-  },
-  "keywords": [
-    "component",
-    "components"
-  ],
-  "author": "Donut Team",
-  "license": "MIT",
-  "type": "module",
-  "devDependencies": {
-    "@donutteam/document-builder": "^6.0.0",
-    "@types/node": "^20.9.0",
-    "rimraf": "^5.0.5",
-    "typescript": "^5.2.2"
-  }
+	"name": "@donutteam/document-builder-components",
+	"version": "1.5.2",
+	"description": "A collection of components built with Donut Team's Document Builder package.",
+	"main": "./lib/index.js",
+	"scripts": {
+		"build": "npx rimraf lib && npx tsc",
+		"prepublishOnly": "npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/donutteam/npm-document-builder-components.git"
+	},
+	"keywords": [
+		"component",
+		"components"
+	],
+	"author": "Donut Team",
+	"license": "MIT",
+	"type": "module",
+	"devDependencies": {
+		"@types/node": "^20.9.0",
+		"rimraf": "^5.0.5",
+		"typescript": "^5.2.2"
+	},
+	"peerDependencies": {
+		"@donutteam/document-builder": "6.x",
+		"@types/luxon": "3.x",
+		"luxon": "3.x"
+	}
 }
