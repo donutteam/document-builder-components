@@ -1,0 +1,14 @@
+@mixin ConditionalTopBottomMargin($margins: 1rem)
+{
+	margin: 0;
+
+	&:not(:first-child)
+	{
+		margin-top: $margins;
+	}
+
+	&:not(:last-child)
+	{
+		margin-bottom: $margins;
+	}
+}
