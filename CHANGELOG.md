@@ -3,6 +3,8 @@
 
 * Added `HumanDateTime` component.
 * Added `HumanDateTimeOptions` interface.
+* Removed `@types/node` dev dependency.
+	* Nothing actually used it.
 
 ## 1.5.2
 Fixing an oversight with the way SCSS variables interact with Custom Properties.
