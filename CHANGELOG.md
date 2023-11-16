@@ -1,4 +1,7 @@
 # Changelog
+## 1.5.2
+Fixing an oversight with the way SCSS variables interact with Custom Properties.
+
 ## 1.5.1
 Fixing the type of `widthRems` on `ContentWrapperCustomWidth`.
 

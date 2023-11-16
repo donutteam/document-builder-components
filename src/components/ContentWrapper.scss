@@ -15,7 +15,7 @@
 	{
 		@include Mixins.ConditionalTopBottomMargin($margins);
 
-		--width: $defaultWidth;
+		--width: #{$defaultWidth};
 
 		display: grid;
 
