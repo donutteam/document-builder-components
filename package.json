@@ -18,14 +18,14 @@
 	"author": "Donut Team",
 	"license": "MIT",
 	"type": "module",
-	"devDependencies": {
-		"@types/node": "^20.9.0",
-		"rimraf": "^5.0.5",
-		"typescript": "^5.2.2"
-	},
 	"peerDependencies": {
 		"@donutteam/document-builder": "6.x",
 		"@types/luxon": "3.x",
 		"luxon": "3.x"
+	},
+	"devDependencies": {
+		"@types/node": "^20.9.0",
+		"rimraf": "^5.0.5",
+		"typescript": "^5.2.2"
 	}
 }
