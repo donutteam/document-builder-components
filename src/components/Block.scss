@@ -8,7 +8,7 @@
 // Component
 //
 
-@mixin Block($margins: 1rem)
+@mixin Block($margins)
 {
 	.component-block
 	{
