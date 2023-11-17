@@ -1,6 +1,8 @@
 # Changelog
 ## 1.8.0
-Added `BubbleList` component.
+
+* Added `BubbleList` component.
+* Moved default `Button` colors to `GlobalDefaults.scss`.
 
 ## 1.7.1
 Removing underline from focused/hovered `Button` instances.
