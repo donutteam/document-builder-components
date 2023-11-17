@@ -9,4 +9,4 @@ npm install @donutteam/document-builder-components
 ```
 
 ## License
-[MIT](https://github.com/donutteam/document-builder/blob/main/LICENSE.md)
+[MIT](https://github.com/donutteam/npm-document-builder-components/blob/main/LICENSE.md)
