@@ -1,0 +1,33 @@
+//
+// Imports
+//
+
+@use "./GlobalDefaults";
+@use "./Mixins";
+
+//
+// Component
+//
+
+@mixin BubbleList($margins: GlobalDefaults.$margins, $gap: 0.5rem)
+{
+	.component-bubble-list
+	{
+		@include Mixins.ConditionalTopBottomMargin($margins);
+
+		display: flex;
+
+		flex-wrap: wrap;
+
+		gap: $gap;
+	}
+
+	.component-bubble-list-item
+	{
+		border: 1px solid #dddddd;
+
+		border-radius: 0.625rem;
+
+		padding: 0.5rem;
+	}
+}

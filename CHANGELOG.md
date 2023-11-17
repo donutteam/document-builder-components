@@ -1,4 +1,7 @@
 # Changelog
+## 1.8.0
+Added `BubbleList` component.
+
 ## 1.7.1
 Removing underline from focused/hovered `Button` instances.
 
