@@ -3,6 +3,8 @@
 
 * Added `BubbleList` component.
 * Moved default `Button` colors to `GlobalDefaults.scss`.
+* Added `Pagination` component.
+* Added `PaginationOptions` interface.
 
 ## 1.7.1
 Removing underline from focused/hovered `Button` instances.

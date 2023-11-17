@@ -1,0 +1,99 @@
+//
+// Imports
+//
+
+@use "./GlobalDefaults";
+@use "./Mixins";
+
+//
+// Component
+//
+
+@mixin Pagination
+(
+	$margins: GlobalDefaults.$margins,
+	$backgroundColor: GlobalDefaults.$buttonBackgroundColor,
+	$backgroundColorHover: GlobalDefaults.$buttonBackgroundColorHover,
+	$textColor: GlobalDefaults.$buttonTextColor,
+)
+{
+	.component-pagination
+	{
+		display: grid;
+
+		gap: 1px;
+
+		&[data-num-page-numbers="1"]
+		{
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+
+		&[data-num-page-numbers="2"]
+		{
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+		}
+
+		&[data-num-page-numbers="3"]
+		{
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		}
+
+		&[data-num-page-numbers="4"]
+		{
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		}
+
+		&[data-num-page-numbers="5"]
+		{
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		}
+
+		&[data-num-page-numbers="6"]
+		{
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		}
+
+		&[data-num-page-numbers="7"]
+		{
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		}
+	}
+
+	.component-pagination-page
+	{
+		align-items: center;
+
+		background-color: $backgroundColor;
+
+		color: $textColor;
+
+		display: grid;
+
+		justify-content: center;
+
+		padding: 0.5rem;
+
+		text-decoration: none;
+
+		&:hover,
+		&.current-page
+		{
+			background-color: $backgroundColorHover;
+
+			text-decoration: none;
+		}
+
+		&:is(:first-child)
+		{
+			border-top-left-radius: 0.625rem;
+			border-bottom-left-radius: 0.625rem;
+		}
+
+		&:is(:last-child)
+		{
+			border-top-right-radius: 0.625rem;
+			border-bottom-right-radius: 0.625rem;
+		}
+	}
+}
+
