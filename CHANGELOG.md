@@ -1,4 +1,7 @@
 # Changelog
+## 1.8.1
+Fixed the border radius of `Notice` components.
+
 ## 1.8.0
 
 * Added `BubbleList` component.
