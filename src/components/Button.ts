@@ -153,7 +153,7 @@ export function ButtonCenterAlignedList(buttons : ButtonOptions[]) : Child
 		return null;
 	}
 
-	return new DE("div", "component-button-centered-list", buttons.map(Button));
+	return new DE("div", "component-button-list center-aligned", buttons.map(Button));
 }
 
 export function ButtonGroup(buttons : ButtonOptions[]) : Child

@@ -1,4 +1,7 @@
 # Changelog
+## 1.8.2
+Fixed `ButtonCenterAlignedList` class name.
+
 ## 1.8.1
 Fixed the border radius of `Notice` components.
 
