@@ -1,4 +1,7 @@
 # Changelog
+## 1.9.0
+Added `NotEmptyOrFallback` component.
+
 ## 1.8.2
 Fixed `ButtonCenterAlignedList` class name.
 
