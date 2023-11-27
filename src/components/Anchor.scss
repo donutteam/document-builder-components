@@ -1,0 +1,29 @@
+//
+// Component
+//
+
+@mixin Anchor
+(
+	$color: blue,
+	$colorVisited: purple,
+	$textDecoration: underline,
+	$textDecorationHover: underline,
+)
+{
+	.component-anchor
+	{
+		color: $color;
+
+		text-decoration: $textDecoration;
+
+		&:hover
+		{
+			text-decoration: $textDecorationHover;
+		}
+
+		&:visited
+		{
+			color: $colorVisited;
+		}
+	}
+}

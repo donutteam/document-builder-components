@@ -1,4 +1,7 @@
 # Changelog
+## 1.10.0
+Added `Anchor` component.
+
 ## 1.9.0
 Added `NotEmptyOrFallback` component.
 

@@ -5,6 +5,7 @@
 export * from "./components/utilities/MapOrFallback.js";
 export * from "./components/utilities/NotEmptyOrFallback.js";
 
+export * from "./components/Anchor.js";
 export * from "./components/Block.js";
 export * from "./components/Breadcrumbs.js";
 export * from "./components/BubbleList.js";
