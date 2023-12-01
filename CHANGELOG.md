@@ -1,5 +1,5 @@
 # Changelog
-## 1.10.1
+## 1.11
 Added optional `extraAttributes` argument to the `Anchor` component.
 
 ## 1.10.0
