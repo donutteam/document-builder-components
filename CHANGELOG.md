@@ -1,4 +1,7 @@
 # Changelog
+## 1.12.1
+Made it so passing `null` to a `Paragraph` component will render nothing.
+
 ## 1.12.0
 Added `Paragraph` component.
 
