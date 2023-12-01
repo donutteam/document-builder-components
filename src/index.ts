@@ -15,3 +15,4 @@ export * from "./components/Header.js";
 export * from "./components/HumanDateTime.js";
 export * from "./components/Notice.js";
 export * from "./components/Pagination.js";
+export * from "./components/Paragraph.js";

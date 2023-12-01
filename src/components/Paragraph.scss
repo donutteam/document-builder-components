@@ -1,0 +1,19 @@
+//
+// Imports
+//
+
+@use "./Mixins";
+
+//
+// Component
+//
+
+@mixin Paragraph($lineHeight: 1.5)
+{
+	.component-paragraph
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		line-height: $lineHeight;
+	}
+}

@@ -1,4 +1,7 @@
 # Changelog
+## 1.12.0
+Added `Paragraph` component.
+
 ## 1.11.0
 Added optional `extraAttributes` argument to the `Anchor` component.
 
