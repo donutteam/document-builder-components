@@ -1,4 +1,7 @@
 # Changelog
+## 1.12.2
+Fixing a bug where the default value of `target` for the `Anchor` component was set to "self" and not "_self".
+
 ## 1.12.1
 Made it so passing `null` to a `Paragraph` component will render nothing.
 
