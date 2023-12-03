@@ -8,7 +8,7 @@ import { Child, DE } from "@donutteam/document-builder";
 // Exports
 //
 
-export function Paragraph(child : Child) : Child
+export function Paragraph(child : Child) : DE | null
 {
 	if (child == null)
 	{

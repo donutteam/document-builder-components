@@ -1,4 +1,7 @@
 # Changelog
+## 1.12.3
+Tightening return type of the `Paragraph` component.
+
 ## 1.12.2
 Fixing a bug where the default value of `target` for the `Anchor` component was set to "self" and not "_self".
 
