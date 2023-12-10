@@ -5,6 +5,8 @@
 @use "./GlobalDefaults";
 @use "./Mixins";
 
+@use "./Button";
+
 //
 // Component
 //
@@ -12,9 +14,9 @@
 @mixin Pagination
 (
 	$margins: GlobalDefaults.$margins,
-	$backgroundColor: GlobalDefaults.$buttonBackgroundColor,
-	$backgroundColorHover: GlobalDefaults.$buttonBackgroundColorHover,
-	$textColor: GlobalDefaults.$buttonTextColor,
+	$backgroundColor: Button.$backgroundColor,
+	$backgroundColorHover: Button.$backgroundColorHover,
+	$textColor: Button.$textColor,
 )
 {
 	.component-pagination

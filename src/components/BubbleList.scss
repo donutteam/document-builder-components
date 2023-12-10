@@ -9,7 +9,12 @@
 // Component
 //
 
-@mixin BubbleList($margins: GlobalDefaults.$margins, $gap: 0.5rem)
+$backgroundColor: transparent;
+$borderColor: #dddddd;
+$gap: 0.5rem;
+$margins: GlobalDefaults.$margins;
+
+@mixin BubbleList($margins: $margins, $gap: $gap, $backgroundColor: $backgroundColor, $borderColor: $borderColor)
 {
 	.component-bubble-list
 	{
@@ -24,7 +29,9 @@
 
 	.component-bubble-list-item
 	{
-		border: 1px solid #dddddd;
+		background-color: $backgroundColor;
+
+		border: 1px solid $borderColor;
 
 		border-radius: 0.625rem;
 

@@ -9,20 +9,25 @@
 // Component
 //
 
-@mixin Block($margins: GlobalDefaults.$margins)
+$backgroundColor: #ffffff;
+$borderColor: #dddddd;
+$margins: GlobalDefaults.$margins;
+$padding: GlobalDefaults.$padding;
+
+@mixin Block($margins: $margins, $padding: $padding, $backgroundColor: $backgroundColor, $borderColor: $borderColor)
 {
 	.component-block
 	{
 		@include Mixins.ConditionalTopBottomMargin($margins);
 
-		background-color: #ffffff;
+		background-color: $backgroundColor;
 
-		border: 1px solid #dddddd;
+		border: 1px solid $borderColor;
 		border-radius: 0.625rem;
 
 		box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); // Tailwind shadow-md
 
-		padding: 0.75rem;
+		padding: $padding;
 	}
 
 	.component-block-group

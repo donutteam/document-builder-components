@@ -19,7 +19,7 @@ export interface PaginationOptions
 	searchParametersPageKey? : string;
 }
 
-export function Pagination(options : PaginationOptions) : Child
+export function Pagination(options : PaginationOptions) : DE
 {
 	//
 	// Check for Single Page
@@ -27,7 +27,7 @@ export function Pagination(options : PaginationOptions) : Child
 
 	if (options.totalPageCount == 1)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	//
@@ -101,7 +101,7 @@ interface PageOptions
 	searchParametersPageKey : string;
 }
 
-function Page(options : PageOptions)
+function Page(options : PageOptions) : DE
 {
 	let cssClass = "component-pagination-page";
 

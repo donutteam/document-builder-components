@@ -9,14 +9,21 @@
 // Components
 //
 
+$backgroundColor: #475569; 				// Tailwind Gray 600
+$backgroundColorDisabled: #9ca3af; 		// Tailwind Gray 400
+$backgroundColorHover: #1e293b; 		// Tailwind Gray 800
+$textColor: #f9fafb;					// Tailwind Gray 50
+$textColorDisabled: #d1d5db;			// Tailwind Gray 300
+$margins: GlobalDefaults.$margins;
+
 @mixin Button
 (
-	$backgroundColor: GlobalDefaults.$buttonBackgroundColor,
-	$backgroundColorDisabled: GlobalDefaults.$buttonBackgroundColorDisabled,
-	$backgroundColorHover: GlobalDefaults.$buttonBackgroundColorHover,
-	$textColor: GlobalDefaults.$buttonTextColor,
-	$textColorDisabled: GlobalDefaults.$buttonTextColorDisabled,
-	$margins: GlobalDefaults.$margins,
+	$backgroundColor: $backgroundColor,
+	$backgroundColorDisabled: $backgroundColorDisabled,
+	$backgroundColorHover: $backgroundColorHover,
+	$textColor: $textColor,
+	$textColorDisabled: $textColorDisabled,
+	$margins: G$margins,
 )
 {
 	.component-button

@@ -2,17 +2,22 @@
 // Component
 //
 
+$textColor: blue;
+$textColorVisited: purple;
+$textDecoration: underline;
+$textDecorationHover: underline;
+
 @mixin Anchor
 (
-	$color: blue,
-	$colorVisited: purple,
-	$textDecoration: underline,
-	$textDecorationHover: underline,
+	$textColor: $textColor,
+	$textColorVisited: $textColorVisited,
+	$textDecoration: $textDecoration,
+	$textDecorationHover: $textDecorationHover,
 )
 {
 	.component-anchor
 	{
-		color: $color;
+		color: $textColor;
 
 		text-decoration: $textDecoration;
 
@@ -23,7 +28,7 @@
 
 		&:visited
 		{
-			color: $colorVisited;
+			color: $textColorVisited;
 		}
 	}
 }

@@ -31,7 +31,7 @@ export interface ButtonOptions
 	text? : Child;
 }
 
-export function Button(buttonOptions : ButtonOptions) : Child
+export function Button(buttonOptions : ButtonOptions) : DE
 {
 	//
 	// Check Null
@@ -39,7 +39,7 @@ export function Button(buttonOptions : ButtonOptions) : Child
 
 	if (buttonOptions == null)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	//
@@ -146,31 +146,31 @@ export function Button(buttonOptions : ButtonOptions) : Child
 	return new DE(tagName, attributes, children);
 }
 
-export function ButtonCenterAlignedList(buttons : ButtonOptions[]) : Child
+export function ButtonCenterAlignedList(buttons : ButtonOptions[]) : DE
 {
 	if (buttons.length == 0)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	return new DE("div", "component-button-list center-aligned", buttons.map(Button));
 }
 
-export function ButtonGroup(buttons : ButtonOptions[]) : Child
+export function ButtonGroup(buttons : ButtonOptions[]) : DE
 {
 	if (buttons.length == 0)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	return new DE("div", "component-button-group", buttons.map(Button));
 }
 
-export function ButtonList(buttons : ButtonOptions[]) : Child
+export function ButtonList(buttons : ButtonOptions[]) : DE
 {
 	if (buttons.length == 0)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	return new DE("div", "component-button-list", buttons.map(
@@ -186,11 +186,11 @@ export function ButtonList(buttons : ButtonOptions[]) : Child
 		}));
 }
 
-export function ButtonRightAlignedGroup(buttons : ButtonOptions[]) : Child
+export function ButtonRightAlignedGroup(buttons : ButtonOptions[]) : DE
 {
 	if (buttons.length == 0)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	return new DE("div", "component-button-group right-aligned", buttons.map(Button));

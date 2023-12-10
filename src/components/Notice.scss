@@ -9,7 +9,36 @@
 // Component
 //
 
-@mixin Notice($margins: GlobalDefaults.$margins)
+// Note: The colors below are from Bootstrap's alerts
+//	https://getbootstrap.com/docs/4.1/components/alerts/
+$dangerBackgroundColor: #f8d7da;
+$dangerTextColor: #721c24;
+
+$infoBackgroundColor: #d1ecf1;
+$infoTextColor: #0c5460;
+
+$successBackgroundColor: #d4edda;
+$successTextColor: #155724;
+
+$warningBackgroundColor: #fff3cd;
+$warningTextColor: #856404;
+
+@mixin Notice
+(
+	$margins: GlobalDefaults.$margins,
+
+	$dangerBackgroundColor: $dangerBackgroundColor,
+	$dangerTextColor: $dangerTextColor,
+
+	$infoBackgroundColor: $infoBackgroundColor,
+	$infoTextColor: $infoTextColor,
+
+	$successBackgroundColor: $successBackgroundColor,
+	$successTextColor: $successTextColor,
+
+	$warningBackgroundColor: $warningBackgroundColor,
+	$warningTextColor: $warningTextColor,
+)
 {
 	.component-notice
 	{
@@ -21,31 +50,28 @@
 
 		grid-template-columns: auto 1fr;
 
-		// Note: The colors below are from Bootstrap's alerts
-		//	https://getbootstrap.com/docs/4.1/components/alerts/
-
-		&.success
-		{
-			background-color: #d4edda;
-			color: #155724;
-		}
-
 		&.danger
 		{
-			background-color: #f8d7da;
-			color: #721c24;
-		}
-
-		&.warning
-		{
-			background-color: #fff3cd;
-			color: #856404;
+			background-color: $dangerBackgroundColor;
+			color: $dangerTextColor;
 		}
 
 		&.info
 		{
-			background-color: #d1ecf1;
-			color: #0c5460;
+			background-color: $infoBackgroundColor;
+			color: $infoTextColor;
+		}
+
+		&.success
+		{
+			background-color: $successBackgroundColor;
+			color: $successTextColor;
+		}
+
+		&.warning
+		{
+			background-color: $warningBackgroundColor;
+			color: $warningTextColor;
 		}
 
 		.icon-wrapper

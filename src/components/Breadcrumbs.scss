@@ -9,11 +9,15 @@
 // Component
 //
 
+$margins: GlobalDefaults.$margins;
+$textColorLeading: #6b7280; // Tailwind Gray 500
+$textColorCurrent: blue;
+
 @mixin Breadcrumbs
 (
-	$margins: GlobalDefaults.$margins,
-	$colorLeading: #6b7280, // Tailwind Gray 500
-	$colorCurrent: blue,
+	$margins: $margins,
+	$textColorLeading: $textColorLeading,
+	$textColorCurrent: $textColorCurrent,
 )
 {
 	.component-breadcrumbs
@@ -51,7 +55,7 @@
 
 		&:not(:last-child)
 		{
-			color: $colorLeading;
+			color: $textColorLeading;
 
 			&::after
 			{
@@ -63,7 +67,7 @@
 
 		&:last-child
 		{
-			color: $colorCurrent;
+			color: $textColorCurrent;
 		}
 	}
 }

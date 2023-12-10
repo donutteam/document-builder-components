@@ -8,11 +8,11 @@ import { Child, DE } from "@donutteam/document-builder";
 // Component
 //
 
-export function BubbleList(children : Child[]) : Child
+export function BubbleList(children : Child[]) : DE
 {
 	if (children.length === 0)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	return new DE("div", "component-bubble-list", children.map(Item));
@@ -22,11 +22,11 @@ export function BubbleList(children : Child[]) : Child
 // Local Components
 //
 
-function Item(child : Child) : Child
+function Item(child : Child) : DE
 {
 	if (child == null)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	return new DE("div", "component-bubble-list-item", child);

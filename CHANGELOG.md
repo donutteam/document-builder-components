@@ -1,4 +1,10 @@
 # Changelog
+## 2.0.0
+
+* Exposing all colors as arguments to mixins to facilitate theming.
+* Changing all component functions to always return a DE.
+	* This makes it so its always possible to call `renderToString()` on a component, even if it's empty.
+
 ## 1.12.3
 Tightening return type of the `Paragraph` component.
 
