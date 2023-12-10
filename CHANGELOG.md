@@ -1,4 +1,7 @@
 # Changelog
+## 2.0.1 (Unreleased)
+Updating packages.
+
 ## 2.0.0
 
 * Exposing all colors as arguments to mixins to facilitate theming.
