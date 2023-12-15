@@ -13,8 +13,12 @@ export interface HumanDateTimeOptions
 {
 	convertToLocalTime? : boolean;
 
+	dateTimeFormat : Intl.DateTimeFormatOptions | null;
+
+	/** @deprecated */
 	showDate? : boolean;
 
+	/** @deprecated */
 	showTime? : boolean;
 
 	showRelativeTime? : boolean;
@@ -30,9 +34,12 @@ export function HumanDateTime(options : HumanDateTimeOptions) : DE
 
 	options.convertToLocalTime ??= true;
 
-	options.showDate ??= true;
-
-	options.showTime ??= true;
+	options.dateTimeFormat = options.dateTimeFormat ??
+		(
+			options.showDate
+				? (options.showTime ? DateTime.DATETIME_MED : DateTime.DATE_MED)
+				: null
+		);
 
 	options.showRelativeTime ??= false;
 
@@ -51,13 +58,11 @@ export function HumanDateTime(options : HumanDateTimeOptions) : DE
 
 	let date : Child = null;
 
-	if (options.showDate)
+	if (options.dateTimeFormat != null)
 	{
-		const format = options.showTime ? DateTime.DATETIME_MED : DateTime.DATE_MED;
-
 		date = new DE("span", "date-time",
 			[
-				dateTime.toLocaleString(format),
+				dateTime.toLocaleString(options.dateTimeFormat),
 				" ",
 				"UTC",
 			]);

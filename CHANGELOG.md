@@ -1,12 +1,17 @@
 # Changelog
-## 2.0.1 (Unreleased)
-Updating packages.
+## 2.1.0
+
+* Updating packages.
+* Added `dateTimeFormat` option to `HumanDateTime`.
+* Deprecated `showDate` and `showTime` options of `HumanDateTime`.
+	* They will be removed in the next major version.
+	* They still work for now unless `dateTimeFormat` is also specified, which overrides them.
 
 ## 2.0.0
 
 * Exposing all colors as arguments to mixins to facilitate theming.
 * Changing all component functions to always return a DE.
-	* This makes it so its always possible to call `renderToString()` on a component, even if it's empty.
+	* This makes it always possible to call `renderToString()` on a component, even if it's empty.
 
 ## 1.12.3
 Tightening return type of the `Paragraph` component.
