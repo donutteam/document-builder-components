@@ -44,9 +44,7 @@ export function Button(buttonOptions : ButtonOptions) : DE
 
 	//
 	// Default Options
-	//
-
-	const isRealButton = buttonOptions.href == null;
+	//;
 
 	buttonOptions = buttonOptions ?? {};
 
@@ -64,7 +62,7 @@ export function Button(buttonOptions : ButtonOptions) : DE
 	// Choose Tag Name
 	//
 
-	const tagName = isRealButton ? "button" : "a";
+	const tagName = buttonOptions.href == null ? "button" : "a";
 
 	//
 	// Build Attributes
@@ -77,7 +75,7 @@ export function Button(buttonOptions : ButtonOptions) : DE
 
 	attributes.class = "component-button";
 
-	if (isRealButton)
+	if (buttonOptions.href == null)
 	{
 		attributes.type = buttonOptions.type;
 	}
