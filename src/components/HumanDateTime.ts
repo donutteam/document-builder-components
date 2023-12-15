@@ -13,7 +13,7 @@ export interface HumanDateTimeOptions
 {
 	convertToLocalTime? : boolean;
 
-	dateTimeFormat : Intl.DateTimeFormatOptions | null;
+	dateTimeFormat? : Intl.DateTimeFormatOptions | null;
 
 	/** @deprecated */
 	showDate? : boolean;

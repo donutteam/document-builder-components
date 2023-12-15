@@ -1,4 +1,7 @@
 # Changelog
+## 2.1.1
+Fixed a mistake where `dateTimeFormat` was required.
+
 ## 2.1.0
 
 * Updating packages.
