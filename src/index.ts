@@ -2,6 +2,16 @@
 // Exports
 //
 
+export * from "./components/head/AppleTouchIcon.js";
+export * from "./components/head/ICOFavicon.js";
+export * from "./components/head/ImageFavicon.js";
+export * from "./components/head/Meta.js";
+export * from "./components/head/OpenGraph.js";
+export * from "./components/head/Preload.js";
+export * from "./components/head/Script.js";
+export * from "./components/head/ServerInjectedGlobals.js";
+export * from "./components/head/Stylesheet.js";
+
 export * from "./components/utilities/MapOrFallback.js";
 export * from "./components/utilities/NotEmptyOrFallback.js";
 

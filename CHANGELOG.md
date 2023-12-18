@@ -1,4 +1,16 @@
 # Changelog
+## 2.2.0
+
+* Added `AppleTouchIcon` component.
+* Added `ICOFavicon` component.
+* Added `ImageFavicon` component.
+* Added `Meta` component.
+* Added `OpenGraph` component.
+* Added `Preload` component.
+* Added `Script` component.
+* Added `ServerInjectedGlobals` component.
+* Added `Stylesheet` components.
+
 ## 2.1.1
 Fixed a mistake where `dateTimeFormat` was required.
 
