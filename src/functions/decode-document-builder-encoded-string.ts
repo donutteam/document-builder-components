@@ -3,7 +3,7 @@
 //
 
 /** Decodes a document builder component encoded string. */
-function decodeDocumentBuilderEncodedString(encodedString : string) : string
+export function decodeDocumentBuilderEncodedString(encodedString : string) : string
 {
 	return encodedString.replace(/&lt;|&gt;|&amp;|&quot;|&apos;/g, (entity) =>
 	{

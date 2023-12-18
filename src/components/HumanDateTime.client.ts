@@ -4,6 +4,8 @@
 
 import { DateTime } from "luxon";
 
+import { decodeDocumentBuilderEncodedString } from "../functions/decode-document-builder-encoded-string.js";
+
 //
 // Component
 //

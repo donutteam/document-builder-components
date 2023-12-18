@@ -1,4 +1,7 @@
 # Changelog
+## 2.1.2
+Fixing a mistake with the previous change.
+
 ## 2.1.1
 Fixing an oversight where the client code for `HumanDateTime` did not use the new `dateTimeFormat` option.
 
