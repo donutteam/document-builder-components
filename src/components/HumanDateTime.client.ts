@@ -16,18 +16,38 @@ import { DateTime } from "luxon";
 
 		for (const timeElement of timeElements)
 		{
-			const convertToLocalTime = timeElement.dataset["convertToLocalTime"] === "true";
+			const rawDateTimeFormat = timeElement.dataset["dateTimeFormat"] ?? null;
 			const showDate = timeElement.dataset["showDate"] === "true";
 			const showTime = timeElement.dataset["showTime"] === "true";
+
+			let dateTimeFormat : Intl.DateTimeFormatOptions;
+
+			if (rawDateTimeFormat != null)
+			{
+				try
+				{
+					dateTimeFormat = JSON.parse(decodeDocumentBuilderEncodedString(rawDateTimeFormat));
+				}
+				catch (error)
+				{
+					console.error(error);
+
+					dateTimeFormat = {};
+				}
+			}
+			else
+			{
+				dateTimeFormat = showTime ? DateTime.DATETIME_MED : DateTime.DATE_MED;
+			}
+
+			const convertToLocalTime = timeElement.dataset["convertToLocalTime"] === "true";
 			const showRelativeTime = timeElement.dataset["showRelativeTime"] === "true";
 
 			if (convertToLocalTime && showDate)
 			{
 				const dateTimeElement = timeElement.querySelector(".date-time") as HTMLElement;
 
-				const format = showTime ? DateTime.DATETIME_MED : DateTime.DATE_MED;
-
-				dateTimeElement.innerText = DateTime.fromISO(timeElement.dateTime).toLocaleString(format);
+				dateTimeElement.innerText = DateTime.fromISO(timeElement.dateTime).toLocaleString(dateTimeFormat);
 			}
 
 			if (showRelativeTime)

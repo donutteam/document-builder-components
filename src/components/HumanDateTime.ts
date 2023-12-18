@@ -97,13 +97,12 @@ export function HumanDateTime(options : HumanDateTimeOptions) : DE
 				}),
 
 			"data-convert-to-local-time": options.convertToLocalTime,
-			"data-show-date": options.showDate,
-			"data-show-time": options.showTime,
+			"data-date-time-format": options.dateTimeFormat ? JSON.stringify(options.dateTimeFormat) : null,
 			"data-show-relative-time": options.showRelativeTime,
 		},
 		[
 			date,
-			options.showDate && options.showRelativeTime ? " " : "",
+			options.dateTimeFormat != null && options.showRelativeTime ? " " : "",
 			relativeTime,
 		]);
 }
