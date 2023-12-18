@@ -1,4 +1,7 @@
 # Changelog
+## 2.1.3
+Now casts the decoded `dateTimeFormat` in the client.
+
 ## 2.1.2
 Fixing a mistake with the previous change.
 

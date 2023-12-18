@@ -28,7 +28,7 @@ import { decodeDocumentBuilderEncodedString } from "../functions/decode-document
 			{
 				try
 				{
-					dateTimeFormat = JSON.parse(decodeDocumentBuilderEncodedString(rawDateTimeFormat));
+					dateTimeFormat = JSON.parse(decodeDocumentBuilderEncodedString(rawDateTimeFormat)) as Intl.DateTimeFormatOptions;
 				}
 				catch (error)
 				{
