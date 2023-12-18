@@ -2,7 +2,7 @@
 // Imports
 //
 
-import { Child, DE } from "@donutteam/document-builder";
+import { DE } from "@donutteam/document-builder";
 import { DateTime } from "luxon";
 
 //
@@ -15,74 +15,29 @@ export interface HumanDateTimeOptions
 
 	dateTimeFormat? : Intl.DateTimeFormatOptions | null;
 
-	/** @deprecated */
-	showDate? : boolean;
-
-	/** @deprecated */
-	showTime? : boolean;
-
-	showRelativeTime? : boolean;
-
 	timestampSeconds : number;
 }
 
 export function HumanDateTime(options : HumanDateTimeOptions) : DE
 {
 	//
-	// Default Options
+	// Options
 	//
 
-	options.convertToLocalTime ??= true;
+	const convertToLocalTime = options.convertToLocalTime ?? true;
 
-	options.dateTimeFormat = options.dateTimeFormat ??
-		(
-			options.showDate
-				? (options.showTime ? DateTime.DATETIME_MED : DateTime.DATE_MED)
-				: null
-		);
+	const dateTimeFormat = options.dateTimeFormat ?? DateTime.DATETIME_MED;
 
-	options.showRelativeTime ??= false;
+	const timestampSeconds = options.timestampSeconds;
 
 	//
 	// Create DateTime
 	//
 
-	const dateTime = DateTime.fromSeconds(options.timestampSeconds,
+	const dateTime = DateTime.fromSeconds(timestampSeconds,
 		{
 			zone: "UTC",
 		});
-
-	//
-	// Build Date
-	//
-
-	let date : Child = null;
-
-	if (options.dateTimeFormat != null)
-	{
-		date = new DE("span", "date-time",
-			[
-				dateTime.toLocaleString(options.dateTimeFormat),
-				" ",
-				"UTC",
-			]);
-	}
-
-	//
-	// Build Relative Time
-	//
-
-	let relativeTime : Child = null;
-
-	if (options.showRelativeTime)
-	{
-		relativeTime = new DE("span", "relative-time",
-			[
-				options.showDate ? "(" : "",
-				dateTime.toRelative(),
-				options.showDate ? ")" : "",
-			]);
-	}
 
 	//
 	// Build Component
@@ -96,13 +51,12 @@ export function HumanDateTime(options : HumanDateTimeOptions) : DE
 					includeOffset: true,
 				}),
 
-			"data-convert-to-local-time": options.convertToLocalTime,
-			"data-date-time-format": options.dateTimeFormat ? JSON.stringify(options.dateTimeFormat) : null,
-			"data-show-relative-time": options.showRelativeTime,
+			"data-convert-to-local-time": convertToLocalTime,
+			"data-date-time-format": JSON.stringify(dateTimeFormat),
 		},
 		[
-			date,
-			options.dateTimeFormat != null && options.showRelativeTime ? " " : "",
-			relativeTime,
+			dateTime.toLocaleString(dateTimeFormat),
+			" ",
+			"UTC",
 		]);
 }

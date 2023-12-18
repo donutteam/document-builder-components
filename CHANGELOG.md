@@ -1,11 +1,18 @@
 # Changelog
-## 2.1.3
+## 3.0.0
+To simplify issues with the last three patches and allow more flexibility, some breaking changes have been made:
+
+* The `HumanDateTime` component's relative time functionality has been moved into a new `HumanRelativeTime` component.
+	* The client side code has been simplified substantially as a result of this change.
+* The `dateTimeFormat` argument now defaults to Luxon's `DATETIME_MED` constant.
+
+## 2.2.3
 Now casts the decoded `dateTimeFormat` in the client.
 
-## 2.1.2
+## 2.2.2
 Fixing a mistake with the previous change.
 
-## 2.1.1
+## 2.2.1
 Fixing an oversight where the client code for `HumanDateTime` did not use the new `dateTimeFormat` option.
 
 ## 2.2.0

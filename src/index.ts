@@ -23,6 +23,7 @@ export * from "./components/Button.js";
 export * from "./components/ContentWrapper.js";
 export * from "./components/Header.js";
 export * from "./components/HumanDateTime.js";
+export * from "./components/HumanRelativeTime.js";
 export * from "./components/Notice.js";
 export * from "./components/Pagination.js";
 export * from "./components/Paragraph.js";
