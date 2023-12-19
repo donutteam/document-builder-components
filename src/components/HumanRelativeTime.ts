@@ -23,6 +23,8 @@ export function HumanRelativeTime(options : HumanRelativeTimeOptions) : DE
 	return new DE("span",
 		{
 			class: "component-human-relative-time",
+
+			"data-timestamp-seconds": options.timestampSeconds,
 		},
 		[
 			DateTime

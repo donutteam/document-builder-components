@@ -8,15 +8,47 @@ import { DateTime } from "luxon";
 // Component
 //
 
-(async () =>
-{
-	const updateHumanRelativeTimeElements = () =>
-	{
-		const humanRelativeTimeElements = Array.from(document.querySelectorAll(".component-human-relative-time")) as HTMLTimeElement[];
+export const humanRelativeTimeElements : HTMLElement[] = [];
 
-		for (const humanRelativeTimeElement of humanRelativeTimeElements)
+let updateHumanRelativeTimeElementsInterval : number | null = null;
+
+export function initialiseHumanRelativeTimes()
+{
+	const humanRelativeTimeElements = Array.from(document.querySelectorAll(".component-human-relative-time:not(.initialised)")) as HTMLTimeElement[];
+
+	if (humanRelativeTimeElements.length == 0)
+	{
+		return;
+	}
+
+	console.log("Initialising " + humanRelativeTimeElements.length + " human relative time elements...");
+
+	for (const humanRelativeTimeElement of humanRelativeTimeElements)
+	{
+		humanRelativeTimeElements.push(humanRelativeTimeElement);
+
+		humanRelativeTimeElement.classList.add("initialised");
+	}
+
+	if (updateHumanRelativeTimeElementsInterval != null)
+	{
+		clearInterval(updateHumanRelativeTimeElementsInterval);
+	}
+
+	updateHumanRelativeTimeElementsInterval = setInterval(() => updateHumanRelativeTimeElements(), 1000);
+}
+
+export function updateHumanRelativeTimeElements()
+{
+	for (const humanRelativeTimeElement of humanRelativeTimeElements)
+	{
+		try
 		{
-			const relativeTime = DateTime.fromISO(humanRelativeTimeElement.dateTime).toRelative();
+			const rawTimestampSeconds = humanRelativeTimeElement.dataset["data-timestamp-seconds"]!;
+
+			const timestampSeconds = parseInt(rawTimestampSeconds);
+
+			const relativeTime = DateTime.fromSeconds(timestampSeconds).toRelative();
 
 			if (relativeTime == null)
 			{
@@ -31,9 +63,9 @@ import { DateTime } from "luxon";
 
 			humanRelativeTimeElement.innerText = relativeTime;
 		}
-	};
-
-	updateHumanRelativeTimeElements();
-
-	setInterval(() => updateHumanRelativeTimeElements(), 1000);
-})();
+		catch (error)
+		{
+			console.error("[HumanRelativeTime] Failed to update human relative time element:", error);
+		}
+	}
+}

@@ -1,4 +1,9 @@
 # Changelog
+## 4.0.0
+Updating client code to specify initialisation functions that must be called by the consumer.
+
+This is to facilitate initialising *new* elements when required by the consumer, such as AJAX loaded content.
+
 ## 3.0.0
 To simplify issues with the last three patches and allow more flexibility, some breaking changes have been made:
 
