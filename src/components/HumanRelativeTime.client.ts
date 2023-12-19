@@ -8,7 +8,7 @@ import { DateTime } from "luxon";
 // Component
 //
 
-export const humanRelativeTimeElements : HTMLElement[] = [];
+export const initialisedHumanRelativeTimeElements : HTMLElement[] = [];
 
 let updateHumanRelativeTimeElementsInterval : number | null = null;
 
@@ -27,7 +27,7 @@ export function initialiseHumanRelativeTimes()
 	{
 		humanRelativeTimeElement.classList.add("initialised");
 
-		humanRelativeTimeElements.push(humanRelativeTimeElement);
+		initialisedHumanRelativeTimeElements.push(humanRelativeTimeElement);
 	}
 
 	if (updateHumanRelativeTimeElementsInterval != null)
@@ -35,12 +35,12 @@ export function initialiseHumanRelativeTimes()
 		clearInterval(updateHumanRelativeTimeElementsInterval);
 	}
 
-	updateHumanRelativeTimeElementsInterval = setInterval(() => updateHumanRelativeTimeElements(), 1000);
+	setInterval(() => updateHumanRelativeTimeElements(), 1000);
 }
 
 export function updateHumanRelativeTimeElements()
 {
-	for (const humanRelativeTimeElement of humanRelativeTimeElements)
+	for (const humanRelativeTimeElement of initialisedHumanRelativeTimeElements)
 	{
 		try
 		{

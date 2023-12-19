@@ -1,4 +1,10 @@
 # Changelog
+## 4.0.2
+Fixing a serious oversight in the HumanRelativeTime initialisation function.
+
+## 4.0.1
+Tweaks to client initialisation functions.
+
 ## 4.0.0
 Updating client code to specify initialisation functions that must be called by the consumer.
 
