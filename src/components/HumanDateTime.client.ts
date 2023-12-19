@@ -14,8 +14,12 @@ export function initialiseHumanDateTimes()
 {
 	const humanDateTimeElements = Array.from(document.querySelectorAll(".component-human-date-time:not(.initialised)")) as HTMLTimeElement[];
 
+	console.log("Initialising " + humanDateTimeElements.length + " HumanDateTime elements...");
+
 	for (const humanDateTimeElement of humanDateTimeElements)
 	{
+		humanDateTimeElement.classList.add("initialised");
+
 		try
 		{
 			const convertToLocalTime = humanDateTimeElement.dataset["convertToLocalTime"] === "true";
@@ -34,8 +38,6 @@ export function initialiseHumanDateTimes()
 			humanDateTimeElement.innerText = DateTime
 				.fromISO(humanDateTimeElement.dateTime)
 				.toLocaleString(dateTimeFormat);
-
-			humanDateTimeElement.classList.add("initialised");
 		}
 		catch (error)
 		{

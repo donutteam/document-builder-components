@@ -16,18 +16,18 @@ export function initialiseHumanRelativeTimes()
 {
 	const humanRelativeTimeElements = Array.from(document.querySelectorAll(".component-human-relative-time:not(.initialised)")) as HTMLTimeElement[];
 
+	console.log("Initialising " + humanRelativeTimeElements.length + " HumanRelativeTime elements...");
+
 	if (humanRelativeTimeElements.length == 0)
 	{
 		return;
 	}
 
-	console.log("Initialising " + humanRelativeTimeElements.length + " human relative time elements...");
-
 	for (const humanRelativeTimeElement of humanRelativeTimeElements)
 	{
-		humanRelativeTimeElements.push(humanRelativeTimeElement);
-
 		humanRelativeTimeElement.classList.add("initialised");
+
+		humanRelativeTimeElements.push(humanRelativeTimeElement);
 	}
 
 	if (updateHumanRelativeTimeElementsInterval != null)
