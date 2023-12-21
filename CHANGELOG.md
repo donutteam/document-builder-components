@@ -1,4 +1,7 @@
 # Changelog
+## 4.1.1
+Fixing a mistake with the `AutomaticGridTemplateColumns` mixin where the width was hardcoded to 200px.
+
 ## 4.1.0
 Adding `AutomaticGridTemplateColumns` mixin.
 
