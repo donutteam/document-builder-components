@@ -1,4 +1,7 @@
 # Changelog
+## 4.1.0
+Adding `AutomaticGridTemplateColumns` mixin.
+
 ## 4.0.2
 Fixing a serious oversight in the HumanRelativeTime initialisation function.
 
