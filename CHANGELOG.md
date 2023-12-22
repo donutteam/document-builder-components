@@ -2,6 +2,8 @@
 ## 5.0.0
 
 * Changing `Notice` to take a `NoticeOptions` object instead of separate arguments.
+* Added `Form` component.
+* Added `FormNoticeContainer` component.
 
 ## 4.1.1
 Fixing a mistake with the `AutomaticGridTemplateColumns` mixin where the width was hardcoded to 200px.
