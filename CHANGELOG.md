@@ -1,4 +1,8 @@
 # Changelog
+## 5.0.0
+
+* Changing `Notice` to take a `NoticeOptions` object instead of separate arguments.
+
 ## 4.1.1
 Fixing a mistake with the `AutomaticGridTemplateColumns` mixin where the width was hardcoded to 200px.
 
