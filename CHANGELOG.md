@@ -1,4 +1,7 @@
 # Changelog
+## 5.0.1
+Web browsers are actually the worst.
+
 ## 5.0.0
 
 * Changing `Notice` to take a `NoticeOptions` object instead of separate arguments.

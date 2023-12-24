@@ -105,7 +105,9 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 	{
 		console.log("[Form] No notice container, prepending one...");
 
-		options.form.prepend(FormNoticeContainer().renderToHTMLElement());
+		noticeContainer = FormNoticeContainer().renderToHTMLElement();
+
+		options.form.prepend(noticeContainer);
 	}
 
 	const populateNoticeContainer : SubmitFormPopulateNoticeContainerFunction = (notices) =>
@@ -174,9 +176,9 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 	// Get Method & Action
 	//
 
-	let method = options.form.method ?? "GET";
+	let method = options.form.getAttribute("method") ?? "GET";
 
-	let action = options.form.action ?? "";
+	let action = options.form.getAttribute("action") ?? "";
 
 	console.log("[Form] Method and action:", method, action);
 
