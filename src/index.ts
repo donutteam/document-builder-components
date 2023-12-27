@@ -17,6 +17,7 @@ export * from "./components/head/Stylesheet.js";
 
 export * from "./components/utilities/MapOrFallback.js";
 export * from "./components/utilities/NotEmptyOrFallback.js";
+export * from "./components/utilities/NotNullOrFallback.js";
 
 export * from "./components/Anchor.js";
 export * from "./components/Block.js";

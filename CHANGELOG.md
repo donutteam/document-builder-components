@@ -1,4 +1,7 @@
 # Changelog
+## 5.1.0
+Added `NotNullOrFallback` component.
+
 ## 5.0.1
 Web browsers are actually the worst.
 
@@ -9,13 +12,13 @@ Web browsers are actually the worst.
 * Added `FormNoticeContainer` component.
 
 ## 4.1.1
-Fixing a mistake with the `AutomaticGridTemplateColumns` mixin where the width was hardcoded to 200px.
+Fixed a mistake with the `AutomaticGridTemplateColumns` mixin where the width was hardcoded to 200px.
 
 ## 4.1.0
-Adding `AutomaticGridTemplateColumns` mixin.
+Added `AutomaticGridTemplateColumns` mixin.
 
 ## 4.0.2
-Fixing a serious oversight in the HumanRelativeTime initialisation function.
+Fixed a serious oversight in the HumanRelativeTime initialisation function.
 
 ## 4.0.1
 Tweaks to client initialisation functions.
@@ -36,10 +39,10 @@ To simplify issues with the last three patches and allow more flexibility, some 
 Now casts the decoded `dateTimeFormat` in the client.
 
 ## 2.2.2
-Fixing a mistake with the previous change.
+Fixed a mistake with the previous change.
 
 ## 2.2.1
-Fixing an oversight where the client code for `HumanDateTime` did not use the new `dateTimeFormat` option.
+Fixed an oversight where the client code for `HumanDateTime` did not use the new `dateTimeFormat` option.
 
 ## 2.2.0
 
@@ -74,7 +77,7 @@ Fixed a mistake where `dateTimeFormat` was required.
 Tightening return type of the `Paragraph` component.
 
 ## 1.12.2
-Fixing a bug where the default value of `target` for the `Anchor` component was set to "self" and not "_self".
+Fixed a bug where the default value of `target` for the `Anchor` component was set to "self" and not "_self".
 
 ## 1.12.1
 Made it so passing `null` to a `Paragraph` component will render nothing.
@@ -114,7 +117,7 @@ Removing underline from focused/hovered `Button` instances.
 * Added `ButtonOptions` interface.
 
 ## 1.6.1
-Fixing a spacing issue when using `showRelativeTime` on a `HumanDateTime` instance.
+Fixed a spacing issue when using `showRelativeTime` on a `HumanDateTime` instance.
 
 ## 1.6.0
 
@@ -124,10 +127,10 @@ Fixing a spacing issue when using `showRelativeTime` on a `HumanDateTime` instan
 	* Nothing actually used it.
 
 ## 1.5.2
-Fixing an oversight with the way SCSS variables interact with Custom Properties.
+Fixed an oversight with the way SCSS variables interact with Custom Properties.
 
 ## 1.5.1
-Fixing the type of `widthRems` on `ContentWrapperCustomWidth`.
+Fixed the type of `widthRems` on `ContentWrapperCustomWidth`.
 
 ## 1.5.0
 
@@ -142,7 +145,7 @@ Fixing the type of `widthRems` on `ContentWrapperCustomWidth`.
 * Added `NoticeType` type.
 
 ## 1.3.2
-Fixing an oversight where the `Header` component and `HeaderLevel` type were not exported.
+Fixed an oversight where the `Header` component and `HeaderLevel` type were not exported.
 
 ## 1.3.1
 
