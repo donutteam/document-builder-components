@@ -10,6 +10,9 @@
 * Added `FormLabel` component.
 * Added `FormHiddenInput` component.
 * Added `FormPasswordInput` component.
+* Added `FormSelect` component.
+* Added `FormSelectOption` component.
+* Added `FormSelectOptionGroup` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.
