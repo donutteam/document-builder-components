@@ -3,6 +3,7 @@
 //
 
 export * from "./components/forms/Form.js";
+export * from "./components/forms/FormFieldset.js";
 export * from "./components/forms/FormNoticeContainer.js";
 
 export * from "./components/head/AppleTouchIcon.js";

@@ -1,0 +1,20 @@
+//
+// Imports
+//
+
+@use "../Mixins";
+
+//
+// Component
+//
+
+@mixin FormFieldset($borderColor)
+{
+	.component-form-fieldset
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		border: 1px solid $borderColor;
+		border-radius: 10px;
+	}
+}

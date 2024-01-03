@@ -1,4 +1,7 @@
 # Changelog
+## 5.2.0
+Added `FormFieldset` component.
+
 ## 5.1.0
 Added `NotNullOrFallback` component.
 
