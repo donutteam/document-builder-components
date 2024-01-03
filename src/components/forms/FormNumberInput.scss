@@ -1,0 +1,19 @@
+//
+// Imports
+//
+
+@use "../Mixins";
+
+//
+// Component
+//
+
+@mixin FormNumberInput($backgroundColor, $borderColor)
+{
+	.component-form-number-input
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		@include Mixins.FormTextInput($backgroundColor, $borderColor);
+	}
+}

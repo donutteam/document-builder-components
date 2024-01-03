@@ -6,6 +6,7 @@
 * Added `FormRadioInput` component.
 * Added `FormEmailInput` component.
 * Added `FormTextInput` component.
+* Added `FormNumberInput` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.
