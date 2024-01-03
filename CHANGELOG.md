@@ -16,6 +16,7 @@
 * Added `FormTextArea` component.
 * Added `FormColorInput` component.
 * Added `FormDateInput` component.
+* Added `FormFileInput` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.

@@ -1,0 +1,21 @@
+//
+// Imports
+//
+
+@use "../Mixins";
+
+//
+// Component
+//
+
+@mixin FormFileInput
+{
+	.component-form-file-input
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		display: block;
+
+		width: 100%;
+	}
+}
