@@ -1,0 +1,41 @@
+//
+// Imports
+//
+
+@use "../Mixins";
+
+//
+// Component
+//
+
+@mixin FormColorInput
+{
+	.component-form-color-input
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		border: none;
+		border-radius: 0.625rem;
+
+		display: block;
+
+		overflow: hidden;
+
+		padding: 0;
+
+		height: 3rem;
+		width: 100%;
+
+		&:focus,
+		&:focus-within
+		{
+			outline: 2px solid var(--primary-color);
+		}
+
+		&::-moz-color-swatch,
+		&::-webkit-color-swatch
+		{
+			border: none;
+		}
+	}
+}
