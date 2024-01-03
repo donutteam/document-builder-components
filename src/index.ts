@@ -13,6 +13,7 @@ export * from "./components/forms/FormNumberInput.js";
 export * from "./components/forms/FormPasswordInput.js";
 export * from "./components/forms/FormRadioInput.js";
 export * from "./components/forms/FormSelect.js";
+export * from "./components/forms/FormTextArea.js";
 export * from "./components/forms/FormTextInput.js";
 
 export * from "./components/head/AppleTouchIcon.js";

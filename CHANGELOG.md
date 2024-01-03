@@ -13,6 +13,7 @@
 * Added `FormSelect` component.
 * Added `FormSelectOption` component.
 * Added `FormSelectOptionGroup` component.
+* Added `FormTextArea` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.
