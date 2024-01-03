@@ -8,12 +8,12 @@
 // Component
 //
 
-@mixin FormNumberInput($backgroundColor, $borderColor)
+@mixin FormNumberInput($backgroundColor, $borderColor, $outlineColor)
 {
 	.component-form-number-input
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 
-		@include Mixins.FormTextInput($backgroundColor, $borderColor);
+		@include Mixins.FormTextInput($backgroundColor, $borderColor, $outlineColor);
 	}
 }

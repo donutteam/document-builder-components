@@ -8,12 +8,12 @@
 // Component
 //
 
-@mixin FormSelect($backgroundColor, $borderColor)
+@mixin FormSelect($backgroundColor, $borderColor, $outlineColor)
 {
 	.component-form-select
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 
-		@include Mixins.FormTextInput($backgroundColor, $borderColor);
+		@include Mixins.FormTextInput($backgroundColor, $borderColor, $outlineColor);
 	}
 }
