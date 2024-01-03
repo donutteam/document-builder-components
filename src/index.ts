@@ -5,6 +5,7 @@
 export * from "./components/forms/Form.js";
 export * from "./components/forms/FormCheckboxInput.js";
 export * from "./components/forms/FormColorInput.js";
+export * from "./components/forms/FormDateInput.js";
 export * from "./components/forms/FormEmailInput.js";
 export * from "./components/forms/FormFieldset.js";
 export * from "./components/forms/FormHiddenInput.js";

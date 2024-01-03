@@ -15,6 +15,7 @@
 * Added `FormSelectOptionGroup` component.
 * Added `FormTextArea` component.
 * Added `FormColorInput` component.
+* Added `FormDateInput` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.
