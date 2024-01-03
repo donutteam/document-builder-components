@@ -8,16 +8,14 @@
 // Component
 //
 
-@mixin FormLabel
+@mixin FileInput
 {
-	.component-form-label
+	.component-file-input
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 
-		display: flex;
+		display: block;
 
-		gap: 0.5rem;
-
-		font-weight: bold;
+		width: 100%;
 	}
 }

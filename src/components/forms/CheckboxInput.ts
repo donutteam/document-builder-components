@@ -8,13 +8,13 @@ import { Child, DE, InputElementAttributes } from "@donutteam/document-builder";
 // Exports
 //
 
-export function FormRadioInput(attributes : InputElementAttributes, labelChild : Child) : DE
+export function CheckboxInput(attributes : InputElementAttributes, labelChild : Child) : DE
 {
-	return new DE("label", "component-form-radio-input",
+	return new DE("label", "component-form-checkbox-input",
 		[
 			new DE("input",
 				{
-					type: "radio",
+					type: "checkbox",
 
 					...attributes,
 				}),

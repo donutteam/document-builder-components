@@ -1,22 +1,23 @@
 # Changelog
-## 5.2.0
+## 6.0.0
 
-* Added `FormFieldset` component.
-* Added `FormCheckboxInput` component.
-* Added `FormRadioInput` component.
-* Added `FormEmailInput` component.
-* Added `FormTextInput` component.
-* Added `FormNumberInput` component.
-* Added `FormLabel` component.
-* Added `FormHiddenInput` component.
-* Added `FormPasswordInput` component.
-* Added `FormSelect` component.
-* Added `FormSelectOption` component.
-* Added `FormSelectOptionGroup` component.
-* Added `FormTextArea` component.
-* Added `FormColorInput` component.
-* Added `FormDateInput` component.
-* Added `FormFileInput` component.
+* Renamed `FormNoticeContainer` to `NoticeContainer`.
+* Added `Fieldset` component.
+* Added `CheckboxInput` component.
+* Added `RadioInput` component.
+* Added `EmailInput` component.
+* Added `TextInput` component.
+* Added `NumberInput` component.
+* Added `Label` component.
+* Added `HiddenInput` component.
+* Added `PasswordInput` component.
+* Added `Select` component.
+* Added `SelectOption` component.
+* Added `SelectOptionGroup` component.
+* Added `TextArea` component.
+* Added `ColorInput` component.
+* Added `DateInput` component.
+* Added `FileInput` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.

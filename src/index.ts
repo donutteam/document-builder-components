@@ -2,22 +2,22 @@
 // Exports
 //
 
+export * from "./components/forms/CheckboxInput.js";
+export * from "./components/forms/ColorInput.js";
+export * from "./components/forms/DateInput.js";
+export * from "./components/forms/EmailInput.js";
+export * from "./components/forms/Fieldset.js";
+export * from "./components/forms/FileInput.js";
 export * from "./components/forms/Form.js";
-export * from "./components/forms/FormCheckboxInput.js";
-export * from "./components/forms/FormColorInput.js";
-export * from "./components/forms/FormDateInput.js";
-export * from "./components/forms/FormEmailInput.js";
-export * from "./components/forms/FormFieldset.js";
-export * from "./components/forms/FormFileInput.js";
-export * from "./components/forms/FormHiddenInput.js";
-export * from "./components/forms/FormLabel.js";
-export * from "./components/forms/FormNoticeContainer.js";
-export * from "./components/forms/FormNumberInput.js";
-export * from "./components/forms/FormPasswordInput.js";
-export * from "./components/forms/FormRadioInput.js";
-export * from "./components/forms/FormSelect.js";
-export * from "./components/forms/FormTextArea.js";
-export * from "./components/forms/FormTextInput.js";
+export * from "./components/forms/HiddenInput.js";
+export * from "./components/forms/Label.js";
+export * from "./components/forms/NoticeContainer.js";
+export * from "./components/forms/NumberInput.js";
+export * from "./components/forms/PasswordInput.js";
+export * from "./components/forms/RadioInput.js";
+export * from "./components/forms/Select.js";
+export * from "./components/forms/TextArea.js";
+export * from "./components/forms/TextInput.js";
 
 export * from "./components/head/AppleTouchIcon.js";
 export * from "./components/head/ICOFavicon.js";

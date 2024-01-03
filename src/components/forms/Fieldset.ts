@@ -8,7 +8,7 @@ import { Child, DE, FieldsetElementAttributes } from "@donutteam/document-builde
 // Exports
 //
 
-export function FormFieldset(attributes : FieldsetElementAttributes, legend : string | null, children : Child) : DE
+export function Fieldset(attributes : FieldsetElementAttributes, legend : string | null, children : Child) : DE
 {
 	return new DE("fieldset",
 		{

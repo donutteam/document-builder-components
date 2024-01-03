@@ -2,8 +2,6 @@
 // Imports
 //
 
-import { FormNoticeContainer } from "./FormNoticeContainer.js";
-
 import { Notice, NoticeOptions } from "../Notice.js";
 
 //
@@ -99,22 +97,20 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 
 	console.log("[Form] Getting notice container...");
 
-	let noticeContainer = options.form.querySelector(".component-form-notice-container") as HTMLElement | null;
-
-	if (noticeContainer == null)
-	{
-		console.log("[Form] No notice container, prepending one...");
-
-		noticeContainer = FormNoticeContainer().renderToHTMLElement();
-
-		options.form.prepend(noticeContainer);
-	}
+	let noticeContainer = options.form.querySelector(".component-notice-container") as HTMLElement | null;
 
 	const populateNoticeContainer : SubmitFormPopulateNoticeContainerFunction = (notices) =>
 	{
 		for (const notice of notices)
 		{
-			noticeContainer!.appendChild(Notice(notice).renderToHTMLElement());
+			if (noticeContainer == null)
+			{
+				console.log("[Form] No notice container for notice:", notice);
+
+				continue;
+			}
+
+			noticeContainer.appendChild(Notice(notice).renderToHTMLElement());
 		}
 	};
 

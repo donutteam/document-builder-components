@@ -1,0 +1,23 @@
+//
+// Imports
+//
+
+@use "../Mixins";
+
+//
+// Component
+//
+
+@mixin TextArea($backgroundColor, $borderColor, $outlineColor)
+{
+	.component-text-area
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		@include Mixins.Input($backgroundColor, $borderColor, $outlineColor);
+
+		min-height: 7rem;
+
+		resize: vertical;
+	}
+}

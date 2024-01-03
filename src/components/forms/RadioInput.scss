@@ -8,9 +8,9 @@
 // Component
 //
 
-@mixin FormRadioInput
+@mixin RadioInput
 {
-	.component-form-radio-input
+	.component-radio-input
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 

@@ -8,9 +8,9 @@
 // Component
 //
 
-@mixin FormCheckboxInput
+@mixin CheckboxInput
 {
-	.component-form-checkbox-input
+	.component-checkbox-input
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 

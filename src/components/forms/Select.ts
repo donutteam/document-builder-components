@@ -9,7 +9,7 @@ import { Child, DE, SelectElementAttributes } from "@donutteam/document-builder"
 //
 
 
-export function FormSelect(attributes : SelectElementAttributes, children : Child) : DE
+export function Select(attributes : SelectElementAttributes, children : Child) : DE
 {
 	return new DE("select",
 		{
@@ -22,12 +22,12 @@ export function FormSelect(attributes : SelectElementAttributes, children : Chil
 		]);
 }
 
-export function FormSelectOption(value : number | string, text : string, selected = false) : DE
+export function SelectOption(value : number | string, text : string, selected = false) : DE
 {
 	return new DE("option", { value, selected }, text);
 }
 
-export function FormSelectOptionGroup(label : string, children : Child) : DE
+export function SelectOptionGroup(label : string, children : Child) : DE
 {
 	return new DE("optgroup", { label }, children);
 }

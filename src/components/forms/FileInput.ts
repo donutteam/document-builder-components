@@ -8,12 +8,12 @@ import { DE, InputElementAttributes } from "@donutteam/document-builder";
 // Exports
 //
 
-export function FormEmailInput(attributes : InputElementAttributes) : DE
+export function FileInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{
-			class: "component-form-email-input",
-			type: "email",
+			class: "component-form-file-input",
+			type: "file",
 
 			...attributes,
 		});

@@ -31,7 +31,7 @@
 	}
 }
 
-@mixin FormTextInput($backgroundColor, $borderColor, $outlineColor)
+@mixin Input($backgroundColor, $borderColor, $outlineColor)
 {
 	background-color: $backgroundColor;
 

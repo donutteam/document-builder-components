@@ -1,0 +1,19 @@
+//
+// Imports
+//
+
+@use "../Mixins";
+
+//
+// Component
+//
+
+@mixin EmailInput($backgroundColor, $borderColor, $outlineColor)
+{
+	.component-email-input
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		@include Mixins.Input($backgroundColor, $borderColor, $outlineColor);
+	}
+}

@@ -8,9 +8,9 @@
 // Component
 //
 
-@mixin FormColorInput
+@mixin ColorInput
 {
-	.component-form-color-input
+	.component-color-input
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 

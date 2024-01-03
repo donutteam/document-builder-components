@@ -8,7 +8,7 @@ import { DE, InputElementAttributes } from "@donutteam/document-builder";
 // Exports
 //
 
-export function FormPasswordInput(attributes : InputElementAttributes) : DE
+export function PasswordInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("div", "component-form-password-input",
 		[

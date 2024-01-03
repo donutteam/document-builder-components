@@ -8,7 +8,7 @@ import { Child, DE, TextareaElementAttributes } from "@donutteam/document-builde
 // Exports
 //
 
-export function FormTextArea(attributes : TextareaElementAttributes, children? : Child) : DE
+export function TextArea(attributes : TextareaElementAttributes, children? : Child) : DE
 {
 	return new DE("textarea",
 		{

@@ -8,7 +8,7 @@ import { DE, InputElementAttributes } from "@donutteam/document-builder";
 // Exports
 //
 
-export function FormDateInput(attributes : InputElementAttributes) : DE
+export function DateInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{

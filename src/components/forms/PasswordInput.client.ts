@@ -2,16 +2,16 @@
 // Component
 //
 
-export function initialiseFormPasswordInputs()
+export function initialisePasswordInputs()
 {
-	const passwordInputs = Array.from(document.querySelectorAll(".component-form-password-input:not(.initialised)")) as HTMLElement[];
+	const passwordInputs = Array.from(document.querySelectorAll(".component-password-input:not(.initialised)")) as HTMLElement[];
 
 	if (passwordInputs.length == 0)
 	{
 		return;
 	}
 
-	console.log("Initialising " + passwordInputs.length + " FormPasswordInput components...");
+	console.log("Initialising " + passwordInputs.length + " PasswordInput components...");
 
 	for (const passwordInput of passwordInputs)
 	{

@@ -8,9 +8,9 @@
 // Component
 //
 
-@mixin FormFieldset($borderColor)
+@mixin Fieldset($borderColor)
 {
-	.component-form-fieldset
+	.component-fieldset
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 

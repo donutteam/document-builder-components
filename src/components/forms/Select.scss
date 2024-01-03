@@ -1,0 +1,19 @@
+//
+// Imports
+//
+
+@use "../Mixins";
+
+//
+// Component
+//
+
+@mixin Select($backgroundColor, $borderColor, $outlineColor)
+{
+	.component-select
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		@include Mixins.Input($backgroundColor, $borderColor, $outlineColor);
+	}
+}

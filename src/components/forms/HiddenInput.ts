@@ -8,7 +8,7 @@ import { DE, InputElementAttributes } from "@donutteam/document-builder";
 // Exports
 //
 
-export function FormHiddenInput(name : string, value : string, attributes? : InputElementAttributes) : DE
+export function HiddenInput(name : string, value : string, attributes? : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{
