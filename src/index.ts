@@ -10,6 +10,7 @@ export * from "./components/forms/FormHiddenInput.js";
 export * from "./components/forms/FormLabel.js";
 export * from "./components/forms/FormNoticeContainer.js";
 export * from "./components/forms/FormNumberInput.js";
+export * from "./components/forms/FormPasswordInput.js";
 export * from "./components/forms/FormRadioInput.js";
 export * from "./components/forms/FormTextInput.js";
 

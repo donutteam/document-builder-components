@@ -9,6 +9,7 @@
 * Added `FormNumberInput` component.
 * Added `FormLabel` component.
 * Added `FormHiddenInput` component.
+* Added `FormPasswordInput` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.
