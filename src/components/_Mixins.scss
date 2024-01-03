@@ -30,3 +30,30 @@
 		}
 	}
 }
+
+@mixin FormTextInput($backgroundColor, $borderColor)
+{
+	background-color: $backgroundColor;
+
+	border: 1px solid $borderColor;
+	border-radius: 0.625rem;
+
+	display: block;
+
+	padding: 0.5rem;
+
+	width: 100%;
+
+	&:focus,
+	&:focus-within
+	{
+		outline: 3px solid var(--tertiary-color);
+	}
+
+	&[readonly]
+	{
+		cursor: default;
+
+		opacity: 0.5;
+	}
+}

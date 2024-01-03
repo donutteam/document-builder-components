@@ -4,6 +4,7 @@
 
 export * from "./components/forms/Form.js";
 export * from "./components/forms/FormCheckboxInput.js";
+export * from "./components/forms/FormEmailInput.js";
 export * from "./components/forms/FormFieldset.js";
 export * from "./components/forms/FormNoticeContainer.js";
 export * from "./components/forms/FormRadioInput.js";

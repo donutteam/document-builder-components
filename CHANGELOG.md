@@ -4,6 +4,7 @@
 * Added `FormFieldset` component.
 * Added `FormCheckboxInput` component.
 * Added `FormRadioInput` component.
+* Added `FormEmailInput` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.
