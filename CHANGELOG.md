@@ -1,6 +1,8 @@
 # Changelog
 ## 5.2.0
-Added `FormFieldset` component.
+
+* Added `FormFieldset` component.
+* Added `FormCheckboxInput` component.
 
 ## 5.1.0
 Added `NotNullOrFallback` component.
