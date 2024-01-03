@@ -6,6 +6,7 @@ export * from "./components/forms/Form.js";
 export * from "./components/forms/FormCheckboxInput.js";
 export * from "./components/forms/FormFieldset.js";
 export * from "./components/forms/FormNoticeContainer.js";
+export * from "./components/forms/FormRadioInput.js";
 
 export * from "./components/head/AppleTouchIcon.js";
 export * from "./components/head/ICOFavicon.js";
