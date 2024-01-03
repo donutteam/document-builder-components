@@ -8,6 +8,7 @@ export * from "./components/forms/FormEmailInput.js";
 export * from "./components/forms/FormFieldset.js";
 export * from "./components/forms/FormNoticeContainer.js";
 export * from "./components/forms/FormRadioInput.js";
+export * from "./components/forms/FormTextInput.js";
 
 export * from "./components/head/AppleTouchIcon.js";
 export * from "./components/head/ICOFavicon.js";

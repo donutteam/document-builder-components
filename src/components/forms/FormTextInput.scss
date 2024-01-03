@@ -8,9 +8,9 @@
 // Component
 //
 
-@mixin FormEmailInput($backgroundColor, $borderColor)
+@mixin FormTextInput($backgroundColor, $borderColor)
 {
-	.component-form-email-input
+	.component-form-text-input
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 
