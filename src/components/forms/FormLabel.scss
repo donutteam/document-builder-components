@@ -1,0 +1,23 @@
+//
+// Imports
+//
+
+@use "../Mixins";
+
+//
+// Component
+//
+
+@mixin FormLabel
+{
+	.component-form-label
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		display: flex;
+
+		gap: 0.5rem;
+
+		font-weight: bold;
+	}
+}
