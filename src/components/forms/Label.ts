@@ -12,7 +12,7 @@ export function Label(forName : string | null, child : Child) : DE
 {
 	return new DE("label",
 		{
-			class: "label",
+			class: "component-label",
 			for: forName,
 		},
 		[

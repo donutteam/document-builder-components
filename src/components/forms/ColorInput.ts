@@ -12,7 +12,7 @@ export function ColorInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{
-			class: "color-input",
+			class: "component-color-input",
 			type: "color",
 
 			...attributes,

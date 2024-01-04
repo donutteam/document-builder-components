@@ -12,7 +12,7 @@ export function TextArea(attributes : TextareaElementAttributes, children? : Chi
 {
 	return new DE("textarea",
 		{
-			class: "text-area",
+			class: "component-text-area",
 
 			...attributes,
 		},

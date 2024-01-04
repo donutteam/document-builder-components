@@ -12,7 +12,7 @@ export function DateInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{
-			class: "date-input",
+			class: "component-date-input",
 			type: "date",
 
 			...attributes,

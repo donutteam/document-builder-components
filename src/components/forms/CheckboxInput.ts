@@ -10,7 +10,7 @@ import { Child, DE, InputElementAttributes } from "@donutteam/document-builder";
 
 export function CheckboxInput(attributes : InputElementAttributes, labelChild : Child) : DE
 {
-	return new DE("label", "checkbox-input",
+	return new DE("label", "component-checkbox-input",
 		[
 			new DE("input",
 				{

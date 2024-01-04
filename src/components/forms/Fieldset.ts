@@ -12,7 +12,7 @@ export function Fieldset(attributes : FieldsetElementAttributes, legend : string
 {
 	return new DE("fieldset",
 		{
-			class: "fieldset",
+			class: "component-fieldset",
 
 			...attributes,
 		},

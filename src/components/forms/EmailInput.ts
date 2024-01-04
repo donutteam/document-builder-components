@@ -12,7 +12,7 @@ export function EmailInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{
-			class: "email-input",
+			class: "component-email-input",
 			type: "email",
 
 			...attributes,

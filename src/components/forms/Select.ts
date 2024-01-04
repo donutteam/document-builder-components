@@ -13,7 +13,7 @@ export function Select(attributes : SelectElementAttributes, children : Child) :
 {
 	return new DE("select",
 		{
-			class: "select",
+			class: "component-select",
 
 			...attributes,
 		},

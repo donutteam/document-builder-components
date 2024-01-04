@@ -1,4 +1,7 @@
 # Changelog
+## 6.0.3
+Fixing a bunch of class names I fucked up even worse than before. :')
+
 ## 6.0.2
 Fixing a bunch of class names I thought I had fixed before.
 
