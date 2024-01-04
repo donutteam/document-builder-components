@@ -1,4 +1,7 @@
 # Changelog
+## 6.0.1
+Fixing a mistake where the ColorInput mixin used var instead of taking an argument.
+
 ## 6.0.0
 
 * Renamed `FormNoticeContainer` to `NoticeContainer`.

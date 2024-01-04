@@ -8,7 +8,7 @@
 // Component
 //
 
-@mixin ColorInput
+@mixin ColorInput($outlineColor)
 {
 	.component-color-input
 	{
@@ -29,7 +29,7 @@
 		&:focus,
 		&:focus-within
 		{
-			outline: 2px solid var(--primary-color);
+			outline: 2px solid $outlineColor;
 		}
 
 		&::-moz-color-swatch,
