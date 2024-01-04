@@ -1,4 +1,7 @@
 # Changelog
+## 6.0.2
+Fixing a bunch of class names I thought I had fixed before.
+
 ## 6.0.1
 Fixing a mistake where the ColorInput mixin used var instead of taking an argument.
 

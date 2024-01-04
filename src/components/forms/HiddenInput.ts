@@ -12,7 +12,7 @@ export function HiddenInput(name : string, value : string, attributes? : InputEl
 {
 	return new DE("input",
 		{
-			class: "component-form-hidden-input",
+			class: "hidden-input",
 			type: "hidden",
 			name,
 			value,

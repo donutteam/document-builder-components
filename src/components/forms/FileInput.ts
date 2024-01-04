@@ -12,7 +12,7 @@ export function FileInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{
-			class: "component-form-file-input",
+			class: "file-input",
 			type: "file",
 
 			...attributes,

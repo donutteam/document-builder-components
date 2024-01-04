@@ -10,5 +10,5 @@ import { DE } from "@donutteam/document-builder";
 
 export function NoticeContainer() : DE
 {
-	return new DE("div", "component-form-notice-container");
+	return new DE("div", "notice-container");
 }

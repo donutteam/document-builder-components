@@ -12,7 +12,7 @@ export function NumberInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{
-			class: "component-form-number-input",
+			class: "number-input",
 			type: "number",
 
 			...attributes,

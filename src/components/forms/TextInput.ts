@@ -12,7 +12,7 @@ export function TextInput(attributes : InputElementAttributes) : DE
 {
 	return new DE("input",
 		{
-			class: "component-form-text-input",
+			class: "component-text-input",
 			type: "text",
 
 			...attributes,
