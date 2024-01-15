@@ -45,3 +45,4 @@ export * from "./components/HumanRelativeTime.js";
 export * from "./components/Notice.js";
 export * from "./components/Pagination.js";
 export * from "./components/Paragraph.js";
+export * from "./components/Table.js";

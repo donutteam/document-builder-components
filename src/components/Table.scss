@@ -1,0 +1,62 @@
+//
+// Imports
+//
+
+@use "./Mixins";
+
+//
+// Component
+//
+
+$borderColor: #dddddd;
+
+@mixin Table($borderColor: $borderColor)
+{
+	.component-table
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		overflow-x: scroll;
+
+		width: 100%;
+
+		.table
+		{
+			&, th, td
+			{
+				border: 1px solid $borderColor;
+				border-collapse: collapse;
+			}
+
+			th
+			{
+				padding: 0.75rem;
+
+				white-space: nowrap;
+			}
+
+			.header
+			{
+				font-weight: bold;
+			}
+		}
+	}
+
+	.component-table-row
+	{
+		.column
+		{
+			padding: 0;
+
+			&.has-padding
+			{
+				padding: 0.75rem;
+			}
+
+			&.no-wrap
+			{
+				white-space: nowrap;
+			}
+		}
+	}
+}

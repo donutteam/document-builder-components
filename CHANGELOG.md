@@ -1,4 +1,7 @@
 # Changelog
+## 6.1.0
+Added `Table` component.
+
 ## 6.0.3
 Fixing a bunch of class names I fucked up even worse than before. :')
 
