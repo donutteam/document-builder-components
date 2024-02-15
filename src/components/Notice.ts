@@ -10,6 +10,8 @@ import { Child, DE } from "@donutteam/document-builder";
 
 export interface NoticeOptions
 {
+	dismissible? : boolean;
+
 	type : NoticeType;
 
 	message : Child;
@@ -21,14 +23,27 @@ export function Notice(options : NoticeOptions) : DE
 {
 	const iconName = getIconName(options.type);
 
+	const iconContainer = new DE("span", "icon-container",
+		[
+			new DE("span", "icon " + iconName + " fa-fw"),
+		]);
+
+	const contentContainer = new DE("span", "content-container", options.message);
+
+	const dismissible = options.dismissible ?? true;
+
+	let dismissContainer = dismissible
+		? new DE("span", "dismiss-container",
+			[
+				new DE("span", "dismiss", "Dismiss"),
+			])
+		: new DE("span");
+
 	return new DE("div", "component-notice " + options.type,
 		[
-			new DE("span", "icon-wrapper",
-				[
-					new DE("span", "icon " + iconName + " fa-fw"),
-				]),
-
-			new DE("span", "content-container", options.message),
+			iconContainer,
+			contentContainer,
+			dismissContainer,
 		]);
 }
 

@@ -48,7 +48,7 @@ $warningTextColor: #856404;
 
 		display: grid;
 
-		grid-template-columns: auto 1fr;
+		grid-template-columns: auto 1fr auto;
 
 		&.danger
 		{
@@ -74,7 +74,7 @@ $warningTextColor: #856404;
 			color: $warningTextColor;
 		}
 
-		.icon-wrapper
+		.icon-container
 		{
 			align-items: center;
 
@@ -93,6 +93,21 @@ $warningTextColor: #856404;
 		.content-container
 		{
 			padding: 1rem;
+		}
+
+		.dismiss-container
+		{
+			padding: 1rem;
+
+			&.dismiss
+			{
+				cursor: pointer;
+
+				&:hover
+				{
+					text-decoration: underline;
+				}
+			}
 		}
 	}
 }
