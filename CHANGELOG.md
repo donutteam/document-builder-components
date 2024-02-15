@@ -1,8 +1,16 @@
 # Changelog
+## 6.2.2
+
+* Made dismissible default to false.
+* Added the `roundedCorners` setting which defaults to true.
+
+## 6.2.1
+Fixed a goof in the CSS.
+
 ## 6.2.0
 Made it so Notice components can be dismissed by the user.
 
-This can be disabled on a per-notice basis by passing `dismissable: false` when creating one.
+This can be disabled on a per-notice basis by passing `dismissible: false` when creating one.
 
 ## 6.1.0
 Added `Table` component.

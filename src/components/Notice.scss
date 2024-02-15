@@ -44,7 +44,14 @@ $warningTextColor: #856404;
 	{
 		@include Mixins.ConditionalTopBottomMargin($margins);
 
-		border-radius: 0.625rem;
+		--notice-border-radius: 0;
+
+		&.rounded-corners
+		{
+			--notice-border-radius: 0.625rem;
+		}
+
+		border-radius: var(--notice-border-radius);
 
 		display: grid;
 
@@ -80,8 +87,8 @@ $warningTextColor: #856404;
 
 			background-color: rgba(0, 0, 0, 0.05);
 
-			border-top-left-radius: 0.625rem;
-			border-bottom-left-radius: 0.625rem;
+			border-top-left-radius: var(--notice-border-radius);
+			border-bottom-left-radius: var(--notice-border-radius);
 
 			display: flex;
 

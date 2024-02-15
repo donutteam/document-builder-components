@@ -12,6 +12,8 @@ export interface NoticeOptions
 {
 	dismissible? : boolean;
 
+	roundedCorners? : boolean;
+
 	type : NoticeType;
 
 	message : Child;
@@ -30,7 +32,7 @@ export function Notice(options : NoticeOptions) : DE
 
 	const contentContainer = new DE("span", "content-container", options.message);
 
-	const dismissible = options.dismissible ?? true;
+	const dismissible = options.dismissible ?? false;
 
 	let dismissContainer = dismissible
 		? new DE("span", "dismiss-container",
@@ -39,7 +41,9 @@ export function Notice(options : NoticeOptions) : DE
 			])
 		: new DE("span");
 
-	return new DE("div", "component-notice " + options.type,
+	const roundedCorners = options.roundedCorners ?? true;
+
+	return new DE("div", "component-notice " + options.type + (roundedCorners ? " rounded-corners" : ""),
 		[
 			iconContainer,
 			contentContainer,
