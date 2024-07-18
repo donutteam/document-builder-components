@@ -1,4 +1,9 @@
 # Changelog
+## 6.2.3
+
+* Added `HEADER_LEVEL` constants to the Header component.
+* Fixed the "Dismiss" button not being vertically centered.
+
 ## 6.2.2
 
 * Made dismissible default to false.

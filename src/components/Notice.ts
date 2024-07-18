@@ -25,21 +25,21 @@ export function Notice(options : NoticeOptions) : DE
 {
 	const iconName = getIconName(options.type);
 
-	const iconContainer = new DE("span", "icon-container",
+	const iconContainer = new DE("div", "icon-container",
 		[
 			new DE("span", "icon " + iconName + " fa-fw"),
 		]);
 
-	const contentContainer = new DE("span", "content-container", options.message);
+	const contentContainer = new DE("div", "content-container", options.message);
 
 	const dismissible = options.dismissible ?? false;
 
 	let dismissContainer = dismissible
-		? new DE("span", "dismiss-container",
+		? new DE("div", "dismiss-container",
 			[
 				new DE("span", "dismiss", "Dismiss"),
 			])
-		: new DE("span");
+		: new DE("div");
 
 	const roundedCorners = options.roundedCorners ?? true;
 

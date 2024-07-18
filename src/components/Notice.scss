@@ -23,10 +23,9 @@ $successTextColor: #155724;
 $warningBackgroundColor: #fff3cd;
 $warningTextColor: #856404;
 
-@mixin Notice
+@mixin Notice 
 (
 	$margins: GlobalDefaults.$margins,
-
 	$dangerBackgroundColor: $dangerBackgroundColor,
 	$dangerTextColor: $dangerTextColor,
 
@@ -104,6 +103,12 @@ $warningTextColor: #856404;
 
 		.dismiss-container
 		{
+			align-items: center;
+
+			display: flex;
+
+			justify-content: center;
+
 			padding: 1rem;
 
 			.dismiss
