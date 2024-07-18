@@ -16,13 +16,13 @@ export function ContentWrapper(children : Child) : DE
 		]);
 }
 
-export function ContentWrapperCustomWidth(widthRems : number, children : Child) : DE
+export function ContentWrapperCustomWidth(width : string, children : Child) : DE
 {
 	return new DE("div",
 		{
 			class: "component-content-wrapper",
 
-			style: `--width: ${ widthRems }rem;`,
+			style: `--width: ${ width };`,
 		},
 		[
 			new DE("div", null, children),

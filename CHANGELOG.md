@@ -1,4 +1,8 @@
 # Changelog
+## 7.0.0
+
+* Changed `ContentWrapperCustomWidth` to take a string for the width instead of a number of rems.
+
 ## 6.2.3
 
 * Added `HEADER_LEVEL` constants to the Header component.
