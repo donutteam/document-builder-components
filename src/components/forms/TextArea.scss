@@ -16,8 +16,11 @@
 
 		@include Mixins.Input($backgroundColor, $borderColor, $outlineColor);
 
-		min-height: 7rem;
+		&
+		{
+			min-height: 7rem;
 
-		resize: vertical;
+			resize: vertical;
+		}
 	}
 }

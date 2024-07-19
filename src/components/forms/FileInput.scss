@@ -14,8 +14,11 @@
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 
-		display: block;
+		&
+		{
+			display: block;
 
-		width: 100%;
+			width: 100%;
+		}
 	}
 }

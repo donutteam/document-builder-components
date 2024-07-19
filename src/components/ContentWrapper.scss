@@ -13,15 +13,18 @@
 {
 	.component-content-wrapper
 	{
-		@include Mixins.ConditionalTopBottomMargin($margins);
-
 		--width: #{$defaultWidth};
 
-		display: grid;
+		@include Mixins.ConditionalTopBottomMargin($margins);
 
-		grid-template-areas: ". content .";
+		&
+		{
+			display: grid;
 
-		grid-template-columns: 1fr minmax(0px, var(--width)) 1fr;
+			grid-template-areas: ". content .";
+
+			grid-template-columns: 1fr minmax(0px, var(--width)) 1fr;
+		}
 
 		> *
 		{

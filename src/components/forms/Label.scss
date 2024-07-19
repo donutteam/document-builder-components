@@ -14,10 +14,13 @@
 	{
 		@include Mixins.ConditionalTopBottomMargin();
 
-		display: flex;
+		&
+		{
+			display: flex;
 
-		gap: 0.5rem;
+			gap: 0.5rem;
 
-		font-weight: bold;
+			font-weight: bold;
+		}
 	}
 }

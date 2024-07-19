@@ -2,6 +2,7 @@
 ## 7.0.1
 
 * Updated packages.
+* Updating SCSS to accomodate standards changes.
 
 ## 7.0.0
 

@@ -41,20 +41,23 @@ $warningTextColor: #856404;
 {
 	.component-notice
 	{
+		--notice-border-radius: 0;
+
 		@include Mixins.ConditionalTopBottomMargin($margins);
 
-		--notice-border-radius: 0;
+		&
+		{
+			border-radius: var(--notice-border-radius);
+
+			display: grid;
+
+			grid-template-columns: auto 1fr auto;
+		}
 
 		&.rounded-corners
 		{
 			--notice-border-radius: 0.625rem;
 		}
-
-		border-radius: var(--notice-border-radius);
-
-		display: grid;
-
-		grid-template-columns: auto 1fr auto;
 
 		&.danger
 		{

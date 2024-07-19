@@ -21,9 +21,12 @@
 {
 	.component-pagination
 	{
-		display: grid;
+		&
+		{
+			display: grid;
 
-		gap: 1px;
+			gap: 1px;
+		}
 
 		&[data-num-page-numbers="1"]
 		{
@@ -63,19 +66,22 @@
 
 	.component-pagination-page
 	{
-		align-items: center;
+		&
+		{
+			align-items: center;
 
-		background-color: $backgroundColor;
+			background-color: $backgroundColor;
 
-		color: $textColor;
+			color: $textColor;
 
-		display: grid;
+			display: grid;
 
-		justify-content: center;
+			justify-content: center;
 
-		padding: 0.5rem;
+			padding: 0.5rem;
 
-		text-decoration: none;
+			text-decoration: none;
+		}
 
 		&:hover,
 		&.current-page

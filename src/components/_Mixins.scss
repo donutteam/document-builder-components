@@ -10,12 +10,18 @@
 
 @mixin AutomaticGridTemplateColumns($preferredWidth)
 {
-	grid-template-columns: repeat(auto-fit, minmax(min(100%, $preferredWidth), 1fr));
+	&
+	{
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, $preferredWidth), 1fr));
+	}
 }
 
 @mixin ConditionalTopBottomMargin($margins: GlobalDefaults.$margins)
 {
-	margin: 0;
+	&
+	{
+		margin: 0;
+	}
 	
 	@if $margins != 0
 	{
@@ -33,16 +39,19 @@
 
 @mixin Input($backgroundColor, $borderColor, $outlineColor)
 {
-	background-color: $backgroundColor;
+	&
+	{
+		background-color: $backgroundColor;
 
-	border: 1px solid $borderColor;
-	border-radius: 0.625rem;
+		border: 1px solid $borderColor;
+		border-radius: 0.625rem;
 
-	display: block;
+		display: block;
 
-	padding: 0.5rem;
+		padding: 0.5rem;
 
-	width: 100%;
+		width: 100%;
+	}
 
 	&:focus,
 	&:focus-within

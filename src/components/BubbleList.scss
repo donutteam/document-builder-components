@@ -20,11 +20,14 @@ $margins: GlobalDefaults.$margins;
 	{
 		@include Mixins.ConditionalTopBottomMargin($margins);
 
-		display: flex;
+		&
+		{
+			display: flex;
 
-		flex-wrap: wrap;
+			flex-wrap: wrap;
 
-		gap: $gap;
+			gap: $gap;
+		}
 	}
 
 	.component-bubble-list-item
