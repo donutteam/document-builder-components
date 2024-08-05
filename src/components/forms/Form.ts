@@ -26,7 +26,7 @@ export interface FormOptions
 
 	action?: string;
 
-	autoComplete?: boolean;
+	autoComplete?: boolean; 
 
 	encodingType?: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
 
@@ -41,7 +41,7 @@ export function Form(options: FormOptions, children : Child) : DE
 
 	const action = options.action ?? "";
 
-	const autoComplete = options.autoComplete ?? false;
+	const autoComplete = options.autoComplete ?? true;
 
 	const encodingType = options.encodingType ?? "application/x-www-form-urlencoded";
 

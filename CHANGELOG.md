@@ -1,4 +1,7 @@
 # Changelog
+## 8.0.1
+Made the `Form` component's `autoComplete` option default to true.
+
 ## 8.0.0
 
 * Removed the `NoticeContainer` component.
