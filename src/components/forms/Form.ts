@@ -22,7 +22,7 @@ export interface RecaptchaProtectionOptions
 
 export interface FormOptions
 {
-	method?: "get" | "post" | "dialog";
+	method?: "get" | "GET" | "post" | "POST" | "dialog" | "DIALOG";
 
 	action?: string;
 

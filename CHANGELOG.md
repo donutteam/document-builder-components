@@ -1,4 +1,7 @@
 # Changelog
+## 8.0.2
+Made the `Form` component's `method` option accept either capitalized or lowercase strings.
+
 ## 8.0.1
 Made the `Form` component's `autoComplete` option default to true.
 
