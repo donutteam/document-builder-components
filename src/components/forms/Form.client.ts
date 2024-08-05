@@ -2,78 +2,150 @@
 // Imports
 //
 
+import { HiddenInput } from "./HiddenInput.js";
+
 import { Notice, NoticeOptions } from "../Notice.js";
 
 //
-// Component
+// Types
 //
 
-export type InitialiseFormOptions = Omit<SubmitFormOptions, "form" | "event">
+declare const grecaptcha: any;
 
-export function initialiseForms(options : InitialiseFormOptions) : void
+//
+// Local Functions
+//
+
+function getElement(parent: HTMLElement, selector: string): HTMLElement
 {
-	//
-	// Get Forms
-	//
+	const element = parent.querySelector(selector) as HTMLElement | null;
 
-	const forms = Array.from(document.querySelectorAll(".component-form:not(.initialised)")) as HTMLFormElement[];
+	if (element == null)
+	{
+		throw new Error("Element not found: " + selector);
+	}
 
-	if (forms.length == 0)
+	return element;
+}
+
+async function loadRecaptchaScript(siteKey: string): Promise<void>
+{
+	const existingScript = document.querySelector("script.recaptcha-script");
+
+	if (existingScript != null)
 	{
 		return;
 	}
 
-	//
-	// Initialise Forms
-	//
-
-	console.log("Initialising " + forms.length + " Form components...");
-
-	for (const form of forms)
-	{
-		form.classList.add("initialised");
-
-		if (form.dataset["noHandler"] == "true")
+	return new Promise(
+		(resolve, reject) =>
 		{
-			continue;
-		}
+			const script = document.createElement("script");
 
-		form.addEventListener("submit", async (event) =>
-		{
-			//
-			// Prevent Default
-			//
+			script.classList.add("recaptcha-script");
 
-			event.preventDefault();
+			script.src = "https://www.google.com/recaptcha/api.js?render=" + siteKey;
 
-			//
-			// Submit Form
-			//
+			script.async = true;
 
-			await submitForm(
+			script.addEventListener("load",
+				() =>
 				{
-					...options,
-
-					event,
-					form,
+					resolve();
 				});
+
+			script.addEventListener("error",
+				() =>
+				{
+					reject();
+				});
+
+			document.head.appendChild(script);
 		});
-	}
 }
 
-export interface SubmitFormOptions
+async function waitForRecaptchaScript(): Promise<void>
+{
+	return new Promise(
+		(resolve) =>
+		{
+			const check = () =>
+			{
+				if (typeof grecaptcha !== "undefined")
+				{
+					resolve();
+				}
+				else
+				{
+					setTimeout(check, 100);
+				}
+			};
+
+			check();
+		});
+}
+
+async function getRecaptchaToken(siteKey: string): Promise<string>
+{
+	const token = await new Promise(
+		(resolve) =>
+		{
+			grecaptcha.ready(
+				async () =>
+				{
+					const token = await grecaptcha.execute(siteKey,
+						{
+							action: "submit",
+						});
+
+					resolve(token);
+				});
+		}) as string;
+
+	return token;
+}
+
+interface SubmitFormOptions
 {
 	event : SubmitEvent;
 
 	form : HTMLFormElement;
-
-	onAjaxSubmissionResponse : (response : Response, populateNoticeContainerFunction : SubmitFormPopulateNoticeContainerFunction) => Promise<void>;
 }
-
-export type SubmitFormPopulateNoticeContainerFunction = (notices : NoticeOptions[]) => void;
 
 async function submitForm(options : SubmitFormOptions) : Promise<void>
 {
+	//
+	// Get Options and Elements
+	//
+
+	console.log("[Form] Getting options and elements...");
+
+	const maxFileSize = parseInt(options.form.dataset["maxFileSize"] ?? "-1");
+
+	const protectedBy = options.form.dataset["protectedBy"] ?? "none";
+
+	const noticeContainer = getElement(options.form, ".notices");
+
+	const hiddenContainer = getElement(options.form, ".hidden");
+
+	const inputsContainer = getElement(options.form, ".inputs");
+
+	const fileInputs = inputsContainer.querySelectorAll("input[type=file]") as NodeListOf<HTMLInputElement>;
+
+	//
+	// Create Functions
+	//
+
+	console.log("[Form] Creating functions...");
+
+	const populateNoticeContainer = (notices: NoticeOptions[]) =>
+	{
+		for (const notice of notices)
+		{
+			noticeContainer.appendChild(Notice(notice).renderToHTMLElement());
+		}
+	}
+
 	//
 	// Check Validity
 	//
@@ -84,47 +156,20 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 
 	if (!isValid)
 	{
-		console.log("[Form] Form is invalid.");
-
 		options.form.reportValidity();
 
 		return;
 	}
 
 	//
-	// Get Notice Container
-	//
-
-	console.log("[Form] Getting notice container...");
-
-	let noticeContainer = options.form.querySelector(".component-notice-container") as HTMLElement | null;
-
-	const populateNoticeContainer : SubmitFormPopulateNoticeContainerFunction = (notices) =>
-	{
-		for (const notice of notices)
-		{
-			if (noticeContainer == null)
-			{
-				console.log("[Form] No notice container for notice:", notice);
-
-				continue;
-			}
-
-			noticeContainer.appendChild(Notice(notice).renderToHTMLElement());
-		}
-	};
-
-	//
 	// Check File Sizes
 	//
 
-	const maxFileSize = parseInt(options.form.dataset["maxFileSize"] ?? "-1");
-
 	if (maxFileSize != -1)
 	{
-		console.log("[Form] Checking max file size...");
+		console.log("[Form] Checking file sizes...");
 
-		const fileInputs = Array.from(options.form.querySelectorAll("input[type=file]")) as HTMLInputElement[];
+		const tooLargeFiles: File[] = [];
 
 		for (const fileInput of fileInputs)
 		{
@@ -137,22 +182,24 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 			{
 				if (file.size > maxFileSize)
 				{
-					console.log("[Form] File size check failed:", file);
-
-					populateNoticeContainer(
-						[
-							{
-								type: "warning",
-								message: "One or more files are too large.",
-							},
-						]);
-
-					return;
+					tooLargeFiles.push(file);
 				}
 			}
 		}
 
-		console.log("[Form] Max file size check passed.");
+		if (tooLargeFiles.length > 0)
+		{
+			populateNoticeContainer(tooLargeFiles.map(
+				(file) =>
+				{
+					return {
+						type: "warning",
+						message: "File too large: " + file.name,
+					};
+				}));
+
+			return;
+		}
 	}
 
 	//
@@ -176,159 +223,136 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 
 	let action = options.form.getAttribute("action") ?? "";
 
-	console.log("[Form] Method and action:", method, action);
-
 	//
-	// Update Clicked Submission Button
+	// Handle Submission Button
 	//
 
 	const submissionButton = options.event.submitter;
 
-	console.log("[Form] Submission button:", submissionButton);
-
 	if (submissionButton != null)
 	{
-		if (submissionButton.getAttribute("formmethod") != null)
-		{
-			method = submissionButton.getAttribute("formmethod")!;
+		method = submissionButton.getAttribute("formmethod") ?? method;
 
-			console.log("[Form] Using submission button method:", method);
-		}
-
-		if (submissionButton.getAttribute("formaction") != null)
-		{
-			action = submissionButton.getAttribute("formaction")!;
-
-			console.log("[Form] Using submission button action:", action);
-		}
+		action = submissionButton.getAttribute("formaction") ?? action;
 
 		if (submissionButton.classList.contains("component-button"))
 		{
 			const icon = submissionButton.querySelector(".icon");
 
-			console.log("[Form] Submission button icon:", icon);
-
 			if (icon != null)
 			{
 				icon.className = "icon fa-solid fa-spinner fa-spin";
-
-				console.log("[Form] Changed submission button icon to spinner.");
 			}
 		}
-	}
 
-	//
-	// Include Clicked Submission Button Value
-	//
-
-	if (submissionButton != null)
-	{
 		const name = submissionButton.getAttribute("name");
+		
 		const value = submissionButton.getAttribute("value");
 
 		if (name != null && value != null)
 		{
-			console.log("[Form] Including submission button value:", name, value);
+			const input = HiddenInput(name, value).renderToHTMLElement();
 
-			const input = document.createElement("input");
-
-			input.type = "hidden";
-			input.name = name;
-			input.value = value;
-
-			options.form.appendChild(input);
+			hiddenContainer.appendChild(input);
 		}
 	}
 
+	console.log("[Form] Method:", method);
+
+	console.log("[Form] Action:", action);
+
+	console.log("[Form] Submission button: ", submissionButton);
+
 	//
-	// Include ReCAPTCHA Token
+	// Spam Protection
 	//
 
-	if (options.form.dataset["recaptchaProtected"] == "true")
+	switch (protectedBy)
 	{
-		console.log("[Form] Requesting ReCAPTCHA token...");
-
-		//
-		// Get Site Key
-		//
-
-		if (!("GOOGLE_RECAPTCHA_SITE_KEY" in window) || typeof window.GOOGLE_RECAPTCHA_SITE_KEY != "string")
+		case "recaptcha":
 		{
-			populateNoticeContainer(
-				[
-					{
-						type: "warning",
-						message: "An error occurred while submitting the form. Please refresh the page and try again.",
-					},
-				]);
+			await waitForRecaptchaScript();
 
-			return;
-		}
+			const recaptchaSiteKey = options.form.dataset["recaptchaSiteKey"];
 
-		const siteKey = window.GOOGLE_RECAPTCHA_SITE_KEY;
-
-		//
-		// Get Token
-		//
-
-		const token = await new Promise((resolve) =>
-		{
-			grecaptcha.ready(async function ()
+			if (recaptchaSiteKey == null)
 			{
-				const token = await grecaptcha.execute(siteKey,
-					{
-						action: "submit",
-					});
+				throw new Error("Recaptcha site key not in form dataset.");
+			}
 
-				resolve(token);
-			});
-		}) as string;
+			options.form.querySelector("input[name=recaptcha_token]")?.remove();
+	
+			const token = await getRecaptchaToken(recaptchaSiteKey);
 
-		//
-		// Remove Existing Input
-		//
+			const input = HiddenInput("recaptcha_token", token).renderToHTMLElement();
+	
+			options.form.appendChild(input);
 
-		options.form.querySelector("input[name=recaptcha_token]")?.remove();
-
-		//
-		// Add Input
-		//
-
-		const input = document.createElement("input");
-
-		input.type = "hidden";
-		input.name = "recaptcha_token";
-		input.value = token;
-
-		options.form.appendChild(input);
-
-		console.log("[Form] ReCAPTCHA token:", token);
+			break;
+		}
 	}
 
 	//
 	// Submit Form
 	//
 
-	if (options.form.dataset["ajax"] == "true")
+	options.form.method = method;
+
+	options.form.action = action;
+
+	options.form.submit();
+}
+
+async function initialiseForm(form: HTMLFormElement): Promise<void>
+{
+	form.addEventListener("submit", 
+		async (event) =>
+		{
+			event.preventDefault();
+
+			await submitForm(
+				{
+					event,
+					form,
+				});
+		});
+}
+
+//
+// Component
+//
+
+export function initialiseForms() : void
+{
+	const forms = document.querySelectorAll(".component-form:not(.initialised)") as NodeListOf<HTMLFormElement>;
+
+	console.log("Initialising " + forms.length + " Form components...");
+
+	let recaptchaSiteKey : string | null = null;
+
+	for (const form of forms)
 	{
-		console.log("[Form] Submitting form via AJAX...");
+		if (form.dataset["recaptchaSiteKey"] != null)
+		{
+			recaptchaSiteKey = form.dataset["recaptchaSiteKey"];
+		}
 
-		const response = await fetch(action,
-			{
-				method: method,
-				body: new FormData(options.form),
-				credentials: "include",
-			});
+		form.classList.add("initialised");
 
-		await options.onAjaxSubmissionResponse(response, populateNoticeContainer);
+		try
+		{
+			initialiseForm(form);
+		}
+		catch (error)
+		{
+			console.error("[Form] Error Initialising form:", form, error);
+		}
 	}
-	else
+
+	if (recaptchaSiteKey != null)
 	{
-		console.log("[Form] Submitting form via standard method...");
-
-		options.form.method = method;
-		options.form.action = action;
-
-		options.form.submit();
+		console.log("[Form] Loading Recaptcha script...");
+	
+		loadRecaptchaScript(recaptchaSiteKey);
 	}
 }

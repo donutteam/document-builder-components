@@ -20,7 +20,6 @@
 	"type": "module",
 	"peerDependencies": {
 		"@donutteam/document-builder": "6.x",
-		"@types/grecaptcha": "^3.0.9",
 		"@types/luxon": "^3.4.2",
 		"luxon": "3.x"
 	},

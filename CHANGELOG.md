@@ -2,6 +2,7 @@
 ## 8.0.0
 
 * Removed the `NoticeContainer` component.
+* Refactored the `Form` component to greatly streamline it.
 
 ## 7.0.1
 
