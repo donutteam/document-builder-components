@@ -1,4 +1,8 @@
 # Changelog
+## 8.0.0
+
+* Removed the `NoticeContainer` component.
+
 ## 7.0.1
 
 * Updated packages.

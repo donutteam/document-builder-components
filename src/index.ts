@@ -11,7 +11,6 @@ export * from "./components/forms/FileInput.js";
 export * from "./components/forms/Form.js";
 export * from "./components/forms/HiddenInput.js";
 export * from "./components/forms/Label.js";
-export * from "./components/forms/NoticeContainer.js";
 export * from "./components/forms/NumberInput.js";
 export * from "./components/forms/PasswordInput.js";
 export * from "./components/forms/RadioInput.js";
