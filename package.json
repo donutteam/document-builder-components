@@ -3,6 +3,10 @@
 	"version": "8.0.2",
 	"description": "A collection of components built with Donut Team's Document Builder package.",
 	"main": "./lib/index.js",
+	"exports": {
+		".": "./lib/index.js",
+		"./client": "./lib/client.js"
+	},
 	"scripts": {
 		"build": "npx rimraf lib && npx tsc",
 		"prepublishOnly": "npm run build"
