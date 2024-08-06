@@ -1,4 +1,9 @@
 # Changelog
+## 8.1.0
+
+* Added `createNotice` function to `Notice.client.ts` for easily creating notices client-side.
+* Added an experimental `/client` entrypoint.
+
 ## 8.0.2
 Made the `Form` component's `method` option accept either capitalized or lowercase strings.
 
