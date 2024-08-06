@@ -1,4 +1,7 @@
 # Changelog
+## 8.1.1
+Removed experimental `/client` entrypoint.
+
 ## 8.1.0
 
 * Added `createNotice` function to `Notice.client.ts` for easily creating notices client-side.
