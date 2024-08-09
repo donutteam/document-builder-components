@@ -4,6 +4,8 @@
 
 import { Child, DE } from "@donutteam/document-builder";
 
+import { HiddenInput } from "./HiddenInput.js";
+
 //
 // Exports
 //
@@ -32,6 +34,8 @@ export interface FormOptions
 
 	maxFileSize?: number;
 
+	hiddenInputs?: Record<string, string>;
+
 	protection?: NoProtectionOptions | RecaptchaProtectionOptions;
 }
 
@@ -46,6 +50,8 @@ export function Form(options: FormOptions, children : Child) : DE
 	const encodingType = options.encodingType ?? "application/x-www-form-urlencoded";
 
 	const maxFileSize = options.maxFileSize ?? -1;
+
+	const hiddenInputs = options.hiddenInputs ?? {};
 
 	const protection = options.protection ?? { type: "none" };
 
@@ -85,7 +91,14 @@ export function Form(options: FormOptions, children : Child) : DE
 		[
 			new DE("div", "notices"),
 
-			new DE("div", "hidden"),
+			new DE("div", "hidden",
+				[
+					Object.entries(hiddenInputs).map(
+						([ name, value ]) =>
+						{
+							return HiddenInput(name, value);
+						}),
+				]),
 
 			new DE("div", "inputs", children),
 		]);

@@ -1,4 +1,7 @@
 # Changelog
+## 8.2.0
+Added a `hiddenInputs` option to the `Form` component.
+
 ## 8.1.1
 Removed experimental `/client` entrypoint.
 
