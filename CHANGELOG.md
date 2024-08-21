@@ -1,4 +1,8 @@
 # Changelog
+## 9.1.0
+
+* Improved the styling of input components.
+
 ## 9.0.0
 
 * Removed `ServerInjectedGlobals` component.
