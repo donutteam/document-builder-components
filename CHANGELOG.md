@@ -9,10 +9,12 @@
 * Major `Form` component refactor, including the ability to set `manuallyInitialise` on a form to initialise it with a custom submission handler while getting all the other benefits of the `Form` component.
 
 ## 8.2.0
-Added a `hiddenInputs` option to the `Form` component.
+
+* Added a `hiddenInputs` option to the `Form` component.
 
 ## 8.1.1
-Removed experimental `/client` entrypoint.
+
+* Removed experimental `/client` entrypoint.
 
 ## 8.1.0
 
@@ -20,10 +22,12 @@ Removed experimental `/client` entrypoint.
 * Added an experimental `/client` entrypoint.
 
 ## 8.0.2
-Made the `Form` component's `method` option accept either capitalized or lowercase strings.
+
+* Made the `Form` component's `method` option accept either capitalized or lowercase strings.
 
 ## 8.0.1
-Made the `Form` component's `autoComplete` option default to true.
+
+* Made the `Form` component's `autoComplete` option default to true.
 
 ## 8.0.0
 
@@ -50,24 +54,29 @@ Made the `Form` component's `autoComplete` option default to true.
 * Added the `roundedCorners` setting which defaults to true.
 
 ## 6.2.1
-Fixed a goof in the CSS.
+
+* Fixed a goof in the CSS.
 
 ## 6.2.0
-Made it so Notice components can be dismissed by the user.
 
-This can be disabled on a per-notice basis by passing `dismissible: false` when creating one.
+* Made it so Notice components can be dismissed by the user.
+	* This can be disabled on a per-notice basis by passing `dismissible: false` when creating one.
 
 ## 6.1.0
-Added `Table` component.
+
+* Added `Table` component.
 
 ## 6.0.3
-Fixing a bunch of class names I fucked up even worse than before. :')
+
+* Fixing a bunch of class names I fucked up even worse than before. :')
 
 ## 6.0.2
-Fixing a bunch of class names I thought I had fixed before.
+
+* Fixing a bunch of class names I thought I had fixed before.
 
 ## 6.0.1
-Fixing a mistake where the ColorInput mixin used var instead of taking an argument.
+
+* Fixing a mistake where the ColorInput mixin used var instead of taking an argument.
 
 ## 6.0.0
 
@@ -90,10 +99,12 @@ Fixing a mistake where the ColorInput mixin used var instead of taking an argume
 * Added `FileInput` component.
 
 ## 5.1.0
-Added `NotNullOrFallback` component.
+
+* Added `NotNullOrFallback` component.
 
 ## 5.0.1
-Web browsers are actually the worst.
+
+* Web browsers are actually the worst.
 
 ## 5.0.0
 
@@ -102,37 +113,44 @@ Web browsers are actually the worst.
 * Added `FormNoticeContainer` component.
 
 ## 4.1.1
-Fixed a mistake with the `AutomaticGridTemplateColumns` mixin where the width was hardcoded to 200px.
+
+* Fixed a mistake with the `AutomaticGridTemplateColumns` mixin where the width was hardcoded to 200px.
 
 ## 4.1.0
-Added `AutomaticGridTemplateColumns` mixin.
+
+* Added `AutomaticGridTemplateColumns` mixin.
 
 ## 4.0.2
-Fixed a serious oversight in the HumanRelativeTime initialisation function.
+
+* Fixed a serious oversight in the HumanRelativeTime initialisation function.
 
 ## 4.0.1
-Tweaks to client initialisation functions.
+
+* Tweaks to client initialisation functions.
 
 ## 4.0.0
-Updating client code to specify initialisation functions that must be called by the consumer.
 
-This is to facilitate initialising *new* elements when required by the consumer, such as AJAX loaded content.
+* Updating client code to specify initialisation functions that must be called by the consumer.
+	* This is to facilitate initialising *new* elements when required by the consumer, such as AJAX loaded content.
 
 ## 3.0.0
-To simplify issues with the last three patches and allow more flexibility, some breaking changes have been made:
 
-* The `HumanDateTime` component's relative time functionality has been moved into a new `HumanRelativeTime` component.
-	* The client side code has been simplified substantially as a result of this change.
-* The `dateTimeFormat` argument now defaults to Luxon's `DATETIME_MED` constant.
+* To simplify issues with the last three patches and allow more flexibility, some breaking changes have been made:
+	* The `HumanDateTime` component's relative time functionality has been moved into a new `HumanRelativeTime` component.
+		* The client side code has been simplified substantially as a result of this change.
+	* The `dateTimeFormat` argument now defaults to Luxon's `DATETIME_MED` constant.
 
 ## 2.2.3
-Now casts the decoded `dateTimeFormat` in the client.
+
+* Now casts the decoded `dateTimeFormat` in the client.
 
 ## 2.2.2
-Fixed a mistake with the previous change.
+
+* Fixed a mistake with the previous change.
 
 ## 2.2.1
-Fixed an oversight where the client code for `HumanDateTime` did not use the new `dateTimeFormat` option.
+
+* Fixed an oversight where the client code for `HumanDateTime` did not use the new `dateTimeFormat` option.
 
 ## 2.2.0
 
@@ -147,7 +165,7 @@ Fixed an oversight where the client code for `HumanDateTime` did not use the new
 * Added `Stylesheet` components.
 
 ## 2.1.1
-Fixed a mistake where `dateTimeFormat` was required.
+* Fixed a mistake where `dateTimeFormat` was required.
 
 ## 2.1.0
 
@@ -164,31 +182,40 @@ Fixed a mistake where `dateTimeFormat` was required.
 	* This makes it always possible to call `renderToString()` on a component, even if it's empty.
 
 ## 1.12.3
-Tightening return type of the `Paragraph` component.
+
+* Tightening return type of the `Paragraph` component.
 
 ## 1.12.2
-Fixed a bug where the default value of `target` for the `Anchor` component was set to "self" and not "_self".
+
+* Fixed a bug where the default value of `target` for the `Anchor` component was set to "self" and not "_self".
 
 ## 1.12.1
-Made it so passing `null` to a `Paragraph` component will render nothing.
+
+* Made it so passing `null` to a `Paragraph` component will render nothing.
 
 ## 1.12.0
-Added `Paragraph` component.
+
+* Added `Paragraph` component.
 
 ## 1.11.0
-Added optional `extraAttributes` argument to the `Anchor` component.
+
+* Added optional `extraAttributes` argument to the `Anchor` component.
 
 ## 1.10.0
-Added `Anchor` component.
+
+* Added `Anchor` component.
 
 ## 1.9.0
-Added `NotEmptyOrFallback` component.
+
+* Added `NotEmptyOrFallback` component.
 
 ## 1.8.2
-Fixed `ButtonCenterAlignedList` class name.
+
+* Fixed `ButtonCenterAlignedList` class name.
 
 ## 1.8.1
-Fixed the border radius of `Notice` components.
+
+* Fixed the border radius of `Notice` components.
 
 ## 1.8.0
 
@@ -198,7 +225,8 @@ Fixed the border radius of `Notice` components.
 * Added `PaginationOptions` interface.
 
 ## 1.7.1
-Removing underline from focused/hovered `Button` instances.
+
+* Removing underline from focused/hovered `Button` instances.
 
 ## 1.7.0
 
@@ -207,7 +235,8 @@ Removing underline from focused/hovered `Button` instances.
 * Added `ButtonOptions` interface.
 
 ## 1.6.1
-Fixed a spacing issue when using `showRelativeTime` on a `HumanDateTime` instance.
+
+* Fixed a spacing issue when using `showRelativeTime` on a `HumanDateTime` instance.
 
 ## 1.6.0
 
@@ -217,10 +246,12 @@ Fixed a spacing issue when using `showRelativeTime` on a `HumanDateTime` instanc
 	* Nothing actually used it.
 
 ## 1.5.2
-Fixed an oversight with the way SCSS variables interact with Custom Properties.
+
+* Fixed an oversight with the way SCSS variables interact with Custom Properties.
 
 ## 1.5.1
-Fixed the type of `widthRems` on `ContentWrapperCustomWidth`.
+
+* Fixed the type of `widthRems` on `ContentWrapperCustomWidth`.
 
 ## 1.5.0
 
@@ -235,7 +266,8 @@ Fixed the type of `widthRems` on `ContentWrapperCustomWidth`.
 * Added `NoticeType` type.
 
 ## 1.3.2
-Fixed an oversight where the `Header` component and `HeaderLevel` type were not exported.
+
+* Fixed an oversight where the `Header` component and `HeaderLevel` type were not exported.
 
 ## 1.3.1
 
@@ -250,10 +282,13 @@ Fixed an oversight where the `Header` component and `HeaderLevel` type were not 
 * Added `HeaderLevel` type.
 
 ## 1.2.0
-Added `BlockGroup` component.
+
+* Added `BlockGroup` component.
 
 ## 1.1.0
-Added `Block` and `BlockWithNoPadding` components.
+
+* Added `Block` and `BlockWithNoPadding` components.
 
 ## 1.0.0
-Initial release.
+
+* Initial release.
