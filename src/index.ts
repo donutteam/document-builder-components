@@ -25,7 +25,6 @@ export * from "./components/head/Meta.js";
 export * from "./components/head/OpenGraph.js";
 export * from "./components/head/Preload.js";
 export * from "./components/head/Script.js";
-export * from "./components/head/ServerInjectedGlobals.js";
 export * from "./components/head/Stylesheet.js";
 
 export * from "./components/utilities/MapOrFallback.js";

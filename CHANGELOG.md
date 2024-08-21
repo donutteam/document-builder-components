@@ -1,4 +1,8 @@
 # Changelog
+## 9.0.0
+
+* Removed `ServerInjectedGlobals` component.
+
 ## 8.2.0
 Added a `hiddenInputs` option to the `Form` component.
 
