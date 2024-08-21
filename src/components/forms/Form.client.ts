@@ -13,6 +13,24 @@ import { Notice, NoticeOptions } from "../Notice.js";
 declare const grecaptcha: any;
 
 //
+// Classes
+//
+
+export class FormError extends Error
+{
+	notices: NoticeOptions[];
+
+	constructor(notices: NoticeOptions[])
+	{
+		super();
+
+		this.name = "FormError";
+
+		this.notices = notices;
+	}
+}
+
+//
 // Local Functions
 //
 
@@ -105,58 +123,50 @@ async function getRecaptchaToken(siteKey: string): Promise<string>
 	return token;
 }
 
-interface SubmitFormOptions
+function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOptions[]): void
 {
-	event : SubmitEvent;
+	const noticeElements = notices.map((notice) => Notice(notice).renderToHTMLElement());
 
-	form : HTMLFormElement;
+	noticeContainer.replaceChildren(...noticeElements);
 }
 
-async function submitForm(options : SubmitFormOptions) : Promise<void>
+type HandleSubmissionContext =
+{
+	form: HTMLFormElement;
+	method: string;
+	action: string;
+	noticeContainer: HTMLElement;
+};
+
+type HandleSubmission = (context: HandleSubmissionContext) => Promise<void>;
+
+async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmission: HandleSubmission)
 {
 	//
 	// Get Options and Elements
 	//
 
-	console.log("[Form] Getting options and elements...");
+	const maxFileSize = parseInt(form.dataset["maxFileSize"] ?? "-1");
 
-	const maxFileSize = parseInt(options.form.dataset["maxFileSize"] ?? "-1");
+	const protectedBy = form.dataset["protectedBy"] ?? "none";
 
-	const protectedBy = options.form.dataset["protectedBy"] ?? "none";
+	const noticeContainer = getElement(form, ".notices");
 
-	const noticeContainer = getElement(options.form, ".notices");
+	const hiddenContainer = getElement(form, ".hidden");
 
-	const hiddenContainer = getElement(options.form, ".hidden");
-
-	const inputsContainer = getElement(options.form, ".inputs");
+	const inputsContainer = getElement(form, ".inputs");
 
 	const fileInputs = inputsContainer.querySelectorAll("input[type=file]") as NodeListOf<HTMLInputElement>;
-
-	//
-	// Create Functions
-	//
-
-	console.log("[Form] Creating functions...");
-
-	const populateNoticeContainer = (notices: NoticeOptions[]) =>
-	{
-		for (const notice of notices)
-		{
-			noticeContainer.appendChild(Notice(notice).renderToHTMLElement());
-		}
-	}
 
 	//
 	// Check Validity
 	//
 
-	console.log("[Form] Checking validity...");
-
-	const isValid = options.form.checkValidity();
+	const isValid = form.checkValidity();
 
 	if (!isValid)
 	{
-		options.form.reportValidity();
+		form.reportValidity();
 
 		return;
 	}
@@ -167,8 +177,6 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 
 	if (maxFileSize != -1)
 	{
-		console.log("[Form] Checking file sizes...");
-
 		const tooLargeFiles: File[] = [];
 
 		for (const fileInput of fileInputs)
@@ -189,8 +197,8 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 
 		if (tooLargeFiles.length > 0)
 		{
-			populateNoticeContainer(tooLargeFiles.map(
-				(file) =>
+			populateNoticeContainer(noticeContainer, 
+				tooLargeFiles.map((file) =>
 				{
 					return {
 						type: "warning",
@@ -203,118 +211,162 @@ async function submitForm(options : SubmitFormOptions) : Promise<void>
 	}
 
 	//
-	// Disable Submission Buttons
+	// Get Submit Buttons
 	//
-
-	console.log("[Form] Disabling submission buttons...");
 
 	const submitButtons = Array.from(document.querySelectorAll(`button[type="submit"]`)) as HTMLButtonElement[];
 
-	for (const submitButton of submitButtons)
+	const clickedSubmitButton = event.submitter;
+
+	const clickedSubmitButtonIcon = clickedSubmitButton?.querySelector(".icon");
+
+	let originalClickedSubmitButtonIcon = clickedSubmitButtonIcon?.className;
+
+	//
+	// Try
+	//
+
+	try
 	{
-		submitButton.disabled = true;
-	}
+		//
+		// Disable Submit Buttons
+		//
 
-	//
-	// Get Method & Action
-	//
-
-	let method = options.form.getAttribute("method") ?? "GET";
-
-	let action = options.form.getAttribute("action") ?? "";
-
-	//
-	// Handle Submission Button
-	//
-
-	const submissionButton = options.event.submitter;
-
-	if (submissionButton != null)
-	{
-		method = submissionButton.getAttribute("formmethod") ?? method;
-
-		action = submissionButton.getAttribute("formaction") ?? action;
-
-		if (submissionButton.classList.contains("component-button"))
+		for (const submitButton of submitButtons)
 		{
-			const icon = submissionButton.querySelector(".icon");
+			submitButton.disabled = true;
+		}
 
-			if (icon != null)
+		//
+		// Get Method & Action
+		//
+
+		let method = form.getAttribute("method") ?? "GET";
+	
+		let action = form.getAttribute("action") ?? "";
+
+		//
+		// Handle Clicked Submit Button
+		//
+
+		if (clickedSubmitButton != null)
+		{
+			method = clickedSubmitButton.getAttribute("formmethod") ?? method;
+
+			action = clickedSubmitButton.getAttribute("formaction") ?? action;
+
+			if (clickedSubmitButtonIcon != null)
 			{
-				icon.className = "icon fa-solid fa-spinner fa-spin";
+				clickedSubmitButtonIcon.className = "icon fa-solid fa-spinner fa-spin";
+			}
+
+			const name = clickedSubmitButton.getAttribute("name");
+			
+			const value = clickedSubmitButton.getAttribute("value");
+
+			if (name != null && value != null)
+			{
+				const submitButtonInputs = form.querySelectorAll("input.submit-button-input") as NodeListOf<HTMLInputElement>;
+
+				for (const input of submitButtonInputs)
+				{
+					input.remove();
+				}
+
+				const submitButtonInput = document.createElement("input");
+
+				submitButtonInput.classList.add("submit-button-input");
+
+				submitButtonInput.type = "hidden";
+
+				submitButtonInput.name = name;
+
+				submitButtonInput.value = value;
+
+				hiddenContainer.appendChild(submitButtonInput);
 			}
 		}
 
-		const name = submissionButton.getAttribute("name");
+		//
+		// Protection
+		//
+
+		switch (protectedBy)
+		{
+			case "recaptcha":
+			{
+				await waitForRecaptchaScript();
+
+				const recaptchaSiteKey = form.dataset["recaptchaSiteKey"];
+
+				if (recaptchaSiteKey == null)
+				{
+					throw new Error("Recaptcha site key not in form dataset.");
+				}
+
+				form.querySelector("input[name=recaptcha_token]")?.remove();
 		
-		const value = submissionButton.getAttribute("value");
+				const token = await getRecaptchaToken(recaptchaSiteKey);
 
-		if (name != null && value != null)
-		{
-			const input = HiddenInput(name, value).renderToHTMLElement();
+				const input = HiddenInput("recaptcha_token", token).renderToHTMLElement();
+		
+				form.appendChild(input);
 
-			hiddenContainer.appendChild(input);
-		}
-	}
-
-	console.log("[Form] Method:", method);
-
-	console.log("[Form] Action:", action);
-
-	console.log("[Form] Submission button: ", submissionButton);
-
-	//
-	// Spam Protection
-	//
-
-	switch (protectedBy)
-	{
-		case "recaptcha":
-		{
-			await waitForRecaptchaScript();
-
-			const recaptchaSiteKey = options.form.dataset["recaptchaSiteKey"];
-
-			if (recaptchaSiteKey == null)
-			{
-				throw new Error("Recaptcha site key not in form dataset.");
+				break;
 			}
+		}
 
-			options.form.querySelector("input[name=recaptcha_token]")?.remove();
-	
-			const token = await getRecaptchaToken(recaptchaSiteKey);
+		//
+		// Submit Form
+		//
 
-			const input = HiddenInput("recaptcha_token", token).renderToHTMLElement();
-	
-			options.form.appendChild(input);
-
-			break;
+		await handleSubmission(
+			{
+				form,
+				method,
+				action,
+				noticeContainer,
+			});
+	}
+	catch (error)
+	{
+		if (error instanceof FormError)
+		{
+			populateNoticeContainer(noticeContainer, error.notices);
+		}
+		else
+		{
+			populateNoticeContainer(noticeContainer,
+				[
+					{
+						type: "danger",
+						message: error instanceof Error ? error.message : "An unknown error occurred.",
+					}
+				]);
 		}
 	}
+	finally
+	{
+		for (const submitButton of submitButtons)
+		{
+			submitButton.disabled = false;
+		}
 
-	//
-	// Submit Form
-	//
-
-	options.form.method = method;
-
-	options.form.action = action;
-
-	options.form.submit();
+		if (clickedSubmitButtonIcon != null)
+		{
+			clickedSubmitButtonIcon.className = originalClickedSubmitButtonIcon ?? "";
+		}
+	}
 }
 
-async function initialiseForm(form: HTMLFormElement): Promise<void>
+async function initialiseForm(form: HTMLFormElement, handleSubmission: HandleSubmission): Promise<void>
 {
 	form.addEventListener("submit", 
 		async (event) =>
 		{
 			event.preventDefault();
 
-			await submitForm(
-				{
-					event,
-					form,
-				});
+			await submitForm(event, form, handleSubmission);
 		});
 }
 
@@ -324,7 +376,7 @@ async function initialiseForm(form: HTMLFormElement): Promise<void>
 
 export function initialiseForms() : void
 {
-	const forms = document.querySelectorAll(".component-form:not(.initialised)") as NodeListOf<HTMLFormElement>;
+	const forms = document.querySelectorAll(`.component-form:not(.initialised):not([data-manually-initialize="true"])`) as NodeListOf<HTMLFormElement>;
 
 	console.log("Initialising " + forms.length + " Form components...");
 
@@ -341,7 +393,15 @@ export function initialiseForms() : void
 
 		try
 		{
-			initialiseForm(form);
+			initialiseForm(form,
+				async (context) =>
+				{
+					context.form.method = context.method;
+
+					context.form.action = context.action;
+
+					context.form.submit();
+				});
 		}
 		catch (error)
 		{

@@ -10,34 +10,31 @@ import { HiddenInput } from "./HiddenInput.js";
 // Exports
 //
 
-export interface NoProtectionOptions
+export type NoProtectionOptions =
 {
 	type: "none";
-}
+};
 
-export interface RecaptchaProtectionOptions
+export type RecaptchaProtectionOptions =
 {
 	type: "recaptcha";
-
 	siteKey: string;
-}
+};
 
-export interface FormOptions
+export type FormOptions =
 {
 	method?: "get" | "GET" | "post" | "POST" | "dialog" | "DIALOG";
-
 	action?: string;
 
 	autoComplete?: boolean; 
-
 	encodingType?: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
 
+	manuallyInitialize?: boolean;
 	maxFileSize?: number;
+	protection?: NoProtectionOptions | RecaptchaProtectionOptions;
 
 	hiddenInputs?: Record<string, string>;
-
-	protection?: NoProtectionOptions | RecaptchaProtectionOptions;
-}
+};
 
 export function Form(options: FormOptions, children : Child) : DE
 {
@@ -49,9 +46,9 @@ export function Form(options: FormOptions, children : Child) : DE
 
 	const encodingType = options.encodingType ?? "application/x-www-form-urlencoded";
 
-	const maxFileSize = options.maxFileSize ?? -1;
+	const manuallyInitialize = options.manuallyInitialize ?? false;
 
-	const hiddenInputs = options.hiddenInputs ?? {};
+	const maxFileSize = options.maxFileSize ?? -1;
 
 	const protection = options.protection ?? { type: "none" };
 
@@ -75,6 +72,8 @@ export function Form(options: FormOptions, children : Child) : DE
 		}
 	}
 
+	const hiddenInputs = options.hiddenInputs ?? {};
+
 	return new DE("form",
 		{
 			"class": "component-form",
@@ -84,8 +83,8 @@ export function Form(options: FormOptions, children : Child) : DE
 			"autocomplete": autoComplete ? "on" : "off",
 			"enctype": encodingType,
 
+			"data-manually-initialize": manuallyInitialize,
 			"data-max-file-size": maxFileSize,
-			
 			...protectionAttributes,
 		},
 		[

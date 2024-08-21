@@ -2,6 +2,7 @@
 ## 9.0.0
 
 * Removed `ServerInjectedGlobals` component.
+* Major `Form` component refactor, including the ability to set `manuallyInitialise` on a form to initialise it with a custom submission handler while getting all the other benefits of the `Form` component.
 
 ## 8.2.0
 Added a `hiddenInputs` option to the `Form` component.
