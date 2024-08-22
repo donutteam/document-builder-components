@@ -1,4 +1,8 @@
 # Changelog
+## 13.0.1
+
+* Updated `Form` client to use `createNotice`.
+
 ## 13.0.0
 
 * Once again changed the return type of `HandleSubmission` to an object with two properties:

@@ -4,7 +4,8 @@
 
 import { HiddenInput } from "./HiddenInput.js";
 
-import { Notice, NoticeOptions } from "../Notice.js";
+import { NoticeOptions } from "../Notice.js";
+import { createNotice  } from "../Notice.client.js";
 
 import * as DocumentLib from "../../libs/document.client.js";
 
@@ -121,9 +122,12 @@ function getNoticeContainer(form: HTMLFormElement): HTMLElement
 
 function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOptions[]): void
 {
-	const noticeElements = notices.map((notice) => Notice(notice).renderToHTMLElement());
+	for (const notice of notices)
+	{
+		const noticeElement = createNotice(notice);
 
-	noticeContainer.replaceChildren(...noticeElements);
+		noticeContainer.appendChild(noticeElement);
+	}
 }
 
 type HandleSubmissionOptions =
