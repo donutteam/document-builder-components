@@ -5,46 +5,30 @@
 import { DateTime } from "luxon";
 
 //
-// Component
+// Locals
 //
 
-export const initialisedHumanRelativeTimeElements : HTMLElement[] = [];
+let updateHumanRelativeTimeElementsInterval: number | null = null;
 
-let updateHumanRelativeTimeElementsInterval : number | null = null;
-
-export function initialiseHumanRelativeTimes()
+function initialiseHumanRelativeTime(humanRelativeTime: HTMLTimeElement)
 {
-	const humanRelativeTimeElements = Array.from(document.querySelectorAll(".component-human-relative-time:not(.initialised)")) as HTMLTimeElement[];
-
-	console.log("Initialising " + humanRelativeTimeElements.length + " HumanRelativeTime elements...");
-
-	if (humanRelativeTimeElements.length == 0)
+	if (humanRelativeTime.dataset["timestampSeconds"] == null)
 	{
-		return;
+		throw new Error("Missing data-timestamp-seconds attribute.");
 	}
 
-	for (const humanRelativeTimeElement of humanRelativeTimeElements)
-	{
-		humanRelativeTimeElement.classList.add("initialised");
-
-		initialisedHumanRelativeTimeElements.push(humanRelativeTimeElement);
-	}
-
-	if (updateHumanRelativeTimeElementsInterval != null)
-	{
-		clearInterval(updateHumanRelativeTimeElementsInterval);
-	}
-
-	setInterval(() => updateHumanRelativeTimeElements(), 1000);
+	humanRelativeTime.classList.add("initialised");
 }
 
-export function updateHumanRelativeTimeElements()
+function updateHumanRelativeTimeElements()
 {
-	for (const humanRelativeTimeElement of initialisedHumanRelativeTimeElements)
+	const humanRelativeTimes = document.querySelectorAll<HTMLTimeElement>(".component-human-relative-time.initialised");
+
+	for (const humanRelativeTime of humanRelativeTimes)
 	{
 		try
 		{
-			const rawTimestampSeconds = humanRelativeTimeElement.dataset["data-timestamp-seconds"]!;
+			const rawTimestampSeconds = humanRelativeTime.dataset["data-timestamp-seconds"]!;
 
 			const timestampSeconds = parseInt(rawTimestampSeconds);
 
@@ -56,16 +40,44 @@ export function updateHumanRelativeTimeElements()
 			}
 
 			// Note: Don't trigger unnecessary DOM updates.
-			if (relativeTime == humanRelativeTimeElement.innerText)
+			if (relativeTime == humanRelativeTime.innerText)
 			{
 				continue;
 			}
 
-			humanRelativeTimeElement.innerText = relativeTime;
+			humanRelativeTime.innerText = relativeTime;
 		}
 		catch (error)
 		{
 			console.error("[HumanRelativeTime] Failed to update human relative time element:", error);
 		}
+	}
+}
+
+//
+// Component
+//
+
+export function initialiseHumanRelativeTimes()
+{
+	const humanRelativeTimes = document.querySelectorAll<HTMLTimeElement>(".component-human-relative-time:not(.initialised)");
+
+	console.log("[HumanRelativeTime] Initialising " + humanRelativeTimes.length + " instances...");
+
+	for (const humanRelativeTime of humanRelativeTimes)
+	{
+		try
+		{
+			initialiseHumanRelativeTime(humanRelativeTime);
+		}
+		catch (error)
+		{
+			console.error("[HumanRelativeTime] Error initialising:", humanRelativeTime, error);
+		}
+	}
+
+	if (updateHumanRelativeTimeElementsInterval == null)
+	{
+		setInterval(() => updateHumanRelativeTimeElements(), 1000);
 	}
 }

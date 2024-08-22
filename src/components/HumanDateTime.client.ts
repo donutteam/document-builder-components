@@ -4,7 +4,31 @@
 
 import { DateTime } from "luxon";
 
-import { decodeDocumentBuilderEncodedString } from "../functions/decode-document-builder-encoded-string.js";
+import * as StringLib from "../libs/string.js";
+
+//
+// Locals
+//
+
+function initialiseHumanDateTime(humanDateTime: HTMLTimeElement)
+{
+	const convertToLocalTime = humanDateTime.dataset["convertToLocalTime"] === "true";
+
+	if (convertToLocalTime)
+	{
+		const rawDateTimeFormat = humanDateTime.dataset["dateTimeFormat"]!;
+	
+		let dateTimeFormat: Intl.DateTimeFormatOptions = {};
+	
+		dateTimeFormat = JSON.parse(StringLib.decodeDocumentBuilderEncodedString(rawDateTimeFormat)) as Intl.DateTimeFormatOptions;
+	
+		humanDateTime.innerText = DateTime
+			.fromISO(humanDateTime.dateTime)
+			.toLocaleString(dateTimeFormat);
+	}
+
+	humanDateTime.classList.add("initialised");
+}
 
 //
 // Component
@@ -12,36 +36,19 @@ import { decodeDocumentBuilderEncodedString } from "../functions/decode-document
 
 export function initialiseHumanDateTimes()
 {
-	const humanDateTimeElements = Array.from(document.querySelectorAll(".component-human-date-time:not(.initialised)")) as HTMLTimeElement[];
+	const humanDateTimes = document.querySelectorAll<HTMLTimeElement>(".component-human-date-time:not(.initialised)");
 
-	console.log("Initialising " + humanDateTimeElements.length + " HumanDateTime elements...");
+	console.log("[HumanDateTime] Initialising " + humanDateTimes.length + " instances...");
 
-	for (const humanDateTimeElement of humanDateTimeElements)
+	for (const humanDateTime of humanDateTimes)
 	{
-		humanDateTimeElement.classList.add("initialised");
-
 		try
 		{
-			const convertToLocalTime = humanDateTimeElement.dataset["convertToLocalTime"] === "true";
-
-			if (!convertToLocalTime)
-			{
-				continue;
-			}
-
-			const rawDateTimeFormat = humanDateTimeElement.dataset["dateTimeFormat"]!;
-
-			let dateTimeFormat : Intl.DateTimeFormatOptions = {};
-
-			dateTimeFormat = JSON.parse(decodeDocumentBuilderEncodedString(rawDateTimeFormat)) as Intl.DateTimeFormatOptions;
-
-			humanDateTimeElement.innerText = DateTime
-				.fromISO(humanDateTimeElement.dateTime)
-				.toLocaleString(dateTimeFormat);
+			initialiseHumanDateTime(humanDateTime);
 		}
 		catch (error)
 		{
-			console.error(error);
+			console.error("[HumanDateTime] Error initialising:", humanDateTime, error);
 		}
 	}
 }

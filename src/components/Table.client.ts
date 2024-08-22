@@ -1,163 +1,210 @@
 //
-// Component
+// Imports
 //
 
-export function initialiseTables()
+import * as DocumentLib from "../libs/document.client.js";
+
+//
+// Types
+//
+
+type SortDirection = "ASC" | "DESC";
+
+type SortValueType = "string" | "number";
+
+//
+// Locals
+//
+
+function resetSortIcons(tableHeaders: NodeListOf<HTMLTableCellElement>)
 {
-	const tableContainers = Array.from(document.querySelectorAll(".component-table"));
-
-	for (const tableContainer of tableContainers)
+	for (const tableHeader of tableHeaders)
 	{
-		const table = tableContainer.querySelector("table") as HTMLTableElement;
+		const sortIcon = tableHeader.querySelector<HTMLElement>(".sort-icon");
 
-		const sortableTableHeaders = Array.from(table.querySelectorAll(`th[data-is-sortable="true"]`));
-
-		for (const sortableTableHeader of sortableTableHeaders)
+		if (sortIcon == null)
 		{
-			sortableTableHeader.addEventListener("click", () =>
+			continue;
+		}
+
+		sortIcon.classList.remove("fa-sort-up");
+		sortIcon.classList.remove("fa-sort-down");
+		sortIcon.classList.add("fa-sort");
+	}
+}
+
+function setSortDirection(tableHeader: HTMLTableCellElement): SortDirection
+{
+	const sortIcon = DocumentLib.getElementOrThrow(tableHeader, ".sort-icon");
+
+	const currentSortDirection = tableHeader.dataset["sortDirection"] as SortDirection;
+
+	if (currentSortDirection != "ASC" && currentSortDirection != "DESC")
+	{
+		throw new Error("Invalid data-sort-direction attribute.");
+	}
+
+	let newSortDirection: SortDirection;
+
+	switch (currentSortDirection)
+	{
+		case "ASC":
+		{
+			sortIcon.classList.remove("fa-sort");
+			sortIcon.classList.remove("fa-sort-down");
+			sortIcon.classList.add("fa-sort-up");
+
+			newSortDirection = "DESC";
+
+			break;
+		}
+
+		case "DESC":
+		{
+			sortIcon.classList.remove("fa-sort");
+			sortIcon.classList.remove("fa-sort-up");
+			sortIcon.classList.add("fa-sort-down");
+
+			newSortDirection = "ASC";
+
+			break;
+		}
+	}
+
+	tableHeader.dataset["sortDirection"] = newSortDirection;
+
+	return newSortDirection;
+}
+
+function getSortValueType(tableHeader: HTMLTableCellElement): SortValueType
+{
+	let sortValueType = tableHeader.dataset["sortValueType"] as SortValueType;
+
+	if (sortValueType != "string" && sortValueType != "number")
+	{
+		throw new Error("Invalid data-sort-value-type attribute.");
+	}
+
+	return sortValueType;
+}
+
+function getColumnIndex(tableHeader: HTMLTableCellElement): number
+{
+	if (tableHeader.dataset["columnIndex"] == null)
+	{
+		throw new Error("Missing data-column-index attribute.");
+	}
+
+	const columnIndex = Math.floor(Number(tableHeader.dataset["columnIndex"]));
+
+	if (isNaN(columnIndex))
+	{
+		throw new Error("Invalid column index.");
+	}
+
+	return columnIndex;
+}
+
+function wrapTableRows(tableBody: HTMLTableSectionElement, sortValueType: SortValueType, columnIndex: number)
+{
+	const tableRows = Array.from(tableBody.querySelectorAll("tr"));
+
+	const tableRowWrappers = tableRows
+		.map((tableRow) =>
+		{
+			const column = DocumentLib.getElementOrThrow<HTMLTableCellElement>(tableRow, "td:nth-child(" + (columnIndex + 1) + ")");
+
+			const sortValue = column.dataset["sortValue"] ?? "0";
+
+			return {
+				sortValue: sortValueType == "number"
+					? Number(sortValue)
+					: sortValue,
+				tableRow,
+			};
+		});
+
+	return tableRowWrappers;
+}
+
+function initialiseTable(tableComponent: HTMLElement)
+{
+	const table = DocumentLib.getElementOrThrow<HTMLTableElement>(tableComponent, "table");
+
+	const tableHeaders = table.querySelectorAll("th");
+				
+	const tableBody = DocumentLib.getElementOrThrow<HTMLTableSectionElement>(table, "tbody");
+
+	for (const tableHeader of tableHeaders)
+	{
+		if (tableHeader.dataset["isSortable"] != "true")
+		{
+			continue;
+		}
+
+		tableHeader.addEventListener("click", 
+			() =>
 			{
-				//
-				// Reset Sort Icons
-				//
+				resetSortIcons(tableHeaders);
 
-				for (const tableHeader of sortableTableHeaders)
-				{
-					const sortIcon = tableHeader.querySelector(".sort-icon") as HTMLElement;
+				const sortDirection = setSortDirection(tableHeader);
 
-					sortIcon.classList.remove("fa-sort-up");
-					sortIcon.classList.remove("fa-sort-down");
-					sortIcon.classList.add("fa-sort");
-				}
+				const sortValueType = getSortValueType(tableHeader);
 
-				//
-				// Get Sort Icon
-				//
+				const columnIndex = getColumnIndex(tableHeader);
 
-				const sortIcon = sortableTableHeader.querySelector(".sort-icon") as HTMLElement;
-
-				//
-				// Get Current Sort Direction
-				//
-
-				const currentSortDirection = sortableTableHeader.getAttribute("data-sort-direction");
-
-				//
-				// Set New Sort Direction
-				//
-
-				let newSortDirection : string;
-
-				switch (currentSortDirection)
-				{
-					case "ASC":
-					{
-						sortIcon.classList.remove("fa-sort");
-						sortIcon.classList.remove("fa-sort-down");
-						sortIcon.classList.add("fa-sort-up");
-
-						newSortDirection = "DESC";
-
-						break;
-					}
-
-					case "DESC":
-					default:
-					{
-						sortIcon.classList.remove("fa-sort");
-						sortIcon.classList.remove("fa-sort-up");
-						sortIcon.classList.add("fa-sort-down");
-
-						newSortDirection = "ASC";
-
-						break;
-					}
-				}
-
-				sortableTableHeader.setAttribute("data-sort-direction", newSortDirection);
-
-				console.log(currentSortDirection, newSortDirection);
-
-				//
-				// Sort Rows
-				//
-
-				const sortValueType = sortableTableHeader.getAttribute("data-sort-value-type") as "string" | "number";
-
-				const columnIndex = parseInt(sortableTableHeader.getAttribute("data-column-index") as string);
-
-				const tableRowWrappers = Array.from(table.querySelectorAll("tbody tr"))
-					.map((tableRow) =>
-					{
-						const column = tableRow.querySelector("td:nth-child(" + (columnIndex + 1) + ")") as HTMLElement;
-
-						const sortValue = column.getAttribute("data-sort-value") as string;
-
-						return {
-							sortValue: sortValueType == "number"
-								? parseFloat(sortValue)
-								: sortValue,
-							tableRow,
-						};
-					});
+				const wrappedTableRows = wrapTableRows(tableBody, sortValueType, columnIndex);
 
 				switch (sortValueType)
 				{
 					case "number":
 					{
-						tableRowWrappers.sort((a, b) =>
-						{
-							return (a.sortValue as number) - (b.sortValue as number);
-						});
+						wrappedTableRows.sort((a, b) => (a.sortValue as number) - (b.sortValue as number));
 
 						break;
 					}
 
 					case "string":
 					{
-						tableRowWrappers.sort((a, b) =>
-						{
-							return (a.sortValue as string).localeCompare(b.sortValue as string);
-						});
+						wrappedTableRows.sort((a, b) => (a.sortValue as string).localeCompare(b.sortValue as string));
 
 						break;
 					}
 				}
 
-				if (newSortDirection == "DESC")
+				const sortedTableRows = wrappedTableRows.map(wrappedTableRow => wrappedTableRow.tableRow);
+
+				if (sortDirection == "DESC")
 				{
-					tableRowWrappers.reverse();
+					sortedTableRows.reverse();
 				}
 
-				const sortedTableRows = tableRowWrappers.map(tableRowWrapper => tableRowWrapper.tableRow);
-
-				//
-				// Remove All Rows
-				//
-
-				const tableBody = table.querySelector("tbody") as HTMLTableSectionElement;
-
-				while (tableBody.firstChild)
-				{
-					tableBody.removeChild(tableBody.firstChild);
-				}
-
-				//
-				// Create Document Fragment
-				//
-
-				const documentFragment = document.createDocumentFragment();
-
-				for (const sortedTableRow of sortedTableRows)
-				{
-					documentFragment.appendChild(sortedTableRow);
-				}
-
-				//
-				// Append Document Fragment
-				//
-
-				tableBody.appendChild(documentFragment);
+				tableBody.replaceChildren(...sortedTableRows);
 			});
+	}
+
+	tableComponent.classList.add("initialised");
+}
+
+//
+// Component
+//
+
+export function initialiseTables()
+{
+	const tableContainers = document.querySelectorAll<HTMLElement>(".component-table:not(.initialised)");
+
+	console.log("[Table] Initialising " + tableContainers.length + " instances...");
+
+	for (const tableContainer of tableContainers)
+	{
+		try
+		{
+			initialiseTable(tableContainer);
+		}
+		catch (error)
+		{
+			console.error("[Table] Error initialising:", error);
 		}
 	}
 }

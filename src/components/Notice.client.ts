@@ -10,20 +10,12 @@ import { Notice, NoticeOptions } from "./Notice.js";
 
 function initialiseNotice(notice: HTMLElement)
 {
-	notice.classList.add("initialised");
-
 	const dismissElement = notice.querySelector(".dismiss");
 
-	if (dismissElement == null)
-	{
-		return;
-	}
+	// Note: Not all notices have a dismiss button
+	dismissElement?.addEventListener("click", () => notice.remove());
 
-	dismissElement.addEventListener("click",
-		() =>
-		{
-			notice.remove();
-		});
+	notice.classList.add("initialised");
 }
 
 //
@@ -41,10 +33,19 @@ export function createNotice(options: NoticeOptions): HTMLElement
 
 export function initialiseNotices()
 {
-	const notices = document.querySelectorAll(".component-notice:not(.initialised)") as NodeListOf<HTMLElement>;
+	const notices = document.querySelectorAll<HTMLElement>(".component-notice:not(.initialised)");
+
+	console.log("[Notice] Initialising " + notices.length + " instances...");
 
 	for (const notice of notices)
 	{
-		initialiseNotice(notice);
+		try
+		{
+			initialiseNotice(notice);
+		}
+		catch (error)
+		{
+			console.error("[Notice] Error initialising:", notice, error);
+		}
 	}
 }

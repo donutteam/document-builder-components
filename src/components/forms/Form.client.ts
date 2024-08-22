@@ -6,6 +6,8 @@ import { HiddenInput } from "./HiddenInput.js";
 
 import { Notice, NoticeOptions } from "../Notice.js";
 
+import * as DocumentLib from "../../libs/document.client.js";
+
 //
 // Types
 //
@@ -33,18 +35,6 @@ export class FormError extends Error
 //
 // Local Functions
 //
-
-function getElement(parent: HTMLElement, selector: string): HTMLElement
-{
-	const element = parent.querySelector(selector) as HTMLElement | null;
-
-	if (element == null)
-	{
-		throw new Error("Element not found: " + selector);
-	}
-
-	return element;
-}
 
 async function loadRecaptchaScript(siteKey: string): Promise<void>
 {
@@ -153,11 +143,11 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 	const protectedBy = form.dataset["protectedBy"] ?? "none";
 
-	const noticeContainer = getElement(form, ".notices");
+	const noticeContainer = DocumentLib.getElementOrThrow(form, ".notices");
 
-	const hiddenContainer = getElement(form, ".hidden");
+	const hiddenContainer = DocumentLib.getElementOrThrow(form, ".hidden");
 
-	const inputsContainer = getElement(form, ".inputs");
+	const inputsContainer = DocumentLib.getElementOrThrow(form, ".inputs");
 
 	const fileInputs = inputsContainer.querySelectorAll("input[type=file]") as NodeListOf<HTMLInputElement>;
 
@@ -398,13 +388,13 @@ export function initialiseForm(form: HTMLFormElement, handleSubmission: HandleSu
 		});
 }
 
-export function initialiseForms() : void
+export function initialiseForms(): void
 {
 	const forms = document.querySelectorAll(`.component-form:not(.initialised):not([data-manually-initialize="true"])`) as NodeListOf<HTMLFormElement>;
 
 	console.log("[Form] Initialising " + forms.length + " instances...");
 
-	let recaptchaSiteKey : string | null = null;
+	let recaptchaSiteKey: string | null = null;
 
 	for (const form of forms)
 	{
@@ -429,7 +419,7 @@ export function initialiseForms() : void
 		}
 		catch (error)
 		{
-			console.error("[Form] Error Initialising form:", form, error);
+			console.error("[Form] Error initialising:", form, error);
 		}
 	}
 
