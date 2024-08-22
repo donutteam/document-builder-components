@@ -126,7 +126,7 @@ function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOp
 	noticeContainer.replaceChildren(...noticeElements);
 }
 
-type HandleSubmissionContext =
+type HandleSubmissionOptions =
 {
 	event: SubmitEvent;
 	form: HTMLFormElement;
@@ -134,7 +134,13 @@ type HandleSubmissionContext =
 	action: string;
 };
 
-type HandleSubmission = (context: HandleSubmissionContext) => Promise<NoticeOptions[]>;
+type HandleSubmissionResult =
+{
+	restoreInputs: boolean;
+	notices?: NoticeOptions[];
+};
+
+type HandleSubmission = (context: HandleSubmissionOptions) => Promise<HandleSubmissionResult>;
 
 async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmission: HandleSubmission)
 {
@@ -225,6 +231,21 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 	const clickedSubmitButtonIcon = clickedSubmitButton?.querySelector(".icon");
 
 	let originalClickedSubmitButtonIcon = clickedSubmitButtonIcon?.className;
+
+	const restoreInputs = () =>
+	{
+		for (const submitButton of submitButtons)
+		{
+			submitButton.disabled = false;
+		}
+
+		if (clickedSubmitButtonIcon != null)
+		{
+			console.log("[Form] Restoring clicked submit button icon...");
+
+			clickedSubmitButtonIcon.className = originalClickedSubmitButtonIcon ?? "";
+		}
+	};
 
 	//
 	// Try
@@ -332,7 +353,7 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 		console.log("[Form] Submitting form...");
 
-		const notices = await handleSubmission(
+		const result = await handleSubmission(
 			{
 				event,
 				form,
@@ -340,7 +361,15 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 				action,
 			});
 
-		populateNoticeContainer(noticeContainer, notices);
+		if (result.restoreInputs)
+		{
+			restoreInputs();
+		}
+
+		if (result.notices != null)
+		{
+			populateNoticeContainer(noticeContainer, result.notices);
+		}
 	}
 	catch (error)
 	{
@@ -354,19 +383,7 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 				}
 			]);
 
-		console.log("[Form] Re-enabling submit buttons...");
-		
-		for (const submitButton of submitButtons)
-		{
-			submitButton.disabled = false;
-		}
-
-		if (clickedSubmitButtonIcon != null)
-		{
-			console.log("[Form] Restoring clicked submit button icon...");
-
-			clickedSubmitButtonIcon.className = originalClickedSubmitButtonIcon ?? "";
-		}
+		restoreInputs();
 	}
 }
 
@@ -415,7 +432,9 @@ export function initialiseForms(): void
 
 					context.form.submit();
 
-					return [];
+					return {
+						restoreInputs: false,
+					};
 				});
 		}
 		catch (error)

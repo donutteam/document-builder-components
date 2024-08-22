@@ -1,4 +1,10 @@
 # Changelog
+## 13.0.0
+
+* Once again changed the return type of `HandleSubmission` to an object with two properties:
+	* `restoreInputs`: Whether to re-enable and restore the state of submission inputs.
+	* `notices`: An array of `NoticeOptions` to display. Optional.
+
 ## 12.0.0
 
 * Made the `Form` component take a `noticeContainerSelector` attribute.
