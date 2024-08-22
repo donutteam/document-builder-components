@@ -1,4 +1,9 @@
 # Changelog
+## 11.0.0
+
+* Changed it so the `HandleSubmission` type is expected to return an array of `NoticeOptions`.
+* Removed the `FormError` type in favor of the above change.
+
 ## 10.0.1
 
 * Fixed a mistake where the `extraAttributes` option was required on the `Form` component.

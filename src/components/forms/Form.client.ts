@@ -15,24 +15,6 @@ import * as DocumentLib from "../../libs/document.client.js";
 declare const grecaptcha: any;
 
 //
-// Classes
-//
-
-export class FormError extends Error
-{
-	notices: NoticeOptions[];
-
-	constructor(notices: NoticeOptions[])
-	{
-		super();
-
-		this.name = "FormError";
-
-		this.notices = notices;
-	}
-}
-
-//
 // Local Functions
 //
 
@@ -129,7 +111,7 @@ type HandleSubmissionContext =
 	noticeContainer: HTMLElement;
 };
 
-type HandleSubmission = (context: HandleSubmissionContext) => Promise<void>;
+type HandleSubmission = (context: HandleSubmissionContext) => Promise<NoticeOptions[]>;
 
 async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmission: HandleSubmission)
 {
@@ -327,7 +309,7 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 		console.log("[Form] Submitting form...");
 
-		await handleSubmission(
+		const notices = await handleSubmission(
 			{
 				event,
 				form,
@@ -335,25 +317,20 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 				action,
 				noticeContainer,
 			});
+
+		populateNoticeContainer(noticeContainer, notices);
 	}
 	catch (error)
 	{
 		console.error("[Form] Error submitting form:", error);
 
-		if (error instanceof FormError)
-		{
-			populateNoticeContainer(noticeContainer, error.notices);
-		}
-		else
-		{
-			populateNoticeContainer(noticeContainer,
-				[
-					{
-						type: "danger",
-						message: error instanceof Error ? error.message : "An unknown error occurred.",
-					}
-				]);
-		}
+		populateNoticeContainer(noticeContainer,
+			[
+				{
+					type: "danger",
+					message: error instanceof Error ? error.message : "An unknown error occurred.",
+				}
+			]);
 
 		console.log("[Form] Re-enabling submit buttons...");
 		
@@ -415,6 +392,8 @@ export function initialiseForms(): void
 					context.form.action = context.action;
 
 					context.form.submit();
+
+					return [];
 				});
 		}
 		catch (error)
