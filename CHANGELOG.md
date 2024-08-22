@@ -1,4 +1,11 @@
 # Changelog
+## 12.0.0
+
+* Made the `Form` component take a `noticeContainerSelector` attribute.
+	* The client code will now query within the form for this element.
+	* If no element is found, it will query the entire document.
+	* If no element is found still, **it will throw an error**.
+
 ## 11.0.0
 
 * Changed it so the `HandleSubmission` type is expected to return an array of `NoticeOptions`.

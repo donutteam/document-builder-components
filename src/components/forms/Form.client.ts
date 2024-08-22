@@ -95,6 +95,30 @@ async function getRecaptchaToken(siteKey: string): Promise<string>
 	return token;
 }
 
+function getNoticeContainer(form: HTMLFormElement): HTMLElement
+{
+	const noticeContainerSelector = form.dataset["noticeContainerSelector"];
+
+	if (noticeContainerSelector == null)
+	{
+		throw new Error("Missing data-notice-container-selector attribute.");
+	}
+
+	let noticeContainer = form.querySelector<HTMLElement>(noticeContainerSelector);
+
+	if (noticeContainer == null)
+	{
+		noticeContainer = document.querySelector<HTMLElement>(noticeContainerSelector);
+	}
+
+	if (noticeContainer == null)
+	{
+		throw new Error("Notice container not found: " + noticeContainerSelector);
+	}
+
+	return noticeContainer;
+}
+
 function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOptions[]): void
 {
 	const noticeElements = notices.map((notice) => Notice(notice).renderToHTMLElement());
@@ -108,7 +132,6 @@ type HandleSubmissionContext =
 	form: HTMLFormElement;
 	method: string;
 	action: string;
-	noticeContainer: HTMLElement;
 };
 
 type HandleSubmission = (context: HandleSubmissionContext) => Promise<NoticeOptions[]>;
@@ -125,7 +148,7 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 	const protectedBy = form.dataset["protectedBy"] ?? "none";
 
-	const noticeContainer = DocumentLib.getElementOrThrow(form, ".notices");
+	const noticeContainer = getNoticeContainer(form);
 
 	const hiddenContainer = DocumentLib.getElementOrThrow(form, ".hidden");
 
@@ -315,7 +338,6 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 				form,
 				method,
 				action,
-				noticeContainer,
 			});
 
 		populateNoticeContainer(noticeContainer, notices);

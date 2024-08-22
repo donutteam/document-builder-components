@@ -33,6 +33,8 @@ export type FormOptions =
 
 	manuallyInitialize?: boolean;
 	maxFileSize?: number;
+	noticeContainerSelector?: string;
+
 	protection?: NoProtectionOptions | RecaptchaProtectionOptions;
 
 	hiddenInputs?: Record<string, string>;
@@ -96,14 +98,13 @@ export function Form(options: FormOptions, children : Child) : DE
 
 			"data-manually-initialize": manuallyInitialize,
 			"data-max-file-size": maxFileSize,
+			"data-notice-container-selector": options.noticeContainerSelector ?? ".notice-container",
 
 			...protectionAttributes,
 
 			...options.extraAttributes,
 		},
 		[
-			new DE("div", "notices"),
-
 			new DE("div", "hidden",
 				[
 					Object.entries(hiddenInputs).map(
