@@ -132,6 +132,7 @@ function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOp
 
 type HandleSubmissionContext =
 {
+	event: SubmitEvent;
 	form: HTMLFormElement;
 	method: string;
 	action: string;
@@ -145,6 +146,8 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 	//
 	// Get Options and Elements
 	//
+
+	console.log("[Form] Getting options and elements...");
 
 	const maxFileSize = parseInt(form.dataset["maxFileSize"] ?? "-1");
 
@@ -162,6 +165,8 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 	// Check Validity
 	//
 
+	console.log("[Form] Checking validity...");
+
 	const isValid = form.checkValidity();
 
 	if (!isValid)
@@ -177,6 +182,8 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 	if (maxFileSize != -1)
 	{
+		console.log("[Form] Checking file sizes...");
+
 		const tooLargeFiles: File[] = [];
 
 		for (const fileInput of fileInputs)
@@ -214,6 +221,8 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 	// Get Submit Buttons
 	//
 
+	console.log("[Form] Getting submit button(s)...");
+
 	const submitButtons = Array.from(document.querySelectorAll(`button[type="submit"]`)) as HTMLButtonElement[];
 
 	const clickedSubmitButton = event.submitter;
@@ -231,6 +240,8 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 		//
 		// Disable Submit Buttons
 		//
+
+		console.log("[Form] Disabling submit buttons:", submitButtons);
 
 		for (const submitButton of submitButtons)
 		{
@@ -251,6 +262,8 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 		if (clickedSubmitButton != null)
 		{
+			console.log("[Form] Handling clicked submit button:", clickedSubmitButton);
+
 			method = clickedSubmitButton.getAttribute("formmethod") ?? method;
 
 			action = clickedSubmitButton.getAttribute("formaction") ?? action;
@@ -290,11 +303,13 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 		//
 		// Protection
 		//
-
+ 
 		switch (protectedBy)
 		{
 			case "recaptcha":
 			{
+				console.log("[Form] Protecting with Recaptcha...");
+
 				await waitForRecaptchaScript();
 
 				const recaptchaSiteKey = form.dataset["recaptchaSiteKey"];
@@ -320,8 +335,11 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 		// Submit Form
 		//
 
+		console.log("[Form] Submitting form...");
+
 		await handleSubmission(
 			{
+				event,
 				form,
 				method,
 				action,
@@ -330,6 +348,8 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 	}
 	catch (error)
 	{
+		console.error("[Form] Error submitting form:", error);
+
 		if (error instanceof FormError)
 		{
 			populateNoticeContainer(noticeContainer, error.notices);
@@ -344,9 +364,9 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 					}
 				]);
 		}
-	}
-	finally
-	{
+
+		console.log("[Form] Re-enabling submit buttons...");
+		
 		for (const submitButton of submitButtons)
 		{
 			submitButton.disabled = false;
@@ -354,31 +374,35 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 		if (clickedSubmitButtonIcon != null)
 		{
+			console.log("[Form] Restoring clicked submit button icon...");
+
 			clickedSubmitButtonIcon.className = originalClickedSubmitButtonIcon ?? "";
 		}
 	}
-}
-
-async function initialiseForm(form: HTMLFormElement, handleSubmission: HandleSubmission): Promise<void>
-{
-	form.addEventListener("submit", 
-		async (event) =>
-		{
-			event.preventDefault();
-
-			await submitForm(event, form, handleSubmission);
-		});
 }
 
 //
 // Component
 //
 
+export function initialiseForm(form: HTMLFormElement, handleSubmission: HandleSubmission)
+{
+	form.addEventListener("submit", 
+		async (event) =>
+		{
+			event.preventDefault();
+
+			console.log("[Form] Handling submission:", form);
+
+			await submitForm(event, form, handleSubmission);
+		});
+}
+
 export function initialiseForms() : void
 {
 	const forms = document.querySelectorAll(`.component-form:not(.initialised):not([data-manually-initialize="true"])`) as NodeListOf<HTMLFormElement>;
 
-	console.log("Initialising " + forms.length + " Form components...");
+	console.log("[Form] Initialising " + forms.length + " instances...");
 
 	let recaptchaSiteKey : string | null = null;
 

@@ -2,7 +2,7 @@
 // Imports
 //
 
-import { Child, DE } from "@donutteam/document-builder";
+import { Child, DE, ElementAttributes } from "@donutteam/document-builder";
 
 import { HiddenInput } from "./HiddenInput.js";
 
@@ -23,6 +23,8 @@ export type RecaptchaProtectionOptions =
 
 export type FormOptions =
 {
+	className?: string;
+
 	method?: "get" | "GET" | "post" | "POST" | "dialog" | "DIALOG";
 	action?: string;
 
@@ -34,10 +36,19 @@ export type FormOptions =
 	protection?: NoProtectionOptions | RecaptchaProtectionOptions;
 
 	hiddenInputs?: Record<string, string>;
+
+	extraAttributes: ElementAttributes;
 };
 
 export function Form(options: FormOptions, children : Child) : DE
 {
+	let className = "component-form";
+
+	if (options.className != null)
+	{
+		className += " " + options.className;
+	}
+
 	const method = options.method ?? "get";
 
 	const action = options.action ?? "";
@@ -76,7 +87,7 @@ export function Form(options: FormOptions, children : Child) : DE
 
 	return new DE("form",
 		{
-			"class": "component-form",
+			"class": className,
 
 			"method": method,
 			"action": action,
@@ -85,7 +96,10 @@ export function Form(options: FormOptions, children : Child) : DE
 
 			"data-manually-initialize": manuallyInitialize,
 			"data-max-file-size": maxFileSize,
+
 			...protectionAttributes,
+
+			...options.extraAttributes,
 		},
 		[
 			new DE("div", "notices"),

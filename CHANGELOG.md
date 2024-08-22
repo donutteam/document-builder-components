@@ -1,4 +1,11 @@
 # Changelog
+## 9.2.0
+
+* Added a `className` option to forms. This allows you to add additional class names, making it easier to base components upon the `Form` component.
+* Added an `extraAttributes` option to forms. This allows you to define additional custom attributes on the form element.
+* Added `event` to the `HandleSubmissionContext` client type. This is the raw `SubmitEvent`.
+* Added various logs to `Form` client code. Mostly for my own debugging purposes.
+
 ## 9.1.0
 
 * Improved the styling of input components.
