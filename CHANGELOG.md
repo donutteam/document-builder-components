@@ -1,4 +1,8 @@
 # Changelog
+## 10.0.1
+
+* Fixed a mistake where the `extraAttributes` option was required on the `Form` component.
+
 ## 10.0.0
 
 * Added a `className` option to forms. This allows you to add additional class names, making it easier to base components upon the `Form` component.

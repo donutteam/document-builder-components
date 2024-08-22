@@ -37,7 +37,7 @@ export type FormOptions =
 
 	hiddenInputs?: Record<string, string>;
 
-	extraAttributes: ElementAttributes;
+	extraAttributes?: ElementAttributes;
 };
 
 export function Form(options: FormOptions, children : Child) : DE
