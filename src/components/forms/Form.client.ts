@@ -122,8 +122,14 @@ function getNoticeContainer(form: HTMLFormElement): HTMLElement
 
 function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOptions[]): void
 {
-	for (const notice of notices)
+	noticeContainer.replaceChildren();
+
+	for (let notice of notices)
 	{
+		notice = { ...notice };
+
+		notice.dismissible = true;
+
 		const noticeElement = createNotice(notice);
 
 		noticeContainer.appendChild(noticeElement);
@@ -365,6 +371,7 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 				action,
 			});
 
+		// TODO: Maybe make it ALWAYS restore ones that aren't in this form
 		if (result.restoreInputs)
 		{
 			restoreInputs();
@@ -384,7 +391,7 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 				{
 					type: "danger",
 					message: error instanceof Error ? error.message : "An unknown error occurred.",
-				}
+				},
 			]);
 
 		restoreInputs();
