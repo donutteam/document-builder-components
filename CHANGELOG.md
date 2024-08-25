@@ -1,4 +1,8 @@
 # Changelog
+## 13.0.2
+
+* Fixed a bug where the `Form` client was not clearing the notice container after submission.
+
 ## 13.0.1
 
 * Updated `Form` client to use `createNotice`.
