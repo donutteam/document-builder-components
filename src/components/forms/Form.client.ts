@@ -7,7 +7,7 @@ import { HiddenInput } from "./HiddenInput.js";
 import { NoticeOptions } from "../Notice.js";
 import { createNotice  } from "../Notice.client.js";
 
-import * as DocumentLib from "../../libs/document.client.js";
+import * as DocumentClientLib from "../../libs/document.client.js";
 
 //
 // Types
@@ -98,26 +98,23 @@ async function getRecaptchaToken(siteKey: string): Promise<string>
 
 function getNoticeContainer(form: HTMLFormElement): HTMLElement
 {
-	const noticeContainerSelector = form.dataset["noticeContainerSelector"];
+	const noticeContainerSelector = DocumentClientLib.getStringDataOrThrow(form, "noticeContainerSelector");
 
-	if (noticeContainerSelector == null)
+	let parentElement: HTMLElement | null = form;
+
+	while (parentElement != null)
 	{
-		throw new Error("Missing data-notice-container-selector attribute.");
+		const noticeContainer = parentElement.querySelector<HTMLElement>(noticeContainerSelector);
+
+		if (noticeContainer != null)
+		{
+			return noticeContainer;
+		}
+
+		parentElement = parentElement.parentElement;
 	}
 
-	let noticeContainer = form.querySelector<HTMLElement>(noticeContainerSelector);
-
-	if (noticeContainer == null)
-	{
-		noticeContainer = document.querySelector<HTMLElement>(noticeContainerSelector);
-	}
-
-	if (noticeContainer == null)
-	{
-		throw new Error("Notice container not found: " + noticeContainerSelector);
-	}
-
-	return noticeContainer;
+	throw new Error("Notice container not found: " + noticeContainerSelector);
 }
 
 function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOptions[]): void
@@ -166,9 +163,9 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 	const noticeContainer = getNoticeContainer(form);
 
-	const hiddenContainer = DocumentLib.getElementOrThrow(form, ".hidden");
+	const hiddenContainer = DocumentClientLib.getElementOrThrow(form, ".hidden");
 
-	const inputsContainer = DocumentLib.getElementOrThrow(form, ".inputs");
+	const inputsContainer = DocumentClientLib.getElementOrThrow(form, ".inputs");
 
 	const fileInputs = inputsContainer.querySelectorAll("input[type=file]") as NodeListOf<HTMLInputElement>;
 

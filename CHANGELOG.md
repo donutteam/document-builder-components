@@ -1,4 +1,8 @@
 # Changelog
+## 13.0.3
+
+* Updated `Form` client to find the notice container by ascending the DOM tree from the form element.
+
 ## 13.0.2
 
 * Fixed a bug where the `Form` client was not clearing the notice container after submission.

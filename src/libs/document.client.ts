@@ -13,3 +13,15 @@ export function getElementOrThrow<T extends HTMLElement = HTMLElement>(parent: D
 
 	return element;
 }
+
+export function getStringDataOrThrow(element: HTMLElement, key: string)
+{
+	const data = element.dataset[key];
+
+	if (data === undefined)
+	{
+		throw new Error("Data not found: " + key);
+	}
+
+	return data;
+}
