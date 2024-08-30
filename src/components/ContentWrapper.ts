@@ -8,21 +8,34 @@ import { Child, DE } from "@donutteam/document-builder";
 // Exports
 //
 
-export function ContentWrapper(children : Child) : DE
+export type ContentWrapperOptions =
 {
-	return new DE("div", "component-content-wrapper",
-		[
-			new DE("div", null, children),
-		]);
-}
+	className?: string;
+	width?: string;
+};
 
-export function ContentWrapperCustomWidth(width : string, children : Child) : DE
+export function ContentWrapper(options: ContentWrapperOptions | null, children: Child)
 {
+	options = options ?? {};
+
+	let className = "component-content-wrapper";
+
+	if (options.className != null)
+	{
+		className += " " + options.className;
+	}
+
+	let style = "";
+
+	if (options.width != null)
+	{
+		style += `--width: ${ options.width };`;
+	}
+
 	return new DE("div",
 		{
-			class: "component-content-wrapper",
-
-			style: `--width: ${ width };`,
+			class: className,
+			style,
 		},
 		[
 			new DE("div", null, children),

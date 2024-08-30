@@ -5,6 +5,8 @@
 	* Options for `HumanDateTime` are now the second argument.
 * The previously internal `initializeHumanDateTime` and `initializeHumanRelativeTime` functions are now exported.
 * Removed a few empty CSS files for components that have no styles.
+* Changed the `ContentWrapper` component to take an options object as its first argument.
+	* Also removed the `ContentWrapperCustomWidth` component.
 
 ## 13.0.4
 
