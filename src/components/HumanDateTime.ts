@@ -9,39 +9,22 @@ import { DateTime } from "luxon";
 // Component
 //
 
-export interface HumanDateTimeOptions
+export type HumanDateTimeOptions =
 {
-	convertToLocalTime? : boolean;
+	convertToLocalTime?: boolean;
+	dateTimeFormat?: Intl.DateTimeFormatOptions | null;
+};
 
-	dateTimeFormat? : Intl.DateTimeFormatOptions | null;
-
-	timestampSeconds : number;
-}
-
-export function HumanDateTime(options : HumanDateTimeOptions) : DE
+export function HumanDateTime(timestampSeconds: number, options: HumanDateTimeOptions = {})
 {
-	//
-	// Options
-	//
-
 	const convertToLocalTime = options.convertToLocalTime ?? true;
 
 	const dateTimeFormat = options.dateTimeFormat ?? DateTime.DATETIME_MED;
-
-	const timestampSeconds = options.timestampSeconds;
-
-	//
-	// Create DateTime
-	//
 
 	const dateTime = DateTime.fromSeconds(timestampSeconds,
 		{
 			zone: "UTC",
 		});
-
-	//
-	// Build Component
-	//
 
 	return new DE("time",
 		{

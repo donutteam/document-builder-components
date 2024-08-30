@@ -4,21 +4,13 @@
 
 import { DateTime } from "luxon";
 
+import * as DocumentClientLib from "../libs/document.client.js";
+
 //
-// Locals
+// Component
 //
 
 let updateHumanRelativeTimeElementsInterval: number | null = null;
-
-function initialiseHumanRelativeTime(humanRelativeTime: HTMLTimeElement)
-{
-	if (humanRelativeTime.dataset["timestampSeconds"] == null)
-	{
-		throw new Error("Missing data-timestamp-seconds attribute.");
-	}
-
-	humanRelativeTime.classList.add("initialised");
-}
 
 function updateHumanRelativeTimeElements()
 {
@@ -28,16 +20,9 @@ function updateHumanRelativeTimeElements()
 	{
 		try
 		{
-			const rawTimestampSeconds = humanRelativeTime.dataset["data-timestamp-seconds"]!;
-
-			const timestampSeconds = parseInt(rawTimestampSeconds);
+			const timestampSeconds = DocumentClientLib.getIntegerDataOrThrow(humanRelativeTime, "timestampSeconds");
 
 			const relativeTime = DateTime.fromSeconds(timestampSeconds).toRelative();
-
-			if (relativeTime == null)
-			{
-				continue;
-			}
 
 			// Note: Don't trigger unnecessary DOM updates.
 			if (relativeTime == humanRelativeTime.innerText)
@@ -58,6 +43,20 @@ function updateHumanRelativeTimeElements()
 // Component
 //
 
+export function initialiseHumanRelativeTime(humanRelativeTime: HTMLTimeElement)
+{
+	DocumentClientLib.getIntegerDataOrThrow(humanRelativeTime, "timestampSeconds");
+
+	humanRelativeTime.classList.add("initialised");
+
+	if (updateHumanRelativeTimeElementsInterval == null)
+	{
+		console.log("[HumanRelativeTime] Starting update interval...");
+
+		updateHumanRelativeTimeElementsInterval = setInterval(() => updateHumanRelativeTimeElements(), 1000);
+	}
+}
+
 export function initialiseHumanRelativeTimes()
 {
 	const humanRelativeTimes = document.querySelectorAll<HTMLTimeElement>(".component-human-relative-time:not(.initialised)");
@@ -74,10 +73,5 @@ export function initialiseHumanRelativeTimes()
 		{
 			console.error("[HumanRelativeTime] Error initialising:", humanRelativeTime, error);
 		}
-	}
-
-	if (updateHumanRelativeTimeElementsInterval == null)
-	{
-		setInterval(() => updateHumanRelativeTimeElements(), 1000);
 	}
 }

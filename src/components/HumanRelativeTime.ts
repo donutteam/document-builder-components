@@ -9,26 +9,17 @@ import { DateTime } from "luxon";
 // Component
 //
 
-export interface HumanRelativeTimeOptions
+export function HumanRelativeTime(timestampSeconds: number)
 {
-	timestampSeconds : number;
-}
-
-export function HumanRelativeTime(options : HumanRelativeTimeOptions) : DE
-{
-	//
-	// Build Component
-	//
-
 	return new DE("span",
 		{
 			class: "component-human-relative-time",
 
-			"data-timestamp-seconds": options.timestampSeconds,
+			"data-timestamp-seconds": timestampSeconds,
 		},
 		[
 			DateTime
-				.fromSeconds(options.timestampSeconds, { zone: "UTC" })
+				.fromSeconds(timestampSeconds, { zone: "UTC" })
 				.toRelative(),
 		]);
 }

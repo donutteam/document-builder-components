@@ -1,4 +1,10 @@
 # Changelog
+## 14.0.0
+
+* Changed both `HumanDateTime` and `HumanRelativeTime` to take the timestamp as the first arguments.
+	* Options for `HumanDateTime` are now the second argument.
+* The previously internal `initializeHumanDateTime` and `initializeHumanRelativeTime` functions are now exported.
+
 ## 13.0.4
 
 * The `Breadcrumbs` component now allows any type of `Child` for the `text` option instead of just `string`.

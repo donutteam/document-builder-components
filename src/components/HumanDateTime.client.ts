@@ -7,10 +7,10 @@ import { DateTime } from "luxon";
 import * as StringLib from "../libs/string.js";
 
 //
-// Locals
+// Component
 //
 
-function initialiseHumanDateTime(humanDateTime: HTMLTimeElement)
+export function initialiseHumanDateTime(humanDateTime: HTMLTimeElement)
 {
 	const convertToLocalTime = humanDateTime.dataset["convertToLocalTime"] === "true";
 
@@ -29,10 +29,6 @@ function initialiseHumanDateTime(humanDateTime: HTMLTimeElement)
 
 	humanDateTime.classList.add("initialised");
 }
-
-//
-// Component
-//
 
 export function initialiseHumanDateTimes()
 {
