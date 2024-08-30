@@ -1,4 +1,8 @@
 # Changelog
+## 13.0.4
+
+* The `Breadcrumbs` component now allows any type of `Child` for the `text` option instead of just `string`.
+
 ## 13.0.3
 
 * Updated `Form` client to find the notice container by ascending the DOM tree from the form element.

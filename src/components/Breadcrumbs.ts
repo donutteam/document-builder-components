@@ -2,7 +2,7 @@
 // Imports
 //
 
-import { DE } from "@donutteam/document-builder";
+import { Child, DE } from "@donutteam/document-builder";
 
 //
 // Component
@@ -16,7 +16,7 @@ export function Breadcrumbs(items : BreadcrumbsItemOptions[]) : DE
 export interface BreadcrumbsItemOptions
 {
 	href? : string | null;
-	text : string;
+	text : Child;
 }
 
 export function BreadcrumbsItem(options : BreadcrumbsItemOptions) : DE
