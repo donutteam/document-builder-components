@@ -4,6 +4,7 @@
 * Changed both `HumanDateTime` and `HumanRelativeTime` to take the timestamp as the first arguments.
 	* Options for `HumanDateTime` are now the second argument.
 * The previously internal `initializeHumanDateTime` and `initializeHumanRelativeTime` functions are now exported.
+* Removed a few empty CSS files for components that have no styles.
 
 ## 13.0.4
 
