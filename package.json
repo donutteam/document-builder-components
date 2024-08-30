@@ -18,6 +18,9 @@
 	"author": "Donut Team",
 	"license": "MIT",
 	"type": "module",
+	"dependencies": {
+		"zod": "^3.23.8"
+	},
 	"peerDependencies": {
 		"@donutteam/document-builder": "6.x",
 		"@types/luxon": "^3.4.2",
