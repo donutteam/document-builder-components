@@ -1,4 +1,8 @@
 # Changelog
+## 14.0.1
+
+* Fixed a bug where reCAPTCHA would not get loaded if the only form(s) that required it were set to be manually initialised.
+
 ## 14.0.0
 
 * Changed both `HumanDateTime` and `HumanRelativeTime` to take the timestamp as the first arguments.

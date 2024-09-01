@@ -410,11 +410,13 @@ export function initialiseForm(form: HTMLFormElement, handleSubmission: HandleSu
 
 			await submitForm(event, form, handleSubmission);
 		});
+
+	form.classList.add("initialised");
 }
 
 export function initialiseForms(): void
 {
-	const forms = document.querySelectorAll(`.component-form:not(.initialised):not([data-manually-initialize="true"])`) as NodeListOf<HTMLFormElement>;
+	const forms = document.querySelectorAll(`.component-form:not(.initialised)`) as NodeListOf<HTMLFormElement>;
 
 	console.log("[Form] Initialising " + forms.length + " instances...");
 
@@ -427,7 +429,10 @@ export function initialiseForms(): void
 			recaptchaSiteKey = form.dataset["recaptchaSiteKey"];
 		}
 
-		form.classList.add("initialised");
+		if (form.dataset["manuallyInitialize"] == "true")
+		{
+			continue;
+		}
 
 		try
 		{
