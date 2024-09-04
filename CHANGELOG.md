@@ -1,7 +1,20 @@
 # Changelog
-## 14.0.2
+## 15.0.0
 
 * Made the `handleSubmission` argument of `initialiseForm` optional.
+* Renamed the `CheckboxInput` component to `Checkbox`. It also takes different options now.
+* Removed the `ColorInput` component.
+* Removed the `DateInput` component.
+* Removed the `EmailInput` component.
+* Removed the `Fieldset` component.
+* Removed the `FileInput` component.
+* Removed the `NumberInput` component.
+* Removed the `PasswordInput` component.
+* Removed the `RadioInput` component.
+* Removed the `Select`, `SelectOption` and `SelectOptionGroup` components.
+* Removed the `TextArea` component.
+* Removed the `TextInput` component.
+* Added the `Input` component. This is a generic input component that can be used to create several types of inputs.
 
 ## 14.0.1
 
