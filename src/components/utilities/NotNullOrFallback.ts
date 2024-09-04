@@ -8,7 +8,7 @@ import { Child } from "@donutteam/document-builder";
 // Component
 //
 
-export function NotNullOrFallback<T>(value : T, notNullFunction : (item : NonNullable<T>) => Child, fallbackChild? : Child) : Child
+export function NotNullOrFallback<T>(value: T, notNullFunction: (item: NonNullable<T>) => Child, fallbackChild?: Child): Child
 {
 	if (value == null)
 	{

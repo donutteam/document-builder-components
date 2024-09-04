@@ -8,7 +8,7 @@ import { DE } from "@donutteam/document-builder";
 // Exports
 //
 
-export function ImageFavicon(getHref : () => string, sizes = "16x16") : DE
+export function ImageFavicon(getHref: () => string, sizes = "16x16")
 {
 	return new DE("link",
 		{

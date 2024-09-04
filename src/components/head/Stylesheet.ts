@@ -8,7 +8,7 @@ import { DE } from "@donutteam/document-builder";
 // Component
 //
 
-export function Stylesheet(getHref : () => string) : DE
+export function Stylesheet(getHref: () => string)
 {
 	return new DE("link",
 		{

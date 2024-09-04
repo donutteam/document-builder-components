@@ -8,20 +8,16 @@ import { Child, DE } from "@donutteam/document-builder";
 // Component
 //
 
-export interface MetaOptions
+export type MetaOptions =
 {
-	blockRobots? : boolean;
+	blockRobots?: boolean;
+	description?: string;
+	keywords?: string[];
+	themeColor?: string;
+	title?: Child;
+};
 
-	description? : string;
-
-	keywords? : string[];
-
-	themeColor? : string;
-
-	title? : Child;
-}
-
-export function Meta(options : MetaOptions) : Child[]
+export function Meta(options: MetaOptions): Child[]
 {
 	//
 	// Options

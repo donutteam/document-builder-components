@@ -8,7 +8,7 @@ import { AElementAttributes, Child, DE } from "@donutteam/document-builder";
 // Component
 //
 
-export function Anchor(text : Child, href : string, target = "_self", extraAttributes? : AElementAttributes) : DE
+export function Anchor(text: Child, href: string, target = "_self", extraAttributes?: AElementAttributes)
 {
 	return new DE("a",
 		{

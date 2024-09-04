@@ -8,7 +8,7 @@ import { DE } from "@donutteam/document-builder";
 // Exports
 //
 
-export function ICOFavicon(getHref : () => string) : DE
+export function ICOFavicon(getHref: () => string)
 {
 	return new DE("link",
 		{

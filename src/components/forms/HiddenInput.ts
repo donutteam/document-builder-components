@@ -8,7 +8,7 @@ import { DE, InputElementAttributes } from "@donutteam/document-builder";
 // Exports
 //
 
-export function HiddenInput(name : string, value : string, attributes? : InputElementAttributes) : DE
+export function HiddenInput(name: string, value: string, extraAttributes?: InputElementAttributes)
 {
 	return new DE("input",
 		{
@@ -17,6 +17,6 @@ export function HiddenInput(name : string, value : string, attributes? : InputEl
 			name,
 			value,
 
-			...attributes,
+			...extraAttributes,
 		});
 }

@@ -8,7 +8,7 @@ import { Child, DE } from "@donutteam/document-builder";
 // Component
 //
 
-export interface OpenGraphOptions
+export type OpenGraphOptions =
 {
 	/** An audio file that complements this page. */
 	audio? : string | OpenGraphAudioOptions;
@@ -39,9 +39,9 @@ export interface OpenGraphOptions
 
 	/** A video file that complements this page. */
 	video? : string | OpenGraphImageOrVideoOptions;
-}
+};
 
-export interface OpenGraphAudioOptions
+export type OpenGraphAudioOptions =
 {
 	/** The URL to the audio. */
 	url : string;
@@ -51,9 +51,9 @@ export interface OpenGraphAudioOptions
 
 	/** A MIME type for the audio. */
 	type? : "audio/wav" | "audio/mpeg" | "audio/mp4" | "audio/aac" | "audio/aacp" | "audio/ogg" | "audio/webm" | "audio/flac";
-}
+};
 
-export interface OpenGraphImageOrVideoOptions
+export type OpenGraphImageOrVideoOptions =
 {
 	/** The URL to the image or video. */
 	url : string;
@@ -72,18 +72,17 @@ export interface OpenGraphImageOrVideoOptions
 
 	/** The alt text for the image or video. */
 	alt? : string;
-}
+};
 
-export type OpenGraphType = "music.song" | "music.album" | "music.playlist" | "music.radio_station" | "video.movie"
-	| "video.episode" | "video.tv_show" | "video.other" | "article" | "book" | "profile" | "website";
+export type OpenGraphType = "music.song" | "music.album" | "music.playlist" | "music.radio_station" | "video.movie" | "video.episode" | "video.tv_show" | "video.other" | "article" | "book" | "profile" | "website";
 
-export function OpenGraph(options : OpenGraphOptions) : Child[]
+export function OpenGraph(options: OpenGraphOptions): Child[]
 {
 	//
 	// Build Properties
 	//
 
-	const elements : Child[] = [];
+	const elements: Child[] = [];
 
 	// Audio
 	if (options.audio)
@@ -139,7 +138,7 @@ export function OpenGraph(options : OpenGraphOptions) : Child[]
 	return elements;
 }
 
-export function OpenGraphAudio(audio : string | OpenGraphAudioOptions) : Child
+export function OpenGraphAudio(audio: string | OpenGraphAudioOptions)
 {
 	if (typeof audio == "string")
 	{
@@ -166,7 +165,7 @@ export function OpenGraphAudio(audio : string | OpenGraphAudioOptions) : Child
 	return properties;
 }
 
-export function OpenGraphImageOrVideo(type : "image" | "video", imageOrVideo : string | OpenGraphImageOrVideoOptions, title : string) : Child
+export function OpenGraphImageOrVideo(type: "image" | "video", imageOrVideo: string | OpenGraphImageOrVideoOptions, title: string)
 {
 	if (typeof imageOrVideo == "string")
 	{
@@ -212,7 +211,7 @@ export function OpenGraphImageOrVideo(type : "image" | "video", imageOrVideo : s
 	return properties;
 }
 
-export function OpenGraphProperty(name : string, content : string) : DE
+export function OpenGraphProperty(name: string, content: string)
 {
 	return new DE("meta",
 		{

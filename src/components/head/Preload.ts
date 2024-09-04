@@ -8,10 +8,9 @@ import { DE } from "@donutteam/document-builder";
 // Component
 //
 
-export type PreloadType = "audio" | "document" | "embed" | "fetch" | "font" |
-	"image" | "object" | "script" | "style" | "track" | "worker" | "video";
+export type PreloadType = "audio" | "document" | "embed" | "fetch" | "font" | "image" | "object" | "script" | "style" | "track" | "worker" | "video";
 
-export function Preload(type : PreloadType, getHref : () => string) : DE
+export function Preload(type: PreloadType, getHref: () => string)
 {
 	return new DE("link",
 		{
