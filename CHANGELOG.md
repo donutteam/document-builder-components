@@ -1,4 +1,8 @@
 # Changelog
+## 14.0.2
+
+* Made the `handleSubmission` argument of `initialiseForm` optional.
+
 ## 14.0.1
 
 * Fixed a bug where reCAPTCHA would not get loaded if the only form(s) that required it were set to be manually initialised.

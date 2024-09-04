@@ -399,8 +399,21 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 // Component
 //
 
-export function initialiseForm(form: HTMLFormElement, handleSubmission: HandleSubmission)
+export function initialiseForm(form: HTMLFormElement, handleSubmission?: HandleSubmission)
 {
+	handleSubmission = handleSubmission ?? (async (context) =>
+	{
+		context.form.method = context.method;
+
+		context.form.action = context.action;
+
+		context.form.submit();
+
+		return {
+			restoreInputs: false,
+		};
+	});
+
 	form.addEventListener("submit", 
 		async (event) =>
 		{
@@ -408,7 +421,8 @@ export function initialiseForm(form: HTMLFormElement, handleSubmission: HandleSu
 
 			console.log("[Form] Handling submission:", form);
 
-			await submitForm(event, form, handleSubmission);
+			// Note: TS was bitching even though this CANNOT be null
+			await submitForm(event, form, handleSubmission as HandleSubmission);
 		});
 
 	form.classList.add("initialised");
@@ -436,19 +450,7 @@ export function initialiseForms(): void
 
 		try
 		{
-			initialiseForm(form,
-				async (context) =>
-				{
-					context.form.method = context.method;
-
-					context.form.action = context.action;
-
-					context.form.submit();
-
-					return {
-						restoreInputs: false,
-					};
-				});
+			initialiseForm(form);
 		}
 		catch (error)
 		{
