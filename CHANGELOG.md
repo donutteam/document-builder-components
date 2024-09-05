@@ -19,6 +19,7 @@
 * Removed `BlockWithoutPadding` component.
 * Changed options for the `Button` component.
 * Combined `ButtonCenterAlignedList`, `ButtonList` and `ButtonRightAlignedGroup` into `ButtonGroup`.
+* Made the first argument of `ContentWrapper` optional.
 
 ## 14.0.1
 

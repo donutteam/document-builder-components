@@ -14,9 +14,21 @@ export type ContentWrapperOptions =
 	width?: string;
 };
 
-export function ContentWrapper(options: ContentWrapperOptions | null, children: Child)
+export function ContentWrapper(children: Child): DE;
+export function ContentWrapper(options: ContentWrapperOptions, children: Child): DE;
+export function ContentWrapper(optionsOrChildren: ContentWrapperOptions | Child, children?: Child): DE
 {
-	options = options ?? {};
+	let options: ContentWrapperOptions;
+
+	if (children == null)
+	{
+		options = {};
+		children = optionsOrChildren as Child;
+	}
+	else
+	{
+		options = optionsOrChildren as ContentWrapperOptions;
+	}
 
 	let className = "component-content-wrapper";
 
