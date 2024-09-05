@@ -29,7 +29,7 @@ export type ControlSelectOptionTuple = [ number | string ] | [ number | string, 
 export type ControlSelectOptionGroup =
 {
 	label: string;
-	options: ControlSelectOptionTuple[];
+	options: (ControlSelectOptionTuple | null)[];
 };
 
 export type ControlOptions =
@@ -151,7 +151,18 @@ export function Control(options: ControlOptions)
 						{ 
 							label: optionTupleOrOptionGroup.label 
 						}, 
-						optionTupleOrOptionGroup.options.map((optionTuple) => Option(optionTuple, options.value)));
+						[
+							optionTupleOrOptionGroup.options.map(
+								(optionTuple) =>
+								{
+									if (optionTuple == null)
+									{
+										return null;
+									}
+
+									return Option(optionTuple, options.value);
+								}),
+						]);
 				}
 			});
 	}
