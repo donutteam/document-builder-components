@@ -14,12 +14,12 @@ export type ButtonOptions =
 			attributes?: AElementAttributes;
 			external?: boolean;
 			href: string;
-			searchParams: URLSearchParams;
+			searchParams?: URLSearchParams;
 			target?: string;
 		} |
 		{
 			attributes?: ButtonElementAttributes;
-			type: "button" | "submit" | "reset";
+			type?: "button" | "submit" | "reset";
 		}
 	) &
 	{

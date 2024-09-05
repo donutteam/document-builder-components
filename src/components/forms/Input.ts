@@ -16,7 +16,7 @@ type SelectOptionGroup =
 	options: SelectOptionTuple[];
 };
 
-function SelectOption([ value, text, extraAttributes ]: SelectOptionTuple, currentValue?: string)
+function SelectOption([ value, text, extraAttributes ]: SelectOptionTuple, currentValue?: string | null)
 {
 	return new DE("option", 
 		{
@@ -35,24 +35,28 @@ function SelectOption([ value, text, extraAttributes ]: SelectOptionTuple, curre
 export type InputOptions =
 	{
 		type: "date" | "email" | "number" | "password" | "text";
-		value?: string;
+		name: string;
+		value?: string | null;
 
 		extraAttributes?: InputElementAttributes;
 	} |
 	{
 		type: "file",
+		name: string;
 
 		extraAttributes?: InputElementAttributes;
 	} |
 	{
 		type: "select";
-		value?: string;
+		name: string;
+		value?: string | null;
 		options: (SelectOptionTuple | SelectOptionGroup)[];
 
 		extraAttributes?: SelectElementAttributes;
 	} |
 	{
 		type: "textarea";
+		name: string;
 		content?: Child;
 
 		extraAttributes?: TextareaElementAttributes;
@@ -166,6 +170,7 @@ export function Input(options: InputOptions): DE
 				{
 					class: "input",
 					type: options.type != "select" && options.type != "textarea" ? options.type : null,
+					name: options.name,
 					value: "value" in options && options.type != "select" ? options.value : null,
 		
 					...options.extraAttributes,
