@@ -83,7 +83,7 @@ $warningTextColor: #856404;
 			color: $warningTextColor;
 		}
 
-		.icon-container
+		> .icon-container
 		{
 			align-items: center;
 
@@ -99,12 +99,12 @@ $warningTextColor: #856404;
 			padding: 1rem;
 		}
 
-		.content-container
+		> .content-container
 		{
 			padding: 1rem;
 		}
 
-		.dismiss-container
+		> .dismiss-container
 		{
 			align-items: center;
 
@@ -114,7 +114,7 @@ $warningTextColor: #856404;
 
 			padding: 1rem;
 
-			.dismiss
+			> .dismiss
 			{
 				cursor: pointer;
 

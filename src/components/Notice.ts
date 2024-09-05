@@ -5,57 +5,10 @@
 import { Child, DE } from "@donutteam/document-builder";
 
 //
-// Component
+// Locals
 //
 
-export interface NoticeOptions
-{
-	dismissible? : boolean;
-
-	roundedCorners? : boolean;
-
-	type : NoticeType;
-
-	message : Child;
-}
-
-export type NoticeType = "danger" | "info" | "success" | "warning";
-
-export function Notice(options : NoticeOptions) : DE
-{
-	const iconName = getIconName(options.type);
-
-	const iconContainer = new DE("div", "icon-container",
-		[
-			new DE("span", "icon " + iconName + " fa-fw"),
-		]);
-
-	const contentContainer = new DE("div", "content-container", options.message);
-
-	const dismissible = options.dismissible ?? false;
-
-	let dismissContainer = dismissible
-		? new DE("div", "dismiss-container",
-			[
-				new DE("span", "dismiss", "Dismiss"),
-			])
-		: new DE("div");
-
-	const roundedCorners = options.roundedCorners ?? true;
-
-	return new DE("div", "component-notice " + options.type + (roundedCorners ? " rounded-corners" : ""),
-		[
-			iconContainer,
-			contentContainer,
-			dismissContainer,
-		]);
-}
-
-//
-// Local Functions
-//
-
-function getIconName(type : NoticeType) : string
+function getIconName(type: NoticeType)
 {
 	switch (type)
 	{
@@ -71,4 +24,56 @@ function getIconName(type : NoticeType) : string
 		case "warning":
 			return "fa-solid fa-triangle-exclamation";
 	}
+}
+
+//
+// Component
+//
+
+export type NoticeType = "danger" | "info" | "success" | "warning";
+
+export type NoticeOptions =
+{ 
+	type: NoticeType;
+	message: Child;
+	dismissible?: boolean;
+	roundedCorners?: boolean;
+};
+
+export function Notice(options: NoticeOptions)
+{
+	//
+	// Options
+	//
+
+	const type = options.type;
+
+	const message = options.message;
+
+	const dismissible = options.dismissible ?? false;
+
+	const roundedCorners = options.roundedCorners ?? true;
+
+	//
+	// Build Notice
+	//
+
+	let className = "component-notice " + type;
+
+	if (roundedCorners)
+	{
+		className += " rounded-corners";
+	}
+
+	return new DE("div", className,
+		[
+			new DE("div", "icon-container",
+				[
+					new DE("span", "icon " + getIconName(type) + " fa-fw"),
+				]),
+
+			new DE("div", "content-container", message),
+			
+			dismissible ? new DE("div", "dismiss-container", new DE("span", "dismiss", "Dismiss")) : null,
+		]);
 }
