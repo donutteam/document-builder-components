@@ -15,6 +15,8 @@
 * Removed the `TextArea` component.
 * Removed the `TextInput` component.
 * Added the `Input` component. This is a generic input component that can be used to create several types of inputs.
+* Added an optional options object to the `Block` component.
+* Removed `BlockWithoutPadding` component.
 
 ## 14.0.1
 
