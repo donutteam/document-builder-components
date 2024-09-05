@@ -32,7 +32,7 @@ function SelectOption([ value, text, extraAttributes ]: SelectOptionTuple, curre
 // Exports
 //
 
-export type InputOptions =
+export type ControlOptions =
 	{
 		type: "date" | "email" | "number" | "password" | "text";
 		name: string;
@@ -62,7 +62,7 @@ export type InputOptions =
 		extraAttributes?: TextareaElementAttributes;
 	};
 
-export function Input(options: InputOptions): DE
+export function Control(options: ControlOptions)
 {
 	//
 	// Tag Name
@@ -161,7 +161,7 @@ export function Input(options: InputOptions): DE
 
 	return new DE("div",
 		{
-			class: "component-input",
+			class: "component-control",
 			
 			"data-type": options.type,
 		},

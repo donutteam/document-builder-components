@@ -8,9 +8,9 @@
 // Component
 //
 
-@mixin Input($backgroundColor, $borderColor, $outlineColor)
+@mixin Control($backgroundColor, $borderColor, $outlineColor)
 {
-	.component-input
+	.component-control
 	{
 		position: relative;
 

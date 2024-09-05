@@ -3,9 +3,9 @@
 //
 
 export * from "./components/forms/Checkbox.js";
+export * from "./components/forms/Control.js";
 export * from "./components/forms/Form.js";
 export * from "./components/forms/HiddenInput.js";
-export * from "./components/forms/Input.js";
 export * from "./components/forms/Label.js";
 
 export * from "./components/head/AppleTouchIcon.js";
