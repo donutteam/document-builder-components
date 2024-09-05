@@ -2,117 +2,90 @@
 // Imports
 //
 
-import { AElementAttributes, ButtonElementAttributes, Child, DE, ElementAttributes } from "@donutteam/document-builder";
+import { AElementAttributes, ButtonElementAttributes, Child, DE } from "@donutteam/document-builder";
 
 //
 // Component
 //
 
-export interface ButtonOptions
-{
-	attributes? : ElementAttributes;
-
-	external? : boolean;
-
-	href? : string;
-
-	iconFixedWidth? : boolean;
-
-	iconName? : string;
-
-	iconPosition? : "before" | "after";
-
-	type? : "button" | "submit" | "reset";
-
-	searchParams? : string | URLSearchParams | string[][] | Record<string, string>;
-
-	target? : "_blank" | "_self" | "_parent" | "top" | string;
-
-	text? : Child;
-}
-
-export function Button(buttonOptions : ButtonOptions) : DE
-{
-	//
-	// Check Null
-	//
-
-	if (buttonOptions == null)
+export type ButtonOptions =
+	(
+		{
+			attributes?: AElementAttributes;
+			external?: boolean;
+			href: string;
+			searchParams: URLSearchParams;
+			target?: string;
+		} |
+		{
+			attributes?: ButtonElementAttributes;
+			type: "button" | "submit" | "reset";
+		}
+	) &
 	{
-		return new DE(null, null);
-	}
+		iconFixedWidth?: boolean;
+		iconName?: string;
+		iconPosition?: "before" | "after";
+		text?: Child;
+	};
 
-	//
-	// Default Options
-	//;
-
-	buttonOptions = buttonOptions ?? {};
-
-	buttonOptions.external = buttonOptions.external ?? false;
-
-	buttonOptions.iconFixedWidth = buttonOptions.iconFixedWidth ?? false;
-
-	buttonOptions.iconPosition = buttonOptions.iconPosition ?? "before";
-
-	buttonOptions.type = buttonOptions.type ?? "button";
-
-	buttonOptions.target = buttonOptions.target ?? (buttonOptions.external ? "_blank" : "_self");
-
+export function Button(options: ButtonOptions)
+{
 	//
 	// Choose Tag Name
 	//
 
-	const tagName = buttonOptions.href == null ? "button" : "a";
+	const tagName = "href" in options ? "button" : "a";
 
 	//
 	// Build Attributes
 	//
 
-	const attributes : ButtonElementAttributes | AElementAttributes =
-		{
-			...buttonOptions.attributes,
-		};
+	const attributes: typeof options["attributes"] =
+	{
+		...options.attributes,
+	};
 
 	attributes.class = "component-button";
 
-	if (buttonOptions.href == null)
+	if ("href" in options)
 	{
-		attributes.type = buttonOptions.type;
-	}
-	else
-	{
-		attributes.href = buttonOptions.href;
+		attributes.href = options.href;
 
-		if (buttonOptions.searchParams != null)
+		if (options.searchParams != null)
 		{
-			const searchParams = new URLSearchParams(buttonOptions.searchParams);
+			const searchParams = new URLSearchParams(options.searchParams);
 
 			attributes.href += "?" + searchParams.toString();
 		}
 
-		attributes.target = buttonOptions.target;
+		attributes.target = options.target ?? (options.external ? "_blank" : "_self");
+	}
+	else
+	{
+		attributes.type = options.type ?? "button";
 	}
 
 	//
 	// Build Children
 	//
 
-	const children : Child[] = [];
+	const children: Child[] = [];
 
-	if (buttonOptions.text != null)
+	if (options.text != null)
 	{
-		children.push(new DE("span", "text", buttonOptions.text));
+		children.push(new DE("span", "text", options.text));
 	}
 
-	if (buttonOptions.iconName != null)
+	if (options.iconName != null)
 	{
 		const cssClasses : string[] = [];
 
 		cssClasses.push("icon");
 
-		cssClasses.push(buttonOptions.iconName);
+		cssClasses.push(options.iconName);
 
-		if (buttonOptions.iconFixedWidth)
+		if (options.iconFixedWidth)
 		{
 			cssClasses.push("fa-fw");
 		}
@@ -122,17 +95,19 @@ export function Button(buttonOptions : ButtonOptions) : DE
 				class: cssClasses.join(" "),
 			});
 
-		if (buttonOptions.iconPosition == "before")
+		const iconPosition = options.iconPosition ?? "before";
+
+		if (iconPosition == "before")
 		{
 			children.unshift(icon);
 		}
-		else if (buttonOptions.iconPosition == "after")
+		else if (iconPosition == "after")
 		{
 			children.push(icon);
 		}
 	}
 
-	if (buttonOptions.external)
+	if ("href" in options && options.external)
 	{
 		children.push(new DE("span", "external fa-light fa-arrow-up-right-from-square"));
 	}
@@ -144,52 +119,42 @@ export function Button(buttonOptions : ButtonOptions) : DE
 	return new DE(tagName, attributes, children);
 }
 
-export function ButtonCenterAlignedList(buttons : ButtonOptions[]) : DE
+export type ButtonGroupType = "left-aligned-group" | "right-aligned-group" | "left-aligned-list" | "center-aligned-list";
+
+export type ButtonGroupOptions =
 {
-	if (buttons.length == 0)
-	{
-		return new DE(null, null);
-	}
+	className?: string;
+	type?: ButtonGroupType;
+};
 
-	return new DE("div", "component-button-list center-aligned", buttons.map(Button));
-}
-
-export function ButtonGroup(buttons : ButtonOptions[]) : DE
+export function ButtonGroup(buttons: (ButtonOptions | null)[]): DE;
+export function ButtonGroup(options: ButtonGroupOptions, buttons: (ButtonOptions | null)[]): DE;
+export function ButtonGroup(optionsOrButtons: ButtonGroupOptions  | (ButtonOptions | null)[], buttons?: (ButtonOptions | null)[]): DE | null
 {
-	if (buttons.length == 0)
+	let options: ButtonGroupOptions;
+
+	if (Array.isArray(optionsOrButtons))
 	{
-		return new DE(null, null);
-	}
-
-	return new DE("div", "component-button-group", buttons.map(Button));
-}
-
-export function ButtonList(buttons : ButtonOptions[]) : DE
-{
-	if (buttons.length == 0)
-	{
-		return new DE(null, null);
-	}
-
-	return new DE("div", "component-button-list", buttons.map(
-		(buttonOptions) =>
+		buttons = optionsOrButtons;
+		options = 
 		{
-			if (buttonOptions != null)
-			{
-				// Note: Forced on for list buttons because aesthetics
-				buttonOptions.iconFixedWidth = true;
-			}
-
-			return Button(buttonOptions);
-		}));
-}
-
-export function ButtonRightAlignedGroup(buttons : ButtonOptions[]) : DE
-{
-	if (buttons.length == 0)
+			type: "left-aligned-group",
+		};
+	}
+	else
 	{
-		return new DE(null, null);
+		buttons = buttons!;
+		options = optionsOrButtons;
 	}
 
-	return new DE("div", "component-button-group right-aligned", buttons.map(Button));
+	const type = options.type ?? "left-aligned-group";
+
+	const nonNullButtons = buttons.filter((button) => button != null);
+
+	if (nonNullButtons.length == 0)
+	{
+		return null;
+	}
+
+	return new DE("div", "component-button-group " + type, nonNullButtons.map((buttonOptions) => Button(buttonOptions as ButtonOptions)));
 }

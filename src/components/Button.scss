@@ -92,89 +92,73 @@ $margins: GlobalDefaults.$margins;
 	{
 		@include Mixins.ConditionalTopBottomMargin($margins);
 
-		&
+		&.left-aligned-group,
+		&.right-aligned-group
 		{
+			display: flex;
 			align-items: center;
-
-			display: flex;
-
 			flex-wrap: wrap;
-
 			gap: 0.75rem;
+
+			> .component-button
+			{
+				margin: 0 !important;
+			}
 		}
 
-		&:not(:first-child)
+		&.right-aligned-group
 		{
-			margin-top: 0.75rem;
+			justify-content: flex-end;
 		}
 
-		&:not(:last-child)
-		{
-			margin-bottom: 0.75rem;
-		}
-
-		> .component-button
-		{
-			margin: 0 !important;
-		}
-	}
-
-	.component-button-group.right-aligned
-	{
-		justify-content: flex-end;
-	}
-
-	.component-button-list
-	{
-		@include Mixins.ConditionalTopBottomMargin($margins);
-
-		&
+		&.left-aligned-list,
+		&.center-aligned-list
 		{
 			display: flex;
-
 			flex-direction: column;
-
 			gap: 1px;
-		}
-
-		&:not(:first-child)
-		{
-			margin-top: 0.75rem;
-		}
-
-		&:not(:last-child)
-		{
-			margin-bottom: 0.75rem;
-		}
-
-		> .component-button
-		{
-			margin: 0 !important;
-
-			&:not(:only-child):first-child
+			
+			> .component-button
 			{
-				border-bottom-left-radius: 0;
-				border-bottom-right-radius: 0;
-			}
+				margin: 0 !important;
 
-			&:not(:first-child, :last-child)
-			{
-				border-radius: 0;
-			}
+				&:not(:only-child):first-child
+				{
+					border-bottom-left-radius: 0;
+					border-bottom-right-radius: 0;
+				}
 
-			&:not(:only-child):last-child
-			{
-				border-top-left-radius: 0;
-				border-top-right-radius: 0;
+				&:not(:first-child, :last-child)
+				{
+					border-radius: 0;
+				}
+
+				&:not(:only-child):last-child
+				{
+					border-top-left-radius: 0;
+					border-top-right-radius: 0;
+				}
 			}
 		}
-	}
 
-	.component-button-list.center-aligned
-	{
-		> .component-button
+		&.left-aligned-list
 		{
-			justify-content: center;
+			> .component-button
+			{
+				> .icon
+				{
+					text-align: center;
+					width: 1.25em;
+				}
+			}
+		}
+
+		&.center-aligned-list
+		{
+			> .component-button
+			{
+				justify-content: center;
+			}
 		}
 	}
 }

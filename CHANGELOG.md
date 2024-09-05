@@ -17,6 +17,8 @@
 * Added the `Input` component. This is a generic input component that can be used to create several types of inputs.
 * Added an optional options object to the `Block` component.
 * Removed `BlockWithoutPadding` component.
+* Changed options for the `Button` component.
+* Combined `ButtonCenterAlignedList`, `ButtonList` and `ButtonRightAlignedGroup` into `ButtonGroup`.
 
 ## 14.0.1
 
