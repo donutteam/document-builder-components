@@ -66,7 +66,7 @@ export function initialiseInputs()
 		}
 		catch (error)
 		{
-			console.error("[Input] Error initialising:", input, error);
+			console.error("[Input] Error:", input, error);
 		}
 	}
 }

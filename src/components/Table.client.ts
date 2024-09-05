@@ -127,7 +127,11 @@ function wrapTableRows(tableBody: HTMLTableSectionElement, sortValueType: SortVa
 	return tableRowWrappers;
 }
 
-function initialiseTable(tableComponent: HTMLElement)
+//
+// component
+//
+
+export function initialiseTable(tableComponent: HTMLElement)
 {
 	const table = DocumentLib.getElementOrThrow<HTMLTableElement>(tableComponent, "table");
 
@@ -186,10 +190,6 @@ function initialiseTable(tableComponent: HTMLElement)
 	tableComponent.classList.add("initialised");
 }
 
-//
-// Component
-//
-
 export function initialiseTables()
 {
 	const tableContainers = document.querySelectorAll<HTMLElement>(".component-table:not(.initialised)");
@@ -204,7 +204,7 @@ export function initialiseTables()
 		}
 		catch (error)
 		{
-			console.error("[Table] Error initialising:", error);
+			console.error("[Table] Error:", error);
 		}
 	}
 }

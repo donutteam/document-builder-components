@@ -41,7 +41,7 @@ export function initialiseNotices()
 		}
 		catch (error)
 		{
-			console.error("[Notice] Error initialising:", notice, error);
+			console.error("[Notice] Error:", notice, error);
 		}
 	}
 }

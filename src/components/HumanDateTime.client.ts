@@ -44,7 +44,7 @@ export function initialiseHumanDateTimes()
 		}
 		catch (error)
 		{
-			console.error("[HumanDateTime] Error initialising:", humanDateTime, error);
+			console.error("[HumanDateTime] Error:", humanDateTime, error);
 		}
 	}
 }

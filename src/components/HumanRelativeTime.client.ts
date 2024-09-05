@@ -71,7 +71,7 @@ export function initialiseHumanRelativeTimes()
 		}
 		catch (error)
 		{
-			console.error("[HumanRelativeTime] Error initialising:", humanRelativeTime, error);
+			console.error("[HumanRelativeTime] Error:", humanRelativeTime, error);
 		}
 	}
 }

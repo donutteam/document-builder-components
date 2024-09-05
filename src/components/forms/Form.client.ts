@@ -454,7 +454,7 @@ export function initialiseForms()
 		}
 		catch (error)
 		{
-			console.error("[Form] Error initialising:", form, error);
+			console.error("[Form] Error:", form, error);
 		}
 	}
 
