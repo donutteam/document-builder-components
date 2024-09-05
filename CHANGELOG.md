@@ -1,4 +1,8 @@
 # Changelog
+## 15.0.1
+
+* Fixed a bug where null options in a group incorrectly got passed to the internal `Option` component, causing an error.
+
 ## 15.0.0
 
 * Made the `handleSubmission` argument of `initialiseForm` optional.
