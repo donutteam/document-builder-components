@@ -5,10 +5,19 @@
 import { Notice, NoticeOptions } from "./Notice.js";
 
 //
-// Local Functions
+// Component
 //
 
-function initialiseNotice(notice: HTMLElement)
+export function createNotice(options: NoticeOptions)
+{
+	const notice = Notice(options).renderToHTMLElement();
+
+	initialiseNotice(notice);
+
+	return notice;
+}
+
+export function initialiseNotice(notice: HTMLElement)
 {
 	const dismissElement = notice.querySelector(".dismiss");
 
@@ -16,19 +25,6 @@ function initialiseNotice(notice: HTMLElement)
 	dismissElement?.addEventListener("click", () => notice.remove());
 
 	notice.classList.add("initialised");
-}
-
-//
-// Component
-//
-
-export function createNotice(options: NoticeOptions): HTMLElement
-{
-	const notice = Notice(options).renderToHTMLElement();
-
-	initialiseNotice(notice);
-
-	return notice;
 }
 
 export function initialiseNotices()

@@ -428,7 +428,7 @@ export function initialiseForm(form: HTMLFormElement, handleSubmission?: HandleS
 	form.classList.add("initialised");
 }
 
-export function initialiseForms(): void
+export function initialiseForms()
 {
 	const forms = document.querySelectorAll(`.component-form:not(.initialised)`) as NodeListOf<HTMLFormElement>;
 
