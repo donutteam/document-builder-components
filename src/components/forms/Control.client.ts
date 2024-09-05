@@ -36,17 +36,6 @@ export function initialiseControl(control: HTMLElement)
 
 			break;
 		}
-
-		case "select":
-		{
-			const select = DocumentClientLib.getElementOrThrow<HTMLSelectElement>(control, ".input");
-
-			const overlay = DocumentClientLib.getElementOrThrow(control, ".overlay");
-
-			overlay.addEventListener("click", () => select.click());
-
-			break;
-		}
 	}
 
 	control.classList.add("initialised");

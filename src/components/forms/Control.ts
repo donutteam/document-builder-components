@@ -8,49 +8,49 @@ import { Child, DE, InputElementAttributes, OptionElementAttributes, SelectEleme
 // Locals
 //
 
-type SelectOptionTuple = [ string, string ] | [ string, string, OptionElementAttributes ];
-
-type SelectOptionGroup =
-{
-	label: string;
-	options: SelectOptionTuple[];
-};
-
-function SelectOption([ value, text, extraAttributes ]: SelectOptionTuple, currentValue?: string | null)
+function Option([ value, text, extraAttributes ]: ControlSelectOptionTuple, currentValue?: number | string | null)
 {
 	return new DE("option", 
 		{
 			value,
-			selected: value == currentValue ? true : null,
+			selected: value.toString() == currentValue?.toString() ? true : null,
 
 			...extraAttributes,
 		},
-		text);
+		text ?? value);
 }
 
 //
 // Exports
 //
 
+export type ControlSelectOptionTuple = [ number | string ] | [ number | string, number | string ] | [ number | string, number | string, OptionElementAttributes ];
+
+export type ControlSelectOptionGroup =
+{
+	label: string;
+	options: ControlSelectOptionTuple[];
+};
+
 export type ControlOptions =
 	{
-		type: "date" | "email" | "number" | "password" | "text";
+		type: "date" | "email" | "number" | "password" | "text" | "url";
 		name: string;
-		value?: string | null;
+		value?: number | string | null;
 
 		extraAttributes?: InputElementAttributes;
 	} |
 	{
 		type: "file",
-		name: string;
+		name: number | string;
 
 		extraAttributes?: InputElementAttributes;
 	} |
 	{
 		type: "select";
 		name: string;
-		value?: string | null;
-		options: (SelectOptionTuple | SelectOptionGroup)[];
+		value?: number | string | null;
+		options: (ControlSelectOptionTuple | ControlSelectOptionGroup | null)[];
 
 		extraAttributes?: SelectElementAttributes;
 	} |
@@ -136,9 +136,14 @@ export function Control(options: ControlOptions)
 		children = options.options.map(
 			(optionTupleOrOptionGroup) =>
 			{
+				if (optionTupleOrOptionGroup == null)
+				{
+					return null;
+				}
+
 				if (Array.isArray(optionTupleOrOptionGroup))
 				{
-					return SelectOption(optionTupleOrOptionGroup, options.value);
+					return Option(optionTupleOrOptionGroup, options.value);
 				}
 				else
 				{
@@ -146,7 +151,7 @@ export function Control(options: ControlOptions)
 						{ 
 							label: optionTupleOrOptionGroup.label 
 						}, 
-						optionTupleOrOptionGroup.options.map((optionTuple) => SelectOption(optionTuple, options.value)));
+						optionTupleOrOptionGroup.options.map((optionTuple) => Option(optionTuple, options.value)));
 				}
 			});
 	}

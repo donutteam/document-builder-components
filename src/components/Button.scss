@@ -23,7 +23,7 @@ $margins: GlobalDefaults.$margins;
 	$backgroundColorHover: $backgroundColorHover,
 	$textColor: $textColor,
 	$textColorDisabled: $textColorDisabled,
-	$margins: G$margins,
+	$margins: $margins,
 )
 {
 	.component-button
@@ -93,6 +93,7 @@ $margins: GlobalDefaults.$margins;
 		@include Mixins.ConditionalTopBottomMargin($margins);
 
 		&.left-aligned-group,
+		&.center-aligned-group,
 		&.right-aligned-group
 		{
 			display: flex;
@@ -104,6 +105,11 @@ $margins: GlobalDefaults.$margins;
 			{
 				margin: 0 !important;
 			}
+		}
+
+		&.center-aligned-group
+		{
+			justify-content: center;
 		}
 
 		&.right-aligned-group

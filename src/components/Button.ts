@@ -35,7 +35,7 @@ export function Button(options: ButtonOptions)
 	// Choose Tag Name
 	//
 
-	const tagName = "href" in options ? "button" : "a";
+	const tagName = "href" in options ? "a" : "button";
 
 	//
 	// Build Attributes
@@ -119,7 +119,7 @@ export function Button(options: ButtonOptions)
 	return new DE(tagName, attributes, children);
 }
 
-export type ButtonGroupType = "left-aligned-group" | "right-aligned-group" | "left-aligned-list" | "center-aligned-list";
+export type ButtonGroupType = "left-aligned-group" | "center-aligned-group" | "right-aligned-group" | "left-aligned-list" | "center-aligned-list";
 
 export type ButtonGroupOptions =
 {

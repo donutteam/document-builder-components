@@ -16,6 +16,14 @@
 
 		@include Mixins.ConditionalTopBottomMargin();
 
+		&[data-type="select"]
+		{
+			> .overlay
+			{
+				pointer-events: none;
+			}
+		}
+
 		> .input
 		{
 			appearance: none;
