@@ -20,6 +20,7 @@
 * Changed options for the `Button` component.
 * Combined `ButtonCenterAlignedList`, `ButtonList` and `ButtonRightAlignedGroup` into `ButtonGroup`.
 * Made the first argument of `ContentWrapper` optional.
+* Removed `searchParametersPageKey` from the `Pagination` component.
 
 ## 14.0.1
 
