@@ -5,10 +5,24 @@
 import { Child, DE } from "@donutteam/document-builder";
 
 //
+// Locals
+//
+
+function Item(child: Child)
+{
+	if (child == null)
+	{
+		return null;
+	}
+
+	return new DE("div", "component-bubble-list-item", child);
+}
+
+//
 // Component
 //
 
-export function BubbleList(children : Child[]) : DE
+export function BubbleList(children: Child[])
 {
 	if (children.length === 0)
 	{
@@ -16,18 +30,4 @@ export function BubbleList(children : Child[]) : DE
 	}
 
 	return new DE("div", "component-bubble-list", children.map(Item));
-}
-
-//
-// Local Components
-//
-
-function Item(child : Child) : DE
-{
-	if (child == null)
-	{
-		return new DE(null, null);
-	}
-
-	return new DE("div", "component-bubble-list-item", child);
 }
