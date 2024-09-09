@@ -14,6 +14,8 @@ export type BlockOptions =
 
 	noPadding?: boolean;
 
+	href?: string;
+
 	extraAttributes?: ElementAttributes;
 };
 
@@ -29,6 +31,8 @@ export function Block(optionsOrChildren: BlockOptions | Child, children?: Child)
 	{
 		const options = optionsOrChildren as BlockOptions;
 
+		const tagName = options.href != null ? "a" : "div";
+
 		let className = "component-block";
 
 		if (options.className != null)
@@ -41,9 +45,11 @@ export function Block(optionsOrChildren: BlockOptions | Child, children?: Child)
 			className += " no-padding";
 		}
 
-		return new DE("div",
+		return new DE(tagName,
 			{
 				class: className,
+
+				href: options.href,
 				
 				...options.extraAttributes,
 			}, 

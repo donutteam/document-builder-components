@@ -9,17 +9,10 @@
 // Component
 //
 
-$backgroundColor: #ffffff;
-$borderColor: #dddddd;
-$margins: GlobalDefaults.$margins;
-$padding: GlobalDefaults.$padding;
-
-@mixin Block($margins: $margins, $padding: $padding, $backgroundColor: $backgroundColor, $borderColor: $borderColor)
+@mixin Block($margins: GlobalDefaults.$margins, $padding: GlobalDefaults.$padding, $backgroundColor: #ffffff, $borderColor: #dddddd, $outlineColor: #dddddd)
 {
 	.component-block
 	{
-		@include Mixins.ConditionalTopBottomMargin($margins);
-
 		&
 		{
 			background-color: $backgroundColor;
@@ -28,8 +21,30 @@ $padding: GlobalDefaults.$padding;
 			border-radius: 0.625rem;
 	
 			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); // Tailwind shadow-md
+
+			color: inherit; // For Anchor Blocks
+
+			text-decoration: none; // For Anchor Blocks
 	
 			padding: $padding;
+		}
+
+		&:not(.no-margin)
+		{
+			@include Mixins.ConditionalTopBottomMargin($margins);
+		}
+
+		&:no-padding
+		{
+			padding: 0;
+		}
+
+		&:is(a)
+		{
+			&:hover
+			{
+				outline: 3px solid $outlineColor;
+			}
 		}
 	}
 
@@ -55,10 +70,5 @@ $padding: GlobalDefaults.$padding;
 				border-bottom-right-radius: 0;
 			}
 		}
-	}
-
-	.component-block.no-padding
-	{
-		padding: 0;
 	}
 }

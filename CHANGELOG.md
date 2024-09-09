@@ -1,4 +1,9 @@
 # Changelog
+## 15.2.0
+
+* Support for specifying an `href` on a block to make it an anchor.
+* Added the `$outlineColor` parameter to the `Block` component's styles which is used when the block is an anchor.
+
 ## 15.1.1
 
 * Made the `Form` client code scroll to the notice container after submission.
