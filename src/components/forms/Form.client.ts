@@ -131,6 +131,8 @@ function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOp
 
 		noticeContainer.appendChild(noticeElement);
 	}
+
+	noticeContainer.scrollIntoView();
 }
 
 type HandleSubmissionOptions =

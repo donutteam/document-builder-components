@@ -1,4 +1,8 @@
 # Changelog
+## 15.1.1
+
+* Made the `Form` client code scroll to the notice container after submission.
+
 ## 15.1.0
 
 * Added `extraAttributes` option to `BlockOptions`.
