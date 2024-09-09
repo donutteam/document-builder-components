@@ -12,6 +12,8 @@ export type BlockOptions =
 {
 	className?: string;
 
+	noMargin?: boolean;
+
 	noPadding?: boolean;
 
 	href?: string;
@@ -38,6 +40,11 @@ export function Block(optionsOrChildren: BlockOptions | Child, children?: Child)
 		if (options.className != null)
 		{
 			className += " " + options.className;
+		}
+
+		if (options.noMargin)
+		{
+			className += " no-margin";
 		}
 
 		if (options.noPadding)

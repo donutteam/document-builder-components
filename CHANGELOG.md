@@ -1,4 +1,8 @@
 # Changelog
+## 15.3.0
+
+* Added `noMargin` option for blocks. They also now automatically have no margins if within a `BlockGroup`.
+
 ## 15.2.0
 
 * Support for specifying an `href` on a block to make it an anchor.
