@@ -1,6 +1,6 @@
 {
 	"name": "@donutteam/document-builder-components",
-	"version": "15.1.1",
+	"version": "15.2.0",
 	"description": "A collection of components built with Donut Team's Document Builder package.",
 	"main": "./lib/index.js",
 	"scripts": {
