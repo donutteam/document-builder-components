@@ -34,7 +34,7 @@
 			@include Mixins.ConditionalTopBottomMargin($margins);
 		}
 
-		&:no-padding
+		&.no-padding
 		{
 			padding: 0;
 		}

@@ -1,4 +1,8 @@
 # Changelog
+## 15.3.2
+
+* Fixed `noPadding` CSS for the `Block` component.
+
 ## 15.3.1
 
 * Added padding to controls when there's an overlay so it doesn't overlap the text.
