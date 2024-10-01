@@ -1,4 +1,8 @@
 # Changelog
+## 15.3.1
+
+* Added padding to controls when there's an overlay so it doesn't overlap the text.
+
 ## 15.3.0
 
 * Added `noMargin` option for blocks. They also now automatically have no margins if within a `BlockGroup`.

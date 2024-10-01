@@ -55,6 +55,11 @@
 				outline: 3px solid $outlineColor;
 			}
 
+			&:has(+ .overlay)
+			{
+				padding-right: 2rem;
+			}
+
 			&:is(textarea)
 			{
 				min-height: 10rem;
