@@ -132,7 +132,17 @@ function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOp
 		noticeContainer.appendChild(noticeElement);
 	}
 
-	noticeContainer.scrollIntoView();
+	// Idea from here: 
+	//	https://stackoverflow.com/questions/5685589/scroll-to-element-only-if-not-in-view-jquery/37829643#37829643
+	if (noticeContainer.getBoundingClientRect().bottom > window.innerHeight)
+	{
+		noticeContainer.scrollIntoView(false);
+	}
+
+	if (noticeContainer.getBoundingClientRect().top < 0)
+	{
+		noticeContainer.scrollIntoView(true);
+	}
 }
 
 type HandleSubmissionOptions =

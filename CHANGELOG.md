@@ -1,4 +1,8 @@
 # Changelog
+## 15.3.3
+
+* Improved the `Form` component's client logic for scrolling the notice container into view.
+
 ## 15.3.2
 
 * Fixed `noPadding` CSS for the `Block` component.
