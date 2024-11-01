@@ -2,9 +2,9 @@
 	"name": "@donutteam/document-builder-components",
 	"version": "15.3.3",
 	"description": "A collection of components built with Donut Team's Document Builder package.",
-	"main": "./lib/index.js",
+	"main": "./build/index.js",
 	"scripts": {
-		"build": "npx rimraf lib && npx tsc",
+		"build": "npx rimraf build && npx tsc",
 		"prepublishOnly": "npm run build"
 	},
 	"repository": {

@@ -2,6 +2,8 @@
 ## 16.0.0
 
 - chore: updated dependencies
+- chore: removed .idea folder
+- refactor: simplified tsconfig
 
 ## 15.3.3
 
