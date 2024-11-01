@@ -4,8 +4,10 @@ A collection of components built for use with [@donutteam/document-builder](http
 ## Installation
 Install the package with NPM:
 
+**Note**: As of Version 16.0.0, this package requires `zod` as a peer dependency.
+
 ```
-npm install @donutteam/document-builder-components
+npm install zod @donutteam/document-builder @donutteam/document-builder-components
 ```
 
 ## License
