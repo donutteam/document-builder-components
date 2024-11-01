@@ -5,7 +5,7 @@
 import { DE } from "@donutteam/document-builder";
 
 //
-// Exports
+// Component
 //
 
 export function ImageFavicon(getHref: () => string, sizes = "16x16")

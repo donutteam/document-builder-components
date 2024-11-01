@@ -5,7 +5,7 @@
 import { HiddenInput } from "./HiddenInput.js";
 
 import { NoticeOptions } from "../Notice.js";
-import { createNotice  } from "../Notice.client.js";
+import { createNotice } from "../Notice.client.js";
 
 import * as DocumentClientLib from "../../libs/document.client.js";
 

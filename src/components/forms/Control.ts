@@ -2,7 +2,8 @@
 // Imports
 //
 
-import { Child, DE, InputElementAttributes, OptionElementAttributes, SelectElementAttributes, TextareaElementAttributes } from "@donutteam/document-builder";
+import { Child, ChildSchema, DE, InputElementAttributesSchema, OptionElementAttributesSchema, SelectElementAttributesSchema, TextareaElementAttributesSchema } from "@donutteam/document-builder";
+import { z } from "zod";
 
 //
 // Locals
@@ -21,46 +22,76 @@ function Option([ value, text, extraAttributes ]: ControlSelectOptionTuple, curr
 }
 
 //
-// Exports
+// Component
 //
 
-export type ControlSelectOptionTuple = [ number | string ] | [ number | string, number | string ] | [ number | string, number | string, OptionElementAttributes ];
+export const ControlSelectOptionTupleSchema = z.union(
+	[
+		z.tuple(
+			[ 
+				z.union([ z.number(), z.string() ]), 
+			]),
 
-export type ControlSelectOptionGroup =
-{
-	label: string;
-	options: (ControlSelectOptionTuple | null)[];
-};
+		z.tuple(
+			[ 
+				z.union([ z.number(), z.string() ]), 
+				z.union([ z.number(), z.string() ]),
+			]),
 
-export type ControlOptions =
+		z.tuple(
+			[ 
+				z.union([ z.number(), z.string() ]), 
+				z.union([ z.number(), z.string() ]), 
+				OptionElementAttributesSchema,
+			]),
+	]);
+
+export type ControlSelectOptionTuple = z.infer<typeof ControlSelectOptionTupleSchema>;
+
+export const ControlSelectOptionGroupSchema = z.object(
 	{
-		type: "date" | "email" | "number" | "password" | "text" | "url";
-		name: string;
-		value?: number | string | null;
+		label: z.string(),
+		options: z.array(z.union([ ControlSelectOptionTupleSchema, z.null() ])),
+	});
 
-		extraAttributes?: InputElementAttributes;
-	} |
-	{
-		type: "file",
-		name: number | string;
+export type ControlSelectOptionGroup = z.infer<typeof ControlSelectOptionGroupSchema>;
 
-		extraAttributes?: InputElementAttributes;
-	} |
-	{
-		type: "select";
-		name: string;
-		value?: number | string | null;
-		options: (ControlSelectOptionTuple | ControlSelectOptionGroup | null)[];
+export const ControlOptionsSchema = z.union(
+	[
+		z.object(
+			{
+				type: z.enum([ "date", "email", "number", "password", "text", "url" ]),
+				name: z.string(),
+				value: z.union([ z.number(), z.string() ]).nullish(),
+				extraAttributes: InputElementAttributesSchema.optional(),
+			}),
 
-		extraAttributes?: SelectElementAttributes;
-	} |
-	{
-		type: "textarea";
-		name: string;
-		content?: Child;
+		z.object(
+			{
+				type: z.literal("file"),
+				name: z.union([ z.number(), z.string() ]),
+				extraAttributes: InputElementAttributesSchema.optional(),
+			}),
 
-		extraAttributes?: TextareaElementAttributes;
-	};
+		z.object(
+			{
+				type: z.literal("select"),
+				name: z.string(),
+				value: z.union([ z.number(), z.string() ]).nullish(),
+				options: z.array(z.union([ ControlSelectOptionTupleSchema, ControlSelectOptionGroupSchema, z.null() ])),
+				extraAttributes: SelectElementAttributesSchema.optional(),
+			}),
+
+		z.object(
+			{
+				type: z.literal("textarea"),
+				name: z.string(),
+				content: ChildSchema.optional(),
+				extraAttributes: TextareaElementAttributesSchema.optional(),
+			}),
+	]);
+
+export type ControlOptions = z.infer<typeof ControlOptionsSchema>;
 
 export function Control(options: ControlOptions)
 {

@@ -5,7 +5,7 @@
 import { DE, InputElementAttributes } from "@donutteam/document-builder";
 
 //
-// Exports
+// Component
 //
 
 export function HiddenInput(name: string, value: string, extraAttributes?: InputElementAttributes)

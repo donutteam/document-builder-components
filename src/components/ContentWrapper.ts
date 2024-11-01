@@ -5,7 +5,7 @@
 import { Child, DE } from "@donutteam/document-builder";
 
 //
-// Exports
+// Component
 //
 
 export type ContentWrapperOptions =

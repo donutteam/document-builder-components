@@ -2,32 +2,39 @@
 // Imports
 //
 
-import { AElementAttributes, ButtonElementAttributes, Child, DE } from "@donutteam/document-builder";
+import { AElementAttributesSchema, ButtonElementAttributesSchema, Child, ChildSchema, DE } from "@donutteam/document-builder";
+import { z } from "zod";
 
 //
 // Component
 //
 
-export type ButtonOptions =
-	(
+export const ButtonOptionsSchema = z.intersection(
+	z.union(
+		[
+			z.object(
+				{
+					attributes: AElementAttributesSchema.optional(),
+					external: z.boolean().optional(),
+					href: z.string(),
+					searchParams: z.instanceof(URLSearchParams).optional(),
+					target: z.string().optional(),
+				}),
+			z.object(
+				{
+					attributes: ButtonElementAttributesSchema.optional(),
+					type: z.enum([ "button", "submit", "reset" ]).optional(),
+				}),
+		]),
+	z.object(
 		{
-			attributes?: AElementAttributes;
-			external?: boolean;
-			href: string;
-			searchParams?: URLSearchParams;
-			target?: string;
-		} |
-		{
-			attributes?: ButtonElementAttributes;
-			type?: "button" | "submit" | "reset";
-		}
-	) &
-	{
-		iconFixedWidth?: boolean;
-		iconName?: string;
-		iconPosition?: "before" | "after";
-		text?: Child;
-	};
+			iconFixedWidth: z.boolean().optional(),
+			iconName: z.string().optional(),
+			iconPosition: z.enum([ "before", "after" ]).optional(),
+			text: ChildSchema.optional(),
+		}));
+
+export type ButtonOptions = z.infer<typeof ButtonOptionsSchema>;
 
 export function Button(options: ButtonOptions)
 {

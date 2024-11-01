@@ -3,78 +3,52 @@
 //
 
 import { Child, DE } from "@donutteam/document-builder";
+import { z } from "zod";
 
 //
 // Component
 //
 
-export type OpenGraphOptions =
-{
-	/** An audio file that complements this page. */
-	audio? : string | OpenGraphAudioOptions;
+export const OpenGraphAudioOptionsSchema = z.object(
+	{
+		url: z.string(),
+		secureUrl: z.string().optional(),
+		type: z.enum([ "audio/wav", "audio/mpeg", "audio/mp4", "audio/aac", "audio/aacp", "audio/ogg", "audio/webm", "audio/flac" ]).optional(),
+	});
 
-	/** A one to two sentence description of the page. */
-	description? : string;
+export type OpenGraphAudioOptions = z.infer<typeof OpenGraphAudioOptionsSchema>;
 
-	/** The word that appears before this page's title in a sentence. */
-	determiner? : "a" | "an" | "the" | "" | "auto";
+export const OpenGraphImageOrVideoOptionsSchema = z.object(
+	{
+		url: z.string(),
+		secureUrl: z.string().optional(),
+		type: z.enum([ "image/avif", "image/jpeg", "image/png", "image/svg+xml", "image/webp", "video/mp4", "video/webm" ]).optional(),
+		width: z.number().optional(),
+		height: z.number().optional(),
+		alt: z.string().optional(),
+	});
 
-	/** An image that URL that represents the page. */
-	image : string | OpenGraphImageOrVideoOptions;
+export type OpenGraphImageOrVideoOptions = z.infer<typeof OpenGraphImageOrVideoOptionsSchema>;
 
-	/** The locale these tags are marked up in. Of the format language_TERRITORY. Default is en_US. */
-	locale? : string;
+export const OpenGraphTypeSchema = z.enum([ "music.song", "music.album", "music.playlist", "music.radio_station", "video.movie", "video.episode", "video.tv_show", "video.other", "article", "book", "profile", "website" ]);
 
-	/** Alternate locales the page is available in. */
-	localeAlternates? : string[];
+export type OpenGraphType = z.infer<typeof OpenGraphTypeSchema>;
 
-	/** The name of the website. */
-	siteName? : string;
+export const OpenGraphOptionsSchema = z.object(
+	{
+		audio: z.union([ z.string(), OpenGraphAudioOptionsSchema ]).optional(),
+		description: z.string().optional(),
+		determiner: z.enum([ "a", "an", "the", "", "auto" ]).optional(),
+		image: z.union([ z.string(), OpenGraphImageOrVideoOptionsSchema ]),
+		locale: z.string().optional(),
+		localeAlternates: z.array(z.string()).optional(),
+		siteName: z.string().optional(),
+		title: z.string(),
+		type: OpenGraphTypeSchema.optional(),
+		video: z.union([ z.string(), OpenGraphImageOrVideoOptionsSchema ]).optional(),
+	});
 
-	/** The title of the page. */
-	title : string;
-
-	/** The type of content on the page. Optional, defaults to "website". */
-	type? : OpenGraphType;
-
-	/** A video file that complements this page. */
-	video? : string | OpenGraphImageOrVideoOptions;
-};
-
-export type OpenGraphAudioOptions =
-{
-	/** The URL to the audio. */
-	url : string;
-
-	/** A secure URL to the audio. */
-	secureUrl? : string;
-
-	/** A MIME type for the audio. */
-	type? : "audio/wav" | "audio/mpeg" | "audio/mp4" | "audio/aac" | "audio/aacp" | "audio/ogg" | "audio/webm" | "audio/flac";
-};
-
-export type OpenGraphImageOrVideoOptions =
-{
-	/** The URL to the image or video. */
-	url : string;
-
-	/** A secure URL to the image or video. */
-	secureUrl? : string;
-
-	/** A MIME type for the image or video. */
-	type? : "image/avif" | "image/jpeg" | "image/png" | "image/svg+xml" | "image/webp" | "video/mp4" | "video/webm";
-
-	/** The width of the image or video in pixels. */
-	width? : number;
-
-	/** The height of the image or video in pixels. */
-	height? : number;
-
-	/** The alt text for the image or video. */
-	alt? : string;
-};
-
-export type OpenGraphType = "music.song" | "music.album" | "music.playlist" | "music.radio_station" | "video.movie" | "video.episode" | "video.tv_show" | "video.other" | "article" | "book" | "profile" | "website";
+export type OpenGraphOptions = z.infer<typeof OpenGraphOptionsSchema>;
 
 export function OpenGraph(options: OpenGraphOptions): Child[]
 {

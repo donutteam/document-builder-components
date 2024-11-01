@@ -2,47 +2,55 @@
 // Imports
 //
 
-import { Child, DE, ElementAttributes } from "@donutteam/document-builder";
+import { Child, DE, ElementAttributes, ElementAttributesSchema } from "@donutteam/document-builder";
+import { z } from "zod";
 
 import { HiddenInput } from "./HiddenInput.js";
 
 //
-// Exports
+// Component
 //
 
-export type NoProtectionOptions =
-{
-	type: "none";
-};
+export const ProtectionOptionsSchema = z.union(
+	[
+		z.object(
+			{
+				type: z.literal("none"),
+			}),
 
-export type RecaptchaProtectionOptions =
-{
-	type: "recaptcha";
-	siteKey: string;
-};
+		z.object(
+			{
+				type: z.literal("recaptcha"),
+				siteKey: z.string(),
+			}),
+	]);
 
-export type FormOptions =
-{
-	className?: string;
+export type ProtectionOptions = z.infer<typeof ProtectionOptionsSchema>;
 
-	method?: "get" | "GET" | "post" | "POST" | "dialog" | "DIALOG";
-	action?: string;
+export const FormOptionsSchema = z.object(
+	{
+		className: z.string().optional(),
 
-	autoComplete?: boolean; 
-	encodingType?: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
+		method: z.enum([ "get", "GET", "post", "POST", "dialog", "DIALOG" ]).optional(),
+		action: z.string().optional(),
 
-	manuallyInitialize?: boolean;
-	maxFileSize?: number;
-	noticeContainerSelector?: string;
+		autoComplete: z.boolean().optional(),
+		encodingType: z.enum([ "application/x-www-form-urlencoded", "multipart/form-data", "text/plain" ]).optional(),
 
-	protection?: NoProtectionOptions | RecaptchaProtectionOptions;
+		manuallyInitialize: z.boolean().optional(),
+		maxFileSize: z.number().optional(),
+		noticeContainerSelector: z.string().optional(),
 
-	hiddenInputs?: Record<string, string>;
+		protection: ProtectionOptionsSchema.optional(),
 
-	extraAttributes?: ElementAttributes;
-};
+		hiddenInputs: z.record(z.string()).optional(),
 
-export function Form(options: FormOptions, children : Child) : DE
+		extraAttributes: ElementAttributesSchema.optional(),
+	});
+
+export type FormOptions = z.infer<typeof FormOptionsSchema>;
+
+export function Form(options: FormOptions, children: Child)
 {
 	let className = "component-form";
 

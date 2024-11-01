@@ -3,15 +3,10 @@
 //
 
 import { Child, DE } from "@donutteam/document-builder";
+import { z } from "zod";
 
 //
 // Locals
-//
-
-
-
-//
-// Local Components
 //
 
 function getPageNumbers(currentPageNumber: number, totalPageCount: number)
@@ -107,12 +102,14 @@ function Page(options: PageOptions)
 // Component
 //
 
-export type PaginationOptions =
-{
-	currentPageNumber: number;
-	totalPageCount: number;
-	searchParameters: URLSearchParams;
-}
+export const PaginationOptionsSchema = z.object(
+	{
+		currentPageNumber: z.number(),
+		totalPageCount: z.number(),
+		searchParameters: z.instanceof(URLSearchParams),
+	});
+
+export type PaginationOptions = z.infer<typeof PaginationOptionsSchema>;
 
 export function Pagination(options: PaginationOptions)
 {

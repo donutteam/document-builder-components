@@ -5,21 +5,10 @@
 import { type Child, DE } from "@donutteam/document-builder";
 
 //
-// Exports
+// Locals
 //
 
-export type TableColumn<Type> =
-{
-	title: Child;
-	getChild: (item : Type) => Child;
-	sortValueType?: "string" | "number";
-	getSortValue?: (item : Type) => string | number;
-	enabled?: boolean;
-	hasPadding?: boolean;
-	noWrap?: boolean;
-};
-
-export function TableRow<Type>(item: Type, tableColumns: TableColumn<Type>[])
+function Row<Type>(item: Type, tableColumns: TableColumn<Type>[])
 {
 	//
 	// Build Row
@@ -60,6 +49,21 @@ export function TableRow<Type>(item: Type, tableColumns: TableColumn<Type>[])
 			}),
 		]);
 }
+
+//
+// Component
+//
+
+export type TableColumn<Type> =
+{
+	title: Child;
+	getChild: (item : Type) => Child;
+	sortValueType?: "string" | "number";
+	getSortValue?: (item : Type) => string | number;
+	enabled?: boolean;
+	hasPadding?: boolean;
+	noWrap?: boolean;
+};
 
 export function Table<Type>(items: Type[], tableColumns: TableColumn<Type>[])
 {
@@ -109,7 +113,7 @@ export function Table<Type>(items: Type[], tableColumns: TableColumn<Type>[])
 		[
 			items.map(item =>
 			{
-				return TableRow(item, tableColumns);
+				return Row(item, tableColumns);
 			}),
 		]);
 

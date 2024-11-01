@@ -5,7 +5,7 @@
 import { DE } from "@donutteam/document-builder";
 
 //
-// Exports
+// Component
 //
 
 export function AppleTouchIcon(getHref: () => string, sizes = "180x180")

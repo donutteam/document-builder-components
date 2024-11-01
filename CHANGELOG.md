@@ -4,6 +4,7 @@
 - chore: updated dependencies
 - chore: removed .idea folder
 - refactor: simplified tsconfig
+- refactor: added zod schemas to all component options
 
 ## 15.3.3
 

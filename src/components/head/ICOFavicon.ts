@@ -5,7 +5,7 @@
 import { DE } from "@donutteam/document-builder";
 
 //
-// Exports
+// Component
 //
 
 export function ICOFavicon(getHref: () => string)
