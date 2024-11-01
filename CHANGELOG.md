@@ -1,4 +1,8 @@
 # Changelog
+## 16.0.0
+
+- chore: updated dependencies
+
 ## 15.3.3
 
 * Improved the `Form` component's client logic for scrolling the notice container into view.
