@@ -12,7 +12,7 @@ export function Paragraph(child: Child)
 {
 	if (child == null)
 	{
-		return null;
+		return new DE(null, null);
 	}
 
 	return new DE("p", "component-paragraph", child);

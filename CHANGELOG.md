@@ -1,4 +1,8 @@
 # Changelog
+## 16.0.1
+
+- fix: reverted the Paragraph component so it always returns a DocumentElement
+
 ## 16.0.0
 
 - chore: updated dependencies
