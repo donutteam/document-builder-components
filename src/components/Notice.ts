@@ -2,7 +2,7 @@
 // Imports
 //
 
-import { Child, DE } from "@donutteam/document-builder";
+import { ChildSchema, DE } from "@donutteam/document-builder";
 import { z } from "zod";
 
 //
@@ -38,7 +38,7 @@ export type NoticeType = z.infer<typeof NoticeTypeSchema>;
 export const NoticeOptionsSchema = z.object(
 	{
 		type: NoticeTypeSchema,
-		message: z.string(),
+		message: ChildSchema,
 		dismissible: z.boolean().optional(),
 		roundedCorners: z.boolean().optional(),
 	});

@@ -2,6 +2,7 @@
 ## 16.0.1
 
 - fix: reverted the Paragraph component so it always returns a DocumentElement
+- fix: changed the Notice component's message option to use ChildSchema
 
 ## 16.0.0
 
