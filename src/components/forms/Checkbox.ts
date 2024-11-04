@@ -2,23 +2,20 @@
 // Imports
 //
 
-import { ChildSchema, DE, InputElementAttributesSchema } from "@donutteam/document-builder";
-import { z } from "zod";
+import { Child, DE, InputElementAttributes } from "@donutteam/document-builder";
 
 //
 // Component
 //
 
-export const CheckboxOptionsSchema = z.object(
-	{
-		type: z.enum([ "checkbox", "radio" ]).optional(),
-		name: z.string(),
-		checked: z.boolean().optional(),
-		extraAttributes: InputElementAttributesSchema.optional(),
-		label: ChildSchema,
-	});
-
-export type CheckboxOptions = z.infer<typeof CheckboxOptionsSchema>;
+export type CheckboxOptions =
+{
+	type?: "checkbox" | "radio",
+	name: string,
+	checked?: boolean,
+	extraAttributes?: InputElementAttributes,
+	label: Child,
+};
 
 export function Checkbox(options: CheckboxOptions)
 {

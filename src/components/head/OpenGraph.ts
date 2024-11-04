@@ -3,54 +3,28 @@
 //
 
 import { Child, DE } from "@donutteam/document-builder";
-import { z } from "zod";
 
 //
 // Component
 //
 
-export const OpenGraphAudioOptionsSchema = z.object(
-	{
-		url: z.string(),
-		secureUrl: z.string().optional(),
-		type: z.enum([ "audio/wav", "audio/mpeg", "audio/mp4", "audio/aac", "audio/aacp", "audio/ogg", "audio/webm", "audio/flac" ]).optional(),
-	});
+export type OpenGraphType = "music.song" | "music.album" | "music.playlist" | "music.radio_station" | "video.movie" | "video.episode" | "video.tv_show" | "video.other" | "article" | "book" | "profile" | "website";
 
-export type OpenGraphAudioOptions = z.infer<typeof OpenGraphAudioOptionsSchema>;
+export type OpenGraphOptions =
+{
+	audio?: string | OpenGraphAudioOptions;
+	description?: string;
+	determiner?: "a" | "an" | "the" | "" | "auto";
+	image: string | OpenGraphImageOrVideoOptions;
+	locale?: string;
+	localeAlternates?: string[];
+	siteName?: string;
+	title: string;
+	type?: OpenGraphType;
+	video?: string | OpenGraphImageOrVideoOptions;
+};
 
-export const OpenGraphImageOrVideoOptionsSchema = z.object(
-	{
-		url: z.string(),
-		secureUrl: z.string().optional(),
-		type: z.enum([ "image/avif", "image/jpeg", "image/png", "image/svg+xml", "image/webp", "video/mp4", "video/webm" ]).optional(),
-		width: z.number().optional(),
-		height: z.number().optional(),
-		alt: z.string().optional(),
-	});
-
-export type OpenGraphImageOrVideoOptions = z.infer<typeof OpenGraphImageOrVideoOptionsSchema>;
-
-export const OpenGraphTypeSchema = z.enum([ "music.song", "music.album", "music.playlist", "music.radio_station", "video.movie", "video.episode", "video.tv_show", "video.other", "article", "book", "profile", "website" ]);
-
-export type OpenGraphType = z.infer<typeof OpenGraphTypeSchema>;
-
-export const OpenGraphOptionsSchema = z.object(
-	{
-		audio: z.union([ z.string(), OpenGraphAudioOptionsSchema ]).optional(),
-		description: z.string().optional(),
-		determiner: z.enum([ "a", "an", "the", "", "auto" ]).optional(),
-		image: z.union([ z.string(), OpenGraphImageOrVideoOptionsSchema ]),
-		locale: z.string().optional(),
-		localeAlternates: z.array(z.string()).optional(),
-		siteName: z.string().optional(),
-		title: z.string(),
-		type: OpenGraphTypeSchema.optional(),
-		video: z.union([ z.string(), OpenGraphImageOrVideoOptionsSchema ]).optional(),
-	});
-
-export type OpenGraphOptions = z.infer<typeof OpenGraphOptionsSchema>;
-
-export function OpenGraph(options: OpenGraphOptions): Child[]
+export function OpenGraph(options: OpenGraphOptions)
 {
 	//
 	// Build Properties
@@ -112,6 +86,13 @@ export function OpenGraph(options: OpenGraphOptions): Child[]
 	return elements;
 }
 
+export type OpenGraphAudioOptions =
+{
+	url: string;
+	secureUrl?: string;
+	type?: "audio/wav" | "audio/mpeg" | "audio/mp4" | "audio/aac" | "audio/aacp" | "audio/ogg" | "audio/webm" | "audio/flac";
+};
+
 export function OpenGraphAudio(audio: string | OpenGraphAudioOptions)
 {
 	if (typeof audio == "string")
@@ -138,6 +119,16 @@ export function OpenGraphAudio(audio: string | OpenGraphAudioOptions)
 
 	return properties;
 }
+
+export type OpenGraphImageOrVideoOptions =
+{
+	url: string;
+	secureUrl?: string;
+	type?: "image/avif" | "image/jpeg" | "image/png" | "image/svg+xml" | "image/webp" | "video/mp4" | "video/webm";
+	width?: number;
+	height?: number;
+	alt? : string;
+};
 
 export function OpenGraphImageOrVideo(type: "image" | "video", imageOrVideo: string | OpenGraphImageOrVideoOptions, title: string)
 {

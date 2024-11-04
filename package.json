@@ -19,7 +19,7 @@
 	"license": "MIT",
 	"type": "module",
 	"peerDependencies": {
-		"@donutteam/document-builder": "^7.0.1",
+		"@donutteam/document-builder": "^8.0.1",
 		"@types/luxon": "^3.4.2",
 		"luxon": "^3.5.0",
 		"zod": "^3.23.8"

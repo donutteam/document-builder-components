@@ -1,4 +1,8 @@
 # Changelog
+## 17.0.0
+
+- refactor: removed zod schemas from all component options
+
 ## 16.0.1
 
 - fix: reverted the Paragraph component so it always returns a DocumentElement

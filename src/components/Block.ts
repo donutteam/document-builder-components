@@ -2,23 +2,20 @@
 // Imports
 //
 
-import { Child, DE, ElementAttributesSchema } from "@donutteam/document-builder";
-import { z } from "zod";
+import { Child, DE, ElementAttributes } from "@donutteam/document-builder";
 
 //
 // Component
 //
 
-export const BlockOptionsSchema = z.object(
-	{
-		className: z.string().optional(),
-		noMargin: z.boolean().optional(),
-		noPadding: z.boolean().optional(),
-		href: z.string().optional(),
-		extraAttributes: ElementAttributesSchema.optional(),
-	});
-
-export type BlockOptions = z.infer<typeof BlockOptionsSchema>;
+export type BlockOptions =
+{
+	className?: string;
+	noMargin?: boolean;
+	noPadding?: boolean;
+	href?: string;
+	extraAttributes?: ElementAttributes;
+};
 
 export function Block(children: Child): DE;
 export function Block(options: BlockOptions, children: Child): DE;

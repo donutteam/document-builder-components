@@ -4,28 +4,16 @@
 
 import { DE } from "@donutteam/document-builder";
 import { DateTime } from "luxon";
-import { z } from "zod";
 
 //
 // Component
 //
 
-export const HumanDateTimeOptionsSchema = z.object(
-	{
-		convertToLocalTime: z.boolean().optional(),
-
-		// Note: This is a zod equivilent of Intl.DateTimeFormatOptions
-		dateTimeFormat: z.object(
-			{
-				formatMatcher: z.enum([ "basic", "best fit" ]).optional(),
-				dateStyle: z.enum([ "full", "long", "medium", "short" ]).optional(),
-				timeStyle: z.enum([ "full", "long", "medium", "short" ]).optional(),
-				dayPeriod: z.enum([ "narrow", "short", "long" ]).optional(),
-				fractionalSecondDigits: z.union([ z.literal(1), z.literal(2), z.literal(3) ]).optional(),
-			}).optional(),
-	});
-
-export type HumanDateTimeOptions = z.infer<typeof HumanDateTimeOptionsSchema>;
+export type HumanDateTimeOptions =
+{
+	convertToLocalTime?: boolean;
+	dateTimeFormat?: Intl.DateTimeFormatOptions | null;
+};
 
 export function HumanDateTime(timestampSeconds: number, options: HumanDateTimeOptions = {})
 {

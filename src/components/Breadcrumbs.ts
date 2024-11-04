@@ -8,6 +8,11 @@ import { Child, DE } from "@donutteam/document-builder";
 // Component
 //
 
+export function Breadcrumbs(items: BreadcrumbsItemOptions[])
+{
+	return new DE("ul", "component-breadcrumbs", items.map(BreadcrumbsItem));
+}
+
 export type BreadcrumbsItemOptions =
 {
 	href?: string | null;
@@ -28,9 +33,4 @@ export function BreadcrumbsItem(options: BreadcrumbsItemOptions)
 					options.text,
 				]),
 		]);
-}
-
-export function Breadcrumbs(items: BreadcrumbsItemOptions[])
-{
-	return new DE("ul", "component-breadcrumbs", items.map(BreadcrumbsItem));
 }

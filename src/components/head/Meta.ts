@@ -2,23 +2,20 @@
 // Imports
 //
 
-import { Child, ChildSchema, DE } from "@donutteam/document-builder";
-import { z } from "zod";
+import { Child, DE } from "@donutteam/document-builder";
 
 //
 // Component
 //
 
-export const MetaOptionsSchema = z.object(
-	{
-		blockRobots: z.boolean().optional(),
-		description: z.string().optional(),
-		keywords: z.array(z.string()).optional(),
-		themeColor: z.string().optional(),
-		title: ChildSchema.optional(),
-	});
-
-export type MetaOptions = z.infer<typeof MetaOptionsSchema>;
+export type MetaOptions =
+{
+	blockRobots?: boolean;
+	description?: string;
+	keywords?: string[];
+	themeColor?: string;
+	title?: Child;
+};
 
 export function Meta(options: MetaOptions): Child[]
 {

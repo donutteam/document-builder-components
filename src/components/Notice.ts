@@ -2,8 +2,7 @@
 // Imports
 //
 
-import { ChildSchema, DE } from "@donutteam/document-builder";
-import { z } from "zod";
+import { Child, DE } from "@donutteam/document-builder";
 
 //
 // Locals
@@ -31,19 +30,15 @@ function getIconName(type: NoticeType)
 // Component
 //
 
-export const NoticeTypeSchema = z.enum([ "danger", "info", "success", "warning" ]);
+export type NoticeType = "danger" | "info" | "success" | "warning";
 
-export type NoticeType = z.infer<typeof NoticeTypeSchema>;
-
-export const NoticeOptionsSchema = z.object(
-	{
-		type: NoticeTypeSchema,
-		message: ChildSchema,
-		dismissible: z.boolean().optional(),
-		roundedCorners: z.boolean().optional(),
-	});
-
-export type NoticeOptions = z.infer<typeof NoticeOptionsSchema>;
+export type NoticeOptions =
+{ 
+	type: NoticeType;
+	message: Child;
+	dismissible?: boolean;
+	roundedCorners?: boolean;
+};
 
 export function Notice(options: NoticeOptions)
 {
