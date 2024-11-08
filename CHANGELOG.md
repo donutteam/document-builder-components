@@ -1,4 +1,8 @@
 # Changelog
+## 17.0.1
+
+- fix: fixing some Table component bugs
+
 ## 17.0.0
 
 - refactor: removed zod schemas from all component options

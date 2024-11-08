@@ -36,6 +36,11 @@ $borderColor: #dddddd;
 				padding: 0.75rem;
 
 				white-space: nowrap;
+
+				&[data-is-sortable="true"]
+				{
+					cursor: pointer;
+				}
 			}
 
 			.header

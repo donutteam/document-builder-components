@@ -37,7 +37,7 @@ function setSortDirection(tableHeader: HTMLTableCellElement): SortDirection
 {
 	const sortIcon = DocumentLib.getElementOrThrow(tableHeader, ".sort-icon");
 
-	const currentSortDirection = tableHeader.dataset["sortDirection"] as SortDirection;
+	const currentSortDirection = (tableHeader.dataset["sortDirection"] ?? "DESC") as SortDirection;
 
 	if (currentSortDirection != "ASC" && currentSortDirection != "DESC")
 	{
