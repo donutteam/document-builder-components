@@ -7,6 +7,7 @@ export * from "./components/forms/Control.js";
 export * from "./components/forms/Form.js";
 export * from "./components/forms/HiddenInput.js";
 export * from "./components/forms/Label.js";
+export * from "./components/forms/ToggleSwitch.js";
 
 export * from "./components/head/AppleTouchIcon.js";
 export * from "./components/head/ICOFavicon.js";

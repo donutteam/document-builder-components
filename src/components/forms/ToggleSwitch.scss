@@ -1,0 +1,106 @@
+//
+// Imports
+//
+
+@use "components/Mixins";
+
+//
+// Component
+//
+
+$size: 25px;
+
+@mixin ToggleSwitch($backgroundColorOff, $backgroundColorOn, $handleColor)
+{
+	.component-toggle-switch 
+	{
+		@include Mixins.ConditionalTopBottomMargin();
+
+		&
+		{
+			display: grid;
+
+			grid-template-areas: "stack";
+		}
+
+		// HACK: This is a hack to show a loading wheel when client JS disables the internal input
+		//	This will probably cause problems in the future and need a more elegant solution
+		&:has(input:disabled)
+		{
+			> .loading
+			{
+				display: flex;
+			}
+		}
+
+		> label
+		{
+			grid-area: stack;
+
+			position: relative;
+
+			display: inline-block;
+
+			width: $size * 2;
+			height: $size;
+
+			background-color: $backgroundColorOff;
+			border-radius: $size;
+			cursor: pointer;
+
+			transition: background-color 0.3s;
+
+			> input
+			{
+				opacity: 0;
+
+				width: 0;
+				height: 0;
+			}
+		}
+
+		> label:before 
+		{
+			content: "";
+
+			position: absolute;
+			left: 2px;
+			bottom: 2px;
+
+			background-color: $handleColor;
+			border-radius: 50%;
+			width: $size - 4px;
+			height: $size - 4px;
+
+			transition: transform 0.3s;
+		}
+
+		> label:has(input:checked)
+		{
+			background-color: $backgroundColorOn;
+
+			&:before
+			{
+				transform: translateX($size);
+			}
+		}
+
+		> label:has(input:disabled)
+		{
+			cursor: not-allowed;
+
+			opacity: 0.5;
+		}
+
+		> .loading
+		{
+			grid-area: stack;
+
+			display: none;
+
+			align-items: center;
+
+			justify-content: center;
+		}
+	}
+}
