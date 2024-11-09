@@ -3,6 +3,7 @@
 
 - feature: added support for image icons on the `Button` component
 - feature: added a $padding variable to the `Button` component's mixin
+- feature: added a padding option to the `Button` component to override padding on a per-button basis
 
 ## 17.0.1
 

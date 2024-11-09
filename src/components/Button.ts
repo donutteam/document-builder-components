@@ -26,6 +26,7 @@ export type ButtonOptions =
 	iconFixedWidth?: boolean;
 	iconName?: string;
 	iconPosition?: "before" | "after";
+	padding?: string;
 	text?: Child;
 };
 
@@ -64,6 +65,11 @@ export function Button(options: ButtonOptions)
 	else
 	{
 		attributes.type = options.type ?? "button";
+	}
+
+	if (options.padding != null)
+	{
+		attributes.style = "--padding: " + options.padding + ";";
 	}
 
 	//
