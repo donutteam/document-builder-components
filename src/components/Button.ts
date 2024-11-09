@@ -79,22 +79,37 @@ export function Button(options: ButtonOptions)
 
 	if (options.iconName != null)
 	{
-		const cssClasses : string[] = [];
+		let icon: Child;
 
-		cssClasses.push("icon");
+		const iconType = options.iconName.startsWith("fa") ? "font-awesome" : "image";
 
-		cssClasses.push(options.iconName);
-
-		if (options.iconFixedWidth)
+		switch (iconType)
 		{
-			cssClasses.push("fa-fw");
-		}
+			case "font-awesome":
+			{		
+				icon = new DE("span",
+					{
+						class: "icon " + options.iconName + (options.iconFixedWidth ? " fa-fw" : ""),
+					});
 
-		const icon = new DE("span",
+				break;
+			}
+
+			case "image":
 			{
-				class: cssClasses.join(" "),
-			});
+				icon = new DE("span", "icon",
+					[
+						new DE("img",
+							{
+								src: options.iconName,
+								alt: "",
+							}),
+					]);
 
+				break;
+			}
+		}
+		
 		const iconPosition = options.iconPosition ?? "before";
 
 		if (iconPosition == "before")

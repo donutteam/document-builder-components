@@ -85,6 +85,12 @@ $margins: GlobalDefaults.$margins;
 		> .external
 		{
 			max-height: 1em;
+
+			> img
+			{
+				max-height: 1em;
+				height: 100%;
+			}
 		}
 	}
 
