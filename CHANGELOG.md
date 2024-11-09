@@ -1,4 +1,8 @@
 # Changelog
+## 17.1.0
+
+- feature: added support for image icons on the `Button` component
+
 ## 17.0.1
 
 - fix: fixing some Table component bugs
