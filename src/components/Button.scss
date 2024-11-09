@@ -15,6 +15,7 @@ $backgroundColorHover: #1e293b; 		// Tailwind Gray 800
 $textColor: #f9fafb;					// Tailwind Gray 50
 $textColorDisabled: #d1d5db;			// Tailwind Gray 300
 $margins: GlobalDefaults.$margins;
+$padding: 0.625em;
 
 @mixin Button
 (
@@ -24,6 +25,7 @@ $margins: GlobalDefaults.$margins;
 	$textColor: $textColor,
 	$textColorDisabled: $textColorDisabled,
 	$margins: $margins,
+	$padding: $padding
 )
 {
 	.component-button
@@ -52,7 +54,7 @@ $margins: GlobalDefaults.$margins;
 
 			gap: 0.625rem;
 
-			padding: 0.625em;
+			padding: $padding;
 
 			text-align: inherit; // For <button> elements
 

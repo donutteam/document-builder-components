@@ -2,6 +2,7 @@
 ## 17.1.0
 
 - feature: added support for image icons on the `Button` component
+- feature: added a $padding variable to the `Button` component's mixin
 
 ## 17.0.1
 
