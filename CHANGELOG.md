@@ -1,4 +1,8 @@
 # Changelog
+## 17.1.1
+
+- refactor: extended @donutteam/typescript-config
+
 ## 17.1.0
 
 - feature: added support for image icons on the Button component
