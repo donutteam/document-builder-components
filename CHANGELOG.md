@@ -1,14 +1,18 @@
 # Changelog
+## 17.2.0
+
+- feat: added the ability to pass two arguments to the Paragraph component, the first being an attributes object
+
 ## 17.1.1
 
 - refactor: extended @donutteam/typescript-config
 
 ## 17.1.0
 
-- feature: added support for image icons on the Button component
-- feature: added a $padding variable to the Button component's mixin
-- feature: added a padding option to the Button component to override padding on a per-button basis
-- feature: added ToggleSwitch component
+- feat: added support for image icons on the Button component
+- feat: added a $padding variable to the Button component's mixin
+- feat: added a padding option to the Button component to override padding on a per-button basis
+- feat: added ToggleSwitch component
 
 ## 17.0.1
 

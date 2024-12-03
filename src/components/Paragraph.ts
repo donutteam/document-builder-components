@@ -2,18 +2,37 @@
 // Imports
 //
 
-import { Child, DE } from "@donutteam/document-builder";
+import { Child, DE, ElementAttributes } from "@donutteam/document-builder";
 
 //
 // Component
 //
 
-export function Paragraph(child: Child)
+export function Paragraph(children: Child): DE;
+export function Paragraph(attributes: ElementAttributes, children: Child): DE;
+export function Paragraph(childrenOrAttributes: ElementAttributes | Child, childrenAfterAttributes?: Child): DE
 {
-	if (child == null)
-	{
-		return new DE(null, null);
-	}
+    let attributes: ElementAttributes = {};
+    let children: Child;
 
-	return new DE("p", "component-paragraph", child);
+    if (typeof childrenAfterAttributes !== "undefined")
+    {
+        attributes = childrenOrAttributes as ElementAttributes;
+        children = childrenAfterAttributes;
+    }
+    else
+    {
+        children = childrenOrAttributes as Child;
+    }
+
+    if (children == null)
+    {
+        return new DE(null, null);
+    }
+
+    attributes.class = attributes.class
+        ? "component-paragraph " + attributes.class
+        : "component-paragraph";
+
+    return new DE("p", attributes, children);
 }
