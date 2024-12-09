@@ -1,4 +1,8 @@
 # Changelog
+## 17.2.1
+
+- fix: fixed anchor blocks to be display block
+
 ## 17.2.0
 
 - feat: added the ability to pass two arguments to the Paragraph component, the first being an attributes object
