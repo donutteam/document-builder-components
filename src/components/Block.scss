@@ -21,12 +21,6 @@
 			border-radius: 0.625rem;
 	
 			box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); // Tailwind shadow-md
-
-			color: inherit; // For Anchor Blocks
-
-			display: block; // For Anchor Blocks
-
-			text-decoration: none; // For Anchor Blocks
 	
 			padding: $padding;
 		}
@@ -43,6 +37,10 @@
 
 		&:is(a)
 		{
+			color: inherit;
+			display: block;
+			text-decoration: none;
+
 			&:hover
 			{
 				outline: 3px solid $outlineColor;
