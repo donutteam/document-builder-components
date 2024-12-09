@@ -1,4 +1,8 @@
 # Changelog
+## 17.2.2
+
+- fix: maybe actually fixed anchor blocks to be display block
+
 ## 17.2.1
 
 - fix: fixed anchor blocks to be display block
