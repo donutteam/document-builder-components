@@ -1,4 +1,9 @@
 # Changelog
+## 17.3.0
+
+- refactor: deprecated the noticeContainerSelector option for the Form component
+- refactor: other minor improvements to the Form component
+
 ## 17.2.3
 
 - fix: reverted an unnecessary change

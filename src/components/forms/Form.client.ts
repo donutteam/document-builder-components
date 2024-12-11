@@ -96,27 +96,6 @@ async function getRecaptchaToken(siteKey: string): Promise<string>
 	return token;
 }
 
-function getNoticeContainer(form: HTMLFormElement): HTMLElement
-{
-	const noticeContainerSelector = DocumentClientLib.getStringDataOrThrow(form, "noticeContainerSelector");
-
-	let parentElement: HTMLElement | null = form;
-
-	while (parentElement != null)
-	{
-		const noticeContainer = parentElement.querySelector<HTMLElement>(noticeContainerSelector);
-
-		if (noticeContainer != null)
-		{
-			return noticeContainer;
-		}
-
-		parentElement = parentElement.parentElement;
-	}
-
-	throw new Error("Notice container not found: " + noticeContainerSelector);
-}
-
 function populateNoticeContainer(noticeContainer: HTMLElement, notices: NoticeOptions[]): void
 {
 	noticeContainer.replaceChildren();
@@ -173,13 +152,11 @@ async function submitForm(event: SubmitEvent, form: HTMLFormElement, handleSubmi
 
 	const protectedBy = form.dataset["protectedBy"] ?? "none";
 
-	const noticeContainer = getNoticeContainer(form);
+	const hiddenContainer = DocumentClientLib.getElementOrThrow(form, ".hidden-container");
+	const noticeContainer = DocumentClientLib.getElementOrThrow(form, ".notice-container");
+	const inputContainer = DocumentClientLib.getElementOrThrow(form, ".input-container");
 
-	const hiddenContainer = DocumentClientLib.getElementOrThrow(form, ".hidden");
-
-	const inputsContainer = DocumentClientLib.getElementOrThrow(form, ".inputs");
-
-	const fileInputs = inputsContainer.querySelectorAll("input[type=file]") as NodeListOf<HTMLInputElement>;
+	const fileInputs = inputContainer.querySelectorAll("input[type=file]") as NodeListOf<HTMLInputElement>;
 
 	//
 	// Check Validity

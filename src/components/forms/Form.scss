@@ -2,16 +2,25 @@
 // Imports
 //
 
-@use "../Mixins";
+@use "../GlobalDefaults.scss";
+@use "../_Mixins.scss";
 
 //
 // Component
 //
 
-@mixin Form
+@mixin Form($margins: GlobalDefaults.$margins)
 {
 	.component-form
 	{
-		@include Mixins.ConditionalTopBottomMargin();
+		@include Mixins.ConditionalTopBottomMargin($margins);
+
+		.notice-container
+		{
+			&:not(:empty)
+			{
+				margin-bottom: $margins;
+			}
+		}
 	}
 }
