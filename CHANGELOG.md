@@ -1,4 +1,8 @@
 # Changelog
+## 17.4.0
+
+- feat: added the ability to specify a getTableRowAttributes function to the Table component
+
 ## 17.3.0
 
 - refactor: deprecated the noticeContainerSelector option for the Form component

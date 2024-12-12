@@ -2,19 +2,24 @@
 // Imports
 //
 
-import { type Child, DE } from "@donutteam/document-builder";
+import { type Child, DE, ElementAttributes } from "@donutteam/document-builder";
 
 //
 // Locals
 //
 
-function Row<Type>(item: Type, tableColumns: TableColumn<Type>[])
+function Row<Type>(item: Type, tableColumns: TableColumn<Type>[], getTableRowAttributes?: (item: Type) => ElementAttributes)
 {
 	//
 	// Build Row
 	//
 
-	return new DE("tr", "component-table-row",
+	return new DE("tr",
+		{
+			class: "component-table-row",
+
+			...getTableRowAttributes?.(item),
+		},
 		[
 			tableColumns.map(tableColumn =>
 			{
@@ -65,7 +70,7 @@ export type TableColumn<Type> =
 	noWrap?: boolean;
 };
 
-export function Table<Type>(items: Type[], tableColumns: TableColumn<Type>[])
+export function Table<Type>(items: Type[], tableColumns: TableColumn<Type>[], getTableRowAttributes?: (item: Type) => ElementAttributes)
 {
 	tableColumns = tableColumns.filter(
 		(tableColumn) => 
@@ -113,7 +118,7 @@ export function Table<Type>(items: Type[], tableColumns: TableColumn<Type>[])
 		[
 			items.map(item =>
 			{
-				return Row(item, tableColumns);
+				return Row(item, tableColumns, getTableRowAttributes);
 			}),
 		]);
 
