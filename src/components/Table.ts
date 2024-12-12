@@ -47,6 +47,8 @@ function Row<Type>(item: Type, tableColumns: TableColumn<Type>[], getTableRowAtt
 
 						"data-is-sortable": tableColumn.getSortValue != null,
 						"data-sort-value": tableColumn.getSortValue != null ? tableColumn.getSortValue(item) : null,
+
+						...tableColumn.getAttributes?.(item),
 					},
 					[
 						tableColumn.getChild(item),
@@ -68,6 +70,7 @@ export type TableColumn<Type> =
 	enabled?: boolean;
 	hasPadding?: boolean;
 	noWrap?: boolean;
+	getAttributes?: (item : Type) => ElementAttributes;
 };
 
 export function Table<Type>(items: Type[], tableColumns: TableColumn<Type>[], getTableRowAttributes?: (item: Type) => ElementAttributes)

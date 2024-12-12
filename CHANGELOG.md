@@ -1,4 +1,8 @@
 # Changelog
+## 17.5.0
+
+- feat: added the ability to specify a getAttributes function on a TableColumn in the Table component
+
 ## 17.4.0
 
 - feat: added the ability to specify a getTableRowAttributes function to the Table component
