@@ -2,7 +2,7 @@
 // Imports
 //
 
-import { Child, DE, ElementAttributes } from "@donutteam/document-builder";
+import { Child, DE, ElementAttributes, InputElementAttributes } from "@donutteam/document-builder";
 
 import { HiddenInput } from "./HiddenInput.js";
 
@@ -37,7 +37,7 @@ export type FormOptions =
 
 	protection?: FormProtectionOptions;
 
-	hiddenInputs?: Record<string, string | { value: string, extraAttributes?: ElementAttributes }>;
+	hiddenInputs?: Record<string, string | { value: string, extraAttributes?: InputElementAttributes }>;
 
 	extraAttributes?: ElementAttributes;
 };

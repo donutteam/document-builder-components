@@ -1,7 +1,11 @@
 # Changelog
+## 17.7.1
+
+- fix: fixed type of the extraAttributes option on the Form component's hiddenInputs option
+
 ## 17.7.0
 
-- feat: added the ability to specify extraAttributes on a Form's hiddenInputs
+- feat: added the ability to specify extraAttributes on a Form component's hiddenInputs option
 
 ## 17.6.0
 
