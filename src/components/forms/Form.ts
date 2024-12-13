@@ -37,7 +37,7 @@ export type FormOptions =
 
 	protection?: FormProtectionOptions;
 
-	hiddenInputs?: Record<string, string>;
+	hiddenInputs?: Record<string, string | { value: string, extraAttributes?: ElementAttributes }>;
 
 	extraAttributes?: ElementAttributes;
 };
@@ -108,7 +108,9 @@ export function Form(options: FormOptions, children: Child)
 					Object.entries(hiddenInputs).map(
 						([ name, value ]) =>
 						{
-							return HiddenInput(name, value);
+							return typeof value == "string"
+								? HiddenInput(name, value)
+								: HiddenInput(name, value.value, value.extraAttributes);
 						}),
 				]),
 

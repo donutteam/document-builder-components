@@ -1,4 +1,8 @@
 # Changelog
+## 17.7.0
+
+- feat: added the ability to specify extraAttributes on a Form's hiddenInputs
+
 ## 17.6.0
 
 - feat: added the ability to pass options to a BubbleList
