@@ -177,5 +177,14 @@ export function ButtonGroup(optionsOrButtons: ButtonGroupOptions  | (ButtonOptio
 		return null;
 	}
 
-	return new DE("div", "component-button-group " + type, nonNullButtons.map((buttonOptions) => Button(buttonOptions as ButtonOptions)));
+	let className = "component-button-group";
+
+	if (options.className != null)
+	{
+		className += " " + options.className;
+	}
+
+	className += " " + type;
+
+	return new DE("div", className, nonNullButtons.map((buttonOptions) => Button(buttonOptions as ButtonOptions)));
 }

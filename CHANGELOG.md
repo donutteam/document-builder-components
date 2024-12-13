@@ -1,4 +1,8 @@
 # Changelog
+## 17.7.2
+
+- fix: fixed a bug where className was not actually used on the ButtonGroup component
+
 ## 17.7.1
 
 - fix: fixed type of the extraAttributes option on the Form component's hiddenInputs option
