@@ -16,6 +16,17 @@ $margins: GlobalDefaults.$margins;
 
 @mixin BubbleList($margins: $margins, $gap: $gap, $backgroundColor: $backgroundColor, $borderColor: $borderColor)
 {
+	.component-bubble-list-item
+	{
+		background-color: $backgroundColor;
+
+		border: 1px solid $borderColor;
+
+		border-radius: 0.625rem;
+
+		padding: 0.5rem;
+	}
+
 	.component-bubble-list
 	{
 		@include Mixins.ConditionalTopBottomMargin($margins);
@@ -28,16 +39,5 @@ $margins: GlobalDefaults.$margins;
 
 			gap: $gap;
 		}
-	}
-
-	.component-bubble-list-item
-	{
-		background-color: $backgroundColor;
-
-		border: 1px solid $borderColor;
-
-		border-radius: 0.625rem;
-
-		padding: 0.5rem;
 	}
 }
