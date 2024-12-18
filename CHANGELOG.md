@@ -1,4 +1,9 @@
 # Changelog
+## 17.8.0
+
+- feat: added helpful data attributes to the Checkbox component
+- feat: added the ability to more directly pass a value to the Checkbox component
+
 ## 17.7.2
 
 - fix: fixed a bug where className was not actually used on the ButtonGroup component
