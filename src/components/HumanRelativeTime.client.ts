@@ -10,7 +10,7 @@ import * as DocumentClientLib from "../libs/document.client.js";
 // Component
 //
 
-let updateHumanRelativeTimeElementsInterval: number | null = null;
+let updateHumanRelativeTimeElementsInterval: ReturnType<typeof setInterval> | null = null;
 
 function updateHumanRelativeTimeElements()
 {
